@@ -3,240 +3,268 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ehtasham Ali S. — CRM Architect</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@200;300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<title>Ehtasham Ali S. — CRM Automation Expert | GHL · HubSpot · Zoho</title>
+<meta name="description" content="CRM Automation Expert specializing in GoHighLevel, HubSpot & Zoho. I build systems that follow up, qualify and close leads automatically.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
-/* ── RESET ── */
+/* ─── RESET ─── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;overflow:hidden;background:#02020a;color:#f0ece8;font-family:'Inter',sans-serif;cursor:none;-webkit-font-smoothing:antialiased}
+html,body{width:100%;height:100%;overflow:hidden;background:#080b14;color:#e8eaf0;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+body{cursor:none}
+@media(max-width:768px){body{cursor:auto}}
 
-/* ── CURSOR ── */
-#cur{position:fixed;width:8px;height:8px;border-radius:50%;background:#a78bfa;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:screen}
-#cur2{position:fixed;width:36px;height:36px;border-radius:50%;border:1px solid rgba(167,139,250,.3);pointer-events:none;z-index:99998;transform:translate(-50%,-50%)}
+/* ─── CSS VARS ─── */
+:root{
+  --bg:#080b14;
+  --bg2:#0d1120;
+  --purple:#8b5cf6;
+  --purple-light:#a78bfa;
+  --acid:#b8ff00;
+  --white:#f0f2f8;
+  --grey:#8892a4;
+  --nav-h:64px;
+  --foot-h:48px;
+}
 
-/* ── CANVAS ── */
-#canvas3d{position:fixed;inset:0;z-index:0}
+/* ─── CURSOR (desktop only) ─── */
+#cur,#cur2{position:fixed;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%)}
+#cur{width:7px;height:7px;background:var(--purple-light);transition:width .2s,height .2s,background .2s;mix-blend-mode:screen}
+#cur2{width:32px;height:32px;border:1px solid rgba(139,92,246,.35);z-index:99998}
+@media(max-width:768px){#cur,#cur2{display:none}}
 
-/* ── SCANLINES ── */
-#scan{position:fixed;inset:0;pointer-events:none;z-index:2;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);opacity:.5}
+/* ─── CANVAS ─── */
+#cv{position:fixed;inset:0;z-index:0}
 
-/* ── WARP FLASH ── */
-#warp{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 60% 50%,rgba(167,139,250,.15) 0%,transparent 70%)}
+/* ─── SCAN LINES ─── */
+#scan{position:fixed;inset:0;pointer-events:none;z-index:2;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px)}
 
-/* ── LOADER ── */
-#loader{position:fixed;inset:0;background:#02020a;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px}
-.ld-name{font-family:'Bebas Neue',sans-serif;font-size:60px;letter-spacing:14px;color:#f0ece8;opacity:0;transform:translateY(16px);animation:ldrise .7s .2s forwards ease-out}
-@keyframes ldrise{to{opacity:1;transform:none}}
-.ld-track{width:220px;height:1px;background:rgba(167,139,250,.12)}
-.ld-fill{height:100%;width:0;background:#a78bfa}
-.ld-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(167,139,250,.45)}
+/* ─── WARP FLASH ─── */
+#warp{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 55% 50%,rgba(139,92,246,.18) 0%,transparent 70%);transition:opacity .08s}
 
-/* ─────────────────────────────────────────────────────────
-   LAYOUT — strict grid:
-   NAV:      fixed 72px tall at top
-   PANEL:    from 80px to calc(100% - 68px)   [safe zone]
-   FOOTER:   fixed 52px tall at bottom
-   3D NODE:  right half, centered vertically
-───────────────────────────────────────────────────────── */
+/* ─── LOADER ─── */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px}
+.ld-logo{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:14px;color:var(--white);opacity:0;animation:rise .6s .3s forwards ease-out}
+@keyframes rise{to{opacity:1;transform:none}from{opacity:0;transform:translateY(14px)}}
+.ld-track{width:200px;height:1px;background:rgba(139,92,246,.15)}
+.ld-bar{height:100%;width:0;background:var(--purple-light);transition:width .08s linear}
+.ld-txt{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(167,139,250,.5)}
 
-/* ── NAV ── */
+/* ─── NAV ─── */
 #nav{
-  position:fixed;
-  top:0;left:0;right:0;
-  height:72px;
-  padding:0 48px;
+  position:fixed;top:0;left:0;right:0;
+  height:var(--nav-h);
+  padding:0 40px;
   display:flex;align-items:center;justify-content:space-between;
   z-index:500;
-  /* solid enough to always cover anything below */
-  background:rgba(2,2,10,.88);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(167,139,250,.06);
+  background:rgba(8,11,20,.92);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(139,92,246,.1);
 }
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:8px;color:#f0ece8}
-#nav-btns{display:flex;gap:28px;align-items:center}
-.nb{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;background:transparent;border:none;color:rgba(240,236,232,.3);cursor:none;transition:color .3s;padding:0;position:relative}
-.nb::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:#a78bfa;transform:scaleX(0);transition:transform .3s;transform-origin:left}
-.nb:hover{color:rgba(240,236,232,.7)}
-.nb.on{color:#a78bfa}
-.nb.on::after{transform:scaleX(1)}
-#nav-cta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;background:#a78bfa;color:#02020a;border:none;padding:10px 20px;cursor:none;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:background .25s,transform .2s;text-decoration:none;display:inline-block;line-height:1.4}
-#nav-cta:hover{background:#c4ff00;transform:translateY(-1px)}
+.n-logo{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:6px;color:var(--white)}
+.n-logo span{color:var(--purple-light)}
+#n-links{display:flex;gap:24px;align-items:center}
+.nl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;background:transparent;border:none;color:var(--grey);cursor:none;transition:color .25s;padding:4px 0;position:relative}
+.nl::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:var(--purple-light);transform:scaleX(0);transition:transform .25s;transform-origin:left}
+.nl:hover{color:var(--white)}
+.nl.on{color:var(--purple-light)}
+.nl.on::after{transform:scaleX(1)}
+#n-cta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;background:var(--purple);color:var(--white);border:none;padding:9px 18px;cursor:none;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:background .25s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+#n-cta:hover{background:var(--acid);color:#000}
+/* Mobile nav */
+#n-ham{display:none;flex-direction:column;gap:5px;background:transparent;border:none;cursor:pointer;padding:4px}
+#n-ham span{display:block;width:22px;height:1px;background:var(--white);transition:all .3s}
+#mob-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(8,11,20,.98);border-bottom:1px solid rgba(139,92,246,.1);z-index:499;padding:16px 0;flex-direction:column}
+#mob-menu.open{display:flex}
+.mob-nl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;background:transparent;border:none;color:var(--grey);cursor:pointer;padding:14px 40px;text-align:left;transition:color .25s;border:none;width:100%}
+.mob-nl:hover,.mob-nl.on{color:var(--purple-light)}
 
-/* ── CORNER BRACKETS ── */
-.brk{position:fixed;width:14px;height:14px;z-index:400;opacity:.2}
-.brk.tl{top:80px;left:16px;border-top:1px solid #a78bfa;border-left:1px solid #a78bfa}
-.brk.tr{top:80px;right:16px;border-top:1px solid #a78bfa;border-right:1px solid #a78bfa}
-.brk.bl{bottom:60px;left:16px;border-bottom:1px solid #a78bfa;border-left:1px solid #a78bfa}
-.brk.br{bottom:60px;right:16px;border-bottom:1px solid #a78bfa;border-right:1px solid #a78bfa}
+/* ─── SIDE DOTS ─── */
+#sdots{position:fixed;right:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:400}
+.sd{width:5px;height:5px;border-radius:50%;border:1px solid rgba(240,242,248,.2);background:transparent;cursor:none;transition:all .35s}
+.sd:hover{border-color:rgba(139,92,246,.6)}
+.sd.on{background:var(--purple-light);border-color:var(--purple-light);box-shadow:0 0 8px rgba(167,139,250,.8)}
+@media(max-width:768px){#sdots{right:10px}}
 
-/* ── CONTENT PANEL ──
-   top: 80px     (8px below the 72px nav — clear gap)
-   bottom: 68px  (16px above the 52px footer bar)
-   width: 44vw max 480px — leaves right half for 3D
-   overflow:hidden so nothing can ever bleed out
-───────────────────────────────────────────────────────── */
+/* ─── CORNER BRACKETS ─── */
+.brk{position:fixed;width:12px;height:12px;z-index:400;opacity:.18}
+.brk.tl{top:var(--nav-h);left:14px;border-top:1px solid var(--purple-light);border-left:1px solid var(--purple-light)}
+.brk.tr{top:var(--nav-h);right:14px;border-top:1px solid var(--purple-light);border-right:1px solid var(--purple-light)}
+.brk.bl{bottom:var(--foot-h);left:14px;border-bottom:1px solid var(--purple-light);border-left:1px solid var(--purple-light)}
+.brk.br{bottom:var(--foot-h);right:14px;border-bottom:1px solid var(--purple-light);border-right:1px solid var(--purple-light)}
+
+/* ─── FOOTER ─── */
+#foot{position:fixed;bottom:0;left:0;right:0;height:var(--foot-h);padding:0 40px;display:flex;align-items:center;justify-content:space-between;z-index:500;background:rgba(8,11,20,.92);backdrop-filter:blur(20px);border-top:1px solid rgba(139,92,246,.1)}
+#counter{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:5px;color:rgba(240,242,248,.25)}
+#counter em{color:var(--purple-light);font-style:normal}
+.f-hint{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(240,242,248,.2);display:flex;align-items:center;gap:8px}
+.f-hint::after{content:'';display:block;width:28px;height:1px;background:linear-gradient(to right,rgba(139,92,246,.4),transparent)}
+
+/* ─── BIG BG WORD ─── */
+#bgw{position:fixed;right:40px;top:50%;transform:translateY(-50%);z-index:1;font-family:'Bebas Neue',sans-serif;font-size:clamp(70px,9vw,130px);letter-spacing:-3px;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(240,242,248,.04);pointer-events:none;text-align:right;max-width:46vw;word-break:break-word;transition:opacity .35s}
+@media(max-width:768px){#bgw{display:none}}
+
+/* ─── WHATSAPP FLOAT ─── */
+#wa-float{position:fixed;bottom:58px;right:40px;z-index:600;background:#25D366;color:#000;display:flex;align-items:center;gap:7px;padding:9px 16px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:background .25s,transform .2s;box-shadow:0 4px 18px rgba(37,211,102,.25)}
+#wa-float:hover{background:#1ebe5c;transform:translateY(-2px)}
+@media(max-width:768px){#wa-float{right:14px;bottom:58px;font-size:8px;padding:8px 12px}}
+
+/* ═══════════════════════════════════════════════
+   CONTENT PANEL
+═══════════════════════════════════════════════ */
 #panel{
   position:fixed;
-  top:72px;
-  left:48px;
-  bottom:52px;
-  width:min(500px,44vw);
+  top:var(--nav-h);
+  left:40px;
+  bottom:var(--foot-h);
+  width:min(520px,48vw);
   z-index:100;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  /* internal padding keeps content off the nav/footer edges */
-  padding:20px 0 20px 0;
+  padding:16px 0;
   overflow:hidden;
   pointer-events:all;
 }
-/* inner scroller so if content is taller than safe zone it stays inside */
-#panel-inner{
-  display:flex;
-  flex-direction:column;
-  gap:0;
-  max-height:100%;
-  overflow:hidden;
+/* Mobile: full width, scrollable */
+@media(max-width:768px){
+  #panel{
+    left:0;right:0;
+    width:100%;
+    padding:16px 20px 12px;
+    bottom:var(--foot-h);
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    justify-content:flex-start;
+    /* Push below nav */
+    top:var(--nav-h);
+    /* semi-transparent so 3D shows faintly behind */
+    background:rgba(8,11,20,.82);
+    backdrop-filter:blur(8px);
+  }
 }
-#panel.exit{animation:pOut .28s forwards ease-in}
-#panel.enter{animation:pIn .45s .05s both ease-out}
-@keyframes pOut{to{opacity:0;transform:translateY(20px)}}
-@keyframes pIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+#panel.exit{animation:pOut .25s forwards ease-in}
+#panel.enter{animation:pIn .4s .05s both ease-out}
+@keyframes pOut{to{opacity:0;transform:translateY(18px)}}
+@keyframes pIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 
-.p-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:10px;flex-shrink:0}
-.p-tag::before{content:'';flex-shrink:0;width:20px;height:1px}
+/* ── Panel elements ── */
+.p-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:5px;text-transform:uppercase;
+  margin-bottom:10px;display:flex;align-items:center;gap:10px;
+  color:var(--purple-light);flex-shrink:0;
+}
+.p-tag::before{content:'';flex-shrink:0;width:20px;height:1px;background:currentColor}
 
-/* Heading — capped so 3-line titles always fit */
 .p-h{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(24px,2.4vw,40px);
-  line-height:.93;
-  letter-spacing:.5px;
-  text-transform:uppercase;
-  margin-bottom:10px;
-  flex-shrink:0;
+  font-size:clamp(26px,2.6vw,44px);
+  line-height:.94;letter-spacing:.5px;text-transform:uppercase;
+  margin-bottom:10px;color:var(--white);flex-shrink:0;
 }
-.p-body{font-size:13px;line-height:1.65;color:rgba(240,236,232,.46);font-weight:300;margin-bottom:10px;max-width:420px;flex-shrink:0}
+@media(max-width:768px){.p-h{font-size:clamp(32px,8vw,52px)}}
 
-.p-list{display:flex;flex-direction:column;gap:0;margin-bottom:14px}
-.p-li{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.3px;padding:6px 0;border-bottom:1px solid rgba(240,236,232,.055);color:rgba(240,236,232,.38);display:flex;align-items:center;gap:9px}
-.p-li::before{content:'›';font-size:13px;flex-shrink:0;line-height:1}
+.p-body{
+  font-size:13px;line-height:1.7;
+  color:#c4c9d8;  /* bright enough to read */
+  font-weight:400;margin-bottom:12px;max-width:440px;flex-shrink:0;
+}
+@media(max-width:768px){.p-body{font-size:14px;color:#d0d5e8}}
 
-.p-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;flex-shrink:0}
-.p-btn{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;background:#a78bfa;color:#02020a;border:none;padding:11px 22px;cursor:none;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%);transition:background .25s,transform .2s;white-space:nowrap}
-.p-btn:hover{background:#c4ff00;transform:translateY(-2px)}
-.p-btn.g{background:transparent;border:1px solid rgba(240,236,232,.14);color:rgba(240,236,232,.4);clip-path:none}
-.p-btn.g:hover{border-color:#a78bfa;color:#a78bfa;background:transparent}
+/* List */
+.p-list{display:flex;flex-direction:column;margin-bottom:12px}
+.p-li{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3px;
+  padding:7px 0;border-bottom:1px solid rgba(240,242,248,.08);
+  color:#bcc4d6;  /* readable grey-white */
+  display:flex;align-items:flex-start;gap:8px;line-height:1.5;
+}
+.p-li::before{content:'›';color:var(--purple-light);font-size:13px;flex-shrink:0;line-height:1.4}
+@media(max-width:768px){.p-li{font-size:12px;color:#ccd2e4}}
+
+/* Highlight list item */
+.p-li.hl{color:var(--white);font-weight:400}
+.p-li.hl::before{color:var(--acid)}
+
+/* Buttons */
+.p-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;flex-shrink:0}
+.pb{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;background:var(--purple);color:var(--white);border:none;padding:11px 20px;cursor:none;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%);transition:background .25s,transform .2s;white-space:nowrap}
+.pb:hover{background:var(--acid);color:#000;transform:translateY(-2px)}
+.pb.g{background:transparent;border:1px solid rgba(240,242,248,.18);color:rgba(240,242,248,.6);clip-path:none}
+.pb.g:hover{border-color:var(--purple-light);color:var(--purple-light);background:transparent}
+@media(max-width:768px){.pb{cursor:pointer;font-size:11px;padding:12px 20px}}
+
+/* Stats row */
+.p-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.ps-item{border:1px solid rgba(139,92,246,.2);padding:14px 10px;text-align:center;background:rgba(139,92,246,.04)}
+.ps-n{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1;color:var(--purple-light);letter-spacing:-1px}
+.ps-u{font-size:16px;color:var(--acid)}
+.ps-l{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-top:4px}
+@media(max-width:768px){.ps-n{font-size:28px}}
+
+/* Platform cards */
+.p-plats{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.plt{border:1px solid rgba(240,242,248,.08);padding:12px 14px;display:flex;align-items:flex-start;gap:12px;transition:border-color .25s;cursor:default}
+.plt:hover{border-color:rgba(139,92,246,.4)}
+.plt-icon{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;min-width:48px;flex-shrink:0;line-height:1.2}
+.plt-body{}
+.plt-name{font-weight:500;font-size:13px;color:var(--white);margin-bottom:3px}
+.plt-desc{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.3px;color:var(--grey);line-height:1.55}
 
 /* Metrics */
-.p-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.p-met{border:1px solid rgba(240,236,232,.07);padding:16px 18px}
-.pm-n{font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1;letter-spacing:-1px;margin-bottom:2px}
-.pm-u{font-size:20px}
-.pm-l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(240,236,232,.28);margin-top:3px}
+.p-mets{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.pm{border:1px solid rgba(240,242,248,.07);padding:14px;background:rgba(13,17,32,.5)}
+.pm-n{font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1;letter-spacing:-1px;color:var(--acid)}
+.pm-u{font-size:18px;color:rgba(184,255,0,.6)}
+.pm-l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-top:3px}
+.pm-sub{font-size:11px;color:#9ca3af;margin-top:4px;line-height:1.4}
+
+/* Process timeline */
+.p-proc{display:flex;flex-direction:column;gap:0;margin-bottom:12px}
+.proc-step{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(240,242,248,.06)}
+.proc-n{font-family:'Bebas Neue',sans-serif;font-size:28px;color:rgba(139,92,246,.3);line-height:1;min-width:32px;flex-shrink:0}
+.proc-body{}
+.proc-name{font-weight:500;font-size:13px;color:var(--white);margin-bottom:2px}
+.proc-desc{font-size:12px;color:#9ca3af;line-height:1.5}
 
 /* Testimonials */
-.p-testi{display:flex;flex-direction:column;gap:0;margin-bottom:10px}
-.pt-item{padding:7px 0;border-bottom:1px solid rgba(240,236,232,.06)}
-.pt-stars{font-size:10px;letter-spacing:3px;margin-bottom:4px}
-.pt-q{font-size:12px;line-height:1.6;color:rgba(240,236,232,.48);font-style:italic;margin-bottom:4px}
-.pt-who{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(240,236,232,.22)}
+.p-testis{display:flex;flex-direction:column;gap:0;margin-bottom:12px}
+.testi{padding:10px 0;border-bottom:1px solid rgba(240,242,248,.07)}
+.t-stars{font-size:11px;letter-spacing:3px;color:var(--acid);margin-bottom:5px}
+.t-q{font-size:12px;line-height:1.65;color:#c8cfe0;font-style:italic;margin-bottom:5px}
+.t-who{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--grey)}
 
 /* Contact form */
-.p-form{display:flex;flex-direction:column;gap:9px}
-.pf-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.p-form input,.p-form textarea,.p-form select{background:rgba(240,236,232,.04);border:1px solid rgba(240,236,232,.1);color:#f0ece8;font-family:'Inter',sans-serif;font-size:13px;padding:10px 13px;outline:none;transition:border-color .25s;-webkit-appearance:none;appearance:none;width:100%}
-.p-form input:focus,.p-form textarea:focus,.p-form select:focus{border-color:rgba(167,139,250,.4)}
+.p-form{display:flex;flex-direction:column;gap:8px}
+.pf-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:480px){.pf-row{grid-template-columns:1fr}}
+.p-form input,.p-form textarea,.p-form select{
+  background:rgba(240,242,248,.05);
+  border:1px solid rgba(240,242,248,.12);
+  color:var(--white);font-family:'Inter',sans-serif;font-size:13px;
+  padding:11px 14px;outline:none;transition:border-color .25s;
+  -webkit-appearance:none;appearance:none;width:100%;
+}
+.p-form input::placeholder,.p-form textarea::placeholder{color:rgba(240,242,248,.3)}
+.p-form input:focus,.p-form textarea:focus,.p-form select:focus{border-color:rgba(139,92,246,.5);background:rgba(139,92,246,.04)}
 .p-form textarea{min-height:72px;resize:none}
-.p-form select option{background:#04040f}
-.pf-sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;background:#a78bfa;color:#02020a;border:none;padding:12px;cursor:none;width:100%;transition:background .25s}
-.pf-sub:hover{background:#c4ff00}
-
-/* ── BIG ACCENT WORD — right side, purely decorative ── */
-#bgword{
-  position:fixed;
-  right:48px;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:50;
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(80px,10vw,150px);
-  letter-spacing:-3px;
-  line-height:1;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(240,236,232,.038);
-  pointer-events:none;
-  text-align:right;
-  /* keep it on right half only */
-  max-width:46vw;
-  word-break:break-word;
-  transition:opacity .4s;
-}
-
-/* ── FOOTER BAR ── */
-#footer{
-  position:fixed;
-  bottom:0;left:0;right:0;
-  height:52px;
-  padding:0 48px;
-  display:flex;align-items:center;justify-content:space-between;
-  z-index:500;
-  background:rgba(2,2,10,.88);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border-top:1px solid rgba(167,139,250,.06);
-}
-#counter{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:5px;color:rgba(240,236,232,.18)}
-#counter em{color:rgba(167,139,250,.55);font-style:normal}
-#shint{display:flex;align-items:center;gap:10px}
-.sh-word{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(240,236,232,.18)}
-.sh-arrow{width:32px;height:1px;background:linear-gradient(to right,rgba(167,139,250,0),rgba(167,139,250,.4))}
-
-/* ── SIDE DOTS ── */
-#sdots{position:fixed;right:28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;z-index:400;pointer-events:all}
-.sdot{width:5px;height:5px;border-radius:50%;border:1px solid rgba(240,236,232,.18);background:transparent;cursor:none;transition:all .35s}
-.sdot:hover{border-color:rgba(167,139,250,.5)}
-.sdot.on{background:#a78bfa;border-color:#a78bfa;box-shadow:0 0 8px rgba(167,139,250,.8)}
-
-/* ── WHATSAPP FLOAT ── */
-#wa-btn{
-  position:fixed;
-  bottom:62px;
-  right:52px;
-  z-index:600;
-  background:#25D366;
-  color:#000;
-  display:flex;align-items:center;gap:6px;
-  padding:9px 14px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  text-decoration:none;
-  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);
-  transition:background .25s,transform .2s;
-  box-shadow:0 4px 20px rgba(37,211,102,.3);
-}
-#wa-btn:hover{background:#1ebe5c;transform:translateY(-2px)}
-
-/* ── WA ALT BUTTON IN FORM ── */
-.wa-alt-btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  width:100%;padding:10px;
-  font-family:'JetBrains Mono',monospace;font-size:9px;
-  letter-spacing:3px;text-transform:uppercase;
-  color:#25D366;
-  border:1px solid rgba(37,211,102,.25);
-  text-decoration:none;
-  transition:background .25s,border-color .25s;
-  cursor:none;
-}
-.wa-alt-btn:hover{background:rgba(37,211,102,.07);border-color:rgba(37,211,102,.5)}
+.p-form select option{background:#0d1120;color:var(--white)}
+.pf-sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;background:var(--purple);color:var(--white);border:none;padding:13px;cursor:none;width:100%;transition:background .25s}
+.pf-sub:hover{background:var(--acid);color:#000}
+@media(max-width:768px){.pf-sub{cursor:pointer}}
+.pf-or{display:flex;align-items:center;gap:8px;margin:2px 0}
+.pf-or-line{flex:1;height:1px;background:rgba(240,242,248,.07)}
+.pf-or-txt{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,242,248,.2)}
+.pf-wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#25D366;border:1px solid rgba(37,211,102,.2);text-decoration:none;transition:background .25s,border-color .25s}
+.pf-wa:hover{background:rgba(37,211,102,.06);border-color:rgba(37,211,102,.4)}
+@media(max-width:768px){.pf-wa{cursor:pointer}}
 </style>
 </head>
 <body>
 
-<canvas id="canvas3d"></canvas>
+<canvas id="cv"></canvas>
 <div id="scan"></div>
 <div id="warp"></div>
 <div id="cur"></div>
@@ -244,9 +272,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:#02020a;color:#f0ece
 
 <!-- LOADER -->
 <div id="loader">
-  <div class="ld-name">EAS</div>
-  <div class="ld-track"><div class="ld-fill" id="ldf"></div></div>
-  <div class="ld-lbl" id="ldl">Initializing</div>
+  <div class="ld-logo">EAS</div>
+  <div class="ld-track"><div class="ld-bar" id="lbar"></div></div>
+  <div class="ld-txt" id="ltxt">Initializing</div>
 </div>
 
 <!-- CORNER BRACKETS -->
@@ -255,337 +283,489 @@ html,body{width:100%;height:100%;overflow:hidden;background:#02020a;color:#f0ece
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-logo">EAS · CRM</div>
-  <div id="nav-btns">
-    <button class="nb on" id="nb0" onclick="goTo(0)">Home</button>
-    <button class="nb" id="nb1" onclick="goTo(2)">Services</button>
-    <button class="nb" id="nb2" onclick="goTo(4)">Platforms</button>
-    <button class="nb" id="nb3" onclick="goTo(6)">Results</button>
-    <button class="nb" id="nb4" onclick="goTo(8)">Contact</button>
+  <div class="n-logo">EAS <span>·</span> CRM</div>
+  <div id="n-links">
+    <button class="nl on" id="nl0" onclick="goTo(0)">Home</button>
+    <button class="nl" id="nl1" onclick="goTo(2)">Services</button>
+    <button class="nl" id="nl2" onclick="goTo(4)">Platforms</button>
+    <button class="nl" id="nl3" onclick="goTo(6)">Results</button>
+    <button class="nl" id="nl4" onclick="goTo(8)">Contact</button>
   </div>
-  <a id="nav-cta" href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20want%20a%20free%20CRM%20audit" target="_blank">Get Free Audit</a>
+  <a id="n-cta" href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20want%20a%20free%20CRM%20audit" target="_blank">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Free Audit
+  </a>
+  <!-- Hamburger -->
+  <button id="n-ham" onclick="toggleMob()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- ACCENT WORD -->
-<div id="bgword">EAS</div>
+<!-- MOBILE MENU -->
+<div id="mob-menu">
+  <button class="mob-nl on" onclick="goTo(0);toggleMob()">Home</button>
+  <button class="mob-nl" onclick="goTo(2);toggleMob()">Services</button>
+  <button class="mob-nl" onclick="goTo(4);toggleMob()">Platforms</button>
+  <button class="mob-nl" onclick="goTo(6);toggleMob()">Results</button>
+  <button class="mob-nl" onclick="goTo(8);toggleMob()">Contact</button>
+</div>
 
-<!-- CONTENT PANEL -->
-<div id="panel"></div>
+<!-- BG WORD -->
+<div id="bgw">CRM</div>
 
 <!-- SIDE DOTS -->
 <div id="sdots"></div>
 
-<!-- WHATSAPP FLOATING BUTTON -->
-<a href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20need%20a%20CRM%20audit" target="_blank" id="wa-btn" title="Chat on WhatsApp">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  Chat
+<!-- CONTENT PANEL -->
+<div id="panel"></div>
+
+<!-- WA FLOAT -->
+<a id="wa-float" href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20need%20a%20CRM%20audit" target="_blank">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  WhatsApp
 </a>
 
 <!-- FOOTER -->
-<footer id="footer">
-  <div id="shint">
-    <div class="sh-word">Scroll to travel</div>
-    <div class="sh-arrow"></div>
-  </div>
+<footer id="foot">
+  <div class="f-hint">Scroll to explore</div>
   <div id="counter"><em id="cc">01</em> / <span id="ct">09</span></div>
 </footer>
 
 <script>
-/* ════════════════════════════════════════════════
-   SECTION DATA
-════════════════════════════════════════════════ */
-const S = [
-  { tag:'CRM Automation Architect', title:'Ehtasham\nAli S.', body:'I build revenue infrastructure — not just CRM setups. Systems that follow up, qualify, and close while you sleep.', accent:'EAS', tagC:'#a78bfa', nodeC:0xa78bfa, shape:'knot', extra:'pills', btns:[{t:'Begin Journey',f:1},{t:'Free Audit',f:8,g:1}],wa:1 },
-  { tag:'The Problem', title:'30–40%\nOf Leads.\nGone.', body:'Not from bad marketing. From a broken CRM. Leads arrive — but nothing follows up, qualifies, or closes them.', accent:'BROKEN', tagC:'#ff6b6b', nodeC:0xff6b6b, shape:'dodecahedron', extra:'stat', btns:[{t:'See The Fix',f:2}] },
-  { tag:'02 · Services', title:'What\nI Build.', body:'Six core services turning your CRM from a dead database into an intelligent revenue engine.', accent:'BUILD', tagC:'#c4ff00', nodeC:0xc4ff00, shape:'octahedron', extra:'services', btns:[{t:'Platforms',f:4},{t:'Start Now',f:8,g:1}] },
-  { tag:'03 · Automation', title:'Workflows\nNever\nSleep.', body:'Trigger-based sequences that handle follow-up, scoring, booking, and sync — 24/7, zero human input.', accent:'AUTO', tagC:'#00f0ff', nodeC:0x00f0ff, shape:'torus', extra:'auto', btns:[{t:'Next: Platforms',f:4}] },
-  { tag:'04 · Platforms', title:'Three\nPlatforms.\nOne Expert.', body:'GoHighLevel, HubSpot, Zoho CRM — deep mastery across all three. Every dial, every feature, every integration.', accent:'MASTER', tagC:'#ff7a59', nodeC:0xff7a59, shape:'icosahedron', extra:'platforms', btns:[{t:'See Results',f:6},{t:'Next',f:5,g:1}] },
-  { tag:'05 · Process', title:'10–14\nDays.\nDelivered.', body:'No month-long delays. Audit → Blueprint → Build → Train. A working automated CRM in two weeks, guaranteed.', accent:'FAST', tagC:'#a78bfa', nodeC:0xa78bfa, shape:'sphere', extra:'process', btns:[{t:'See Numbers',f:6}] },
-  { tag:'06 · Results', title:'Numbers\nThat\nMatter.', body:'From real projects. Real clients. Real revenue impact — not estimates.', accent:'PROOF', tagC:'#c4ff00', nodeC:0xc4ff00, shape:'dodecahedron', extra:'metrics', btns:[{t:'Client Stories',f:7},{t:'Work With Me',f:8,g:1}] },
-  { tag:'07 · Clients', title:'They\nTrust\nThe System.', body:'Agencies, SaaS founders, real estate, e-commerce — USA, UK, Canada, Australia.', accent:'TRUST', tagC:'#ff6b6b', nodeC:0xff6b6b, shape:'knot', extra:'testimonials', btns:[{t:'Work With Me',f:8}] },
-  { tag:'08 · Contact', title:'Ready\nTo Fix It?', body:"DM 'CRM' or fill this form — I'll audit your setup and tell you exactly what's leaking. No pitch.", accent:'START', tagC:'#a78bfa', nodeC:0xa78bfa, shape:'sphere', extra:'contact', btns:[] },
+/* ══════════════════════════════════════════
+   SECTION DATA — CRM-focused content
+══════════════════════════════════════════ */
+const WA = 'https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20want%20a%20free%20CRM%20audit';
+
+const SECTS = [
+  {
+    id:0, tag:'CRM Automation Expert', title:'Stop Losing\nLeads to a\nBroken CRM.',
+    body:'Your CRM should be your best salesperson — working 24/7, never forgetting a follow-up, never dropping a lead. I make that happen on GHL, HubSpot and Zoho.',
+    accent:'CRM', tagC:'#a78bfa', nodeC:0x8b5cf6, shape:'knot',
+    extra:'home', nav:0,
+    btns:[{t:'See My Work',f:()=>goTo(1)},{t:'Free Audit →',f:()=>window.open(WA,'_blank'),g:1}],
+  },
+  {
+    id:1, tag:'The Problem', title:'Your CRM Is\nLeaking\nRevenue.',
+    body:'Studies show 78% of buyers go with the vendor who responds first. If your CRM isn\'t following up within 5 minutes — automatically — you\'re handing deals to competitors.',
+    accent:'LEAK', tagC:'#f87171', nodeC:0xef4444, shape:'dodecahedron',
+    extra:'problem', nav:0,
+    btns:[{t:'How I Fix This',f:()=>goTo(2)}],
+  },
+  {
+    id:2, tag:'02 · Services', title:'CRM Services\nThat Drive\nRevenue.',
+    body:'Every service I offer is tied directly to one outcome: more leads converted, less time wasted, more money in your pipeline.',
+    accent:'BUILD', tagC:'#b8ff00', nodeC:0x84cc16, shape:'octahedron',
+    extra:'services', nav:1,
+    btns:[{t:'See Platforms',f:()=>goTo(4)},{t:'Get Started',f:()=>goTo(8),g:1}],
+  },
+  {
+    id:3, tag:'03 · Automation', title:'Automations\nThat Close\nDeals.',
+    body:'I build sequences that turn cold leads warm, warm leads hot, and hot leads into booked calls — all without you lifting a finger.',
+    accent:'AUTO', tagC:'#22d3ee', nodeC:0x06b6d4, shape:'torus',
+    extra:'automation', nav:1,
+    btns:[{t:'Next: Platforms',f:()=>goTo(4)}],
+  },
+  {
+    id:4, tag:'04 · Platforms', title:'Three CRMs.\nOne Expert.\nDeep Mastery.',
+    body:'I don\'t dabble in every tool. I go deep in three of the most powerful CRM platforms — so you get an expert, not a generalist.',
+    accent:'MASTER', tagC:'#fb923c', nodeC:0xf97316, shape:'icosahedron',
+    extra:'platforms', nav:2,
+    btns:[{t:'See Results',f:()=>goTo(6)},{t:'Next',f:()=>goTo(5),g:1}],
+  },
+  {
+    id:5, tag:'05 · Process', title:'Live in\n10–14 Days.\nGuaranteed.',
+    body:'No vague timelines. No month-long projects. I follow a proven 4-step process that gets your CRM live, tested, and your team trained in under 2 weeks.',
+    accent:'FAST', tagC:'#a78bfa', nodeC:0x8b5cf6, shape:'sphere',
+    extra:'process', nav:2,
+    btns:[{t:'See Real Results',f:()=>goTo(6)}],
+  },
+  {
+    id:6, tag:'06 · Results', title:'Real Numbers.\nReal Clients.\nReal Impact.',
+    body:'These aren\'t projections. These are outcomes from actual CRM automation projects I\'ve delivered.',
+    accent:'PROOF', tagC:'#b8ff00', nodeC:0x84cc16, shape:'dodecahedron',
+    extra:'results', nav:3,
+    btns:[{t:'Client Stories',f:()=>goTo(7)},{t:'Work With Me',f:()=>goTo(8),g:1}],
+  },
+  {
+    id:7, tag:'07 · Client Stories', title:'What Clients\nSay After\nWorking With Me.',
+    body:'100+ projects. Real estate, SaaS, e-commerce, agencies — across USA, UK, Canada, Australia.',
+    accent:'TRUST', tagC:'#f87171', nodeC:0xef4444, shape:'knot',
+    extra:'testimonials', nav:3,
+    btns:[{t:'Work With Me',f:()=>goTo(8)}],
+  },
+  {
+    id:8, tag:'08 · Get Started', title:'Let\'s Fix\nYour CRM\nToday.',
+    body:'I\'ll audit your current CRM setup for free and tell you exactly where leads are leaking and how to fix it. No pitch. No fluff. Just honest answers.',
+    accent:'START', tagC:'#a78bfa', nodeC:0x8b5cf6, shape:'sphere',
+    extra:'contact', nav:4,
+    btns:[],
+  },
 ];
 
+/* ══════════════════════════════════════════
+   EXTRA CONTENT — CRM-focused
+══════════════════════════════════════════ */
+const WA_SVG = `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
+
 const EXTRA = {
-  pills:`<div class="p-list"><div class="p-li">GoHighLevel (GHL) · Sub-accounts, funnels, white-label</div><div class="p-li">HubSpot · Marketing, Sales &amp; Service Hubs</div><div class="p-li">Zoho CRM · Full One ecosystem integration</div><div class="p-li">100+ Projects · 5 Years · Upwork Top Rated</div></div>`,
-  stat:`<div style="margin-bottom:18px"><div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:#ff6b6b;line-height:1;letter-spacing:-2px;filter:drop-shadow(0 0 24px rgba(255,107,107,.4))">$12K<span style="font-size:26px;color:rgba(255,107,107,.4)">/mo</span></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(240,236,232,.22);margin-top:6px">Avg monthly lead revenue lost per client</div></div>`,
-  services:`<div class="p-list"><div class="p-li">CRM architecture &amp; full pipeline setup</div><div class="p-li">Workflow &amp; trigger automation</div><div class="p-li">Sales funnel engineering (pages, forms, booking)</div><div class="p-li">Multi-platform integration · Zapier · Make · API</div><div class="p-li">Email &amp; SMS campaign automation</div><div class="p-li">Reporting dashboards &amp; attribution</div></div>`,
-  auto:`<div class="p-list"><div class="p-li">Lead follow-up: 4 hours → 8 minutes</div><div class="p-li">Automated appointment booking &amp; reminders</div><div class="p-li">Cross-platform data sync — zero manual entry</div><div class="p-li">AI-powered lead scoring &amp; routing</div><div class="p-li">Drip sequences running months untouched</div></div>`,
-  platforms:`<div class="p-list"><div class="p-li" style="color:rgba(255,107,107,.8)">GoHighLevel — Sub-accounts, white-label, AI booking</div><div class="p-li" style="color:rgba(255,122,89,.8)">HubSpot — RevOps, pipelines, CRM migrations</div><div class="p-li" style="color:rgba(167,139,250,.8)">Zoho — Zoho One full ecosystem, Zia AI</div><div class="p-li">Zapier · Make · Stripe · Slack · Google Workspace</div></div>`,
-  process:`<div class="p-list"><div class="p-li"><span style="color:#c4ff00;min-width:52px;display:inline-block;font-size:10px">AUDIT</span>Free diagnosis — find where leads leak</div><div class="p-li"><span style="color:#c4ff00;min-width:52px;display:inline-block;font-size:10px">PLAN</span>Custom blueprint for your business</div><div class="p-li"><span style="color:#c4ff00;min-width:52px;display:inline-block;font-size:10px">BUILD</span>Full implementation in 10–14 days</div><div class="p-li"><span style="color:#c4ff00;min-width:52px;display:inline-block;font-size:10px">TRAIN</span>SOPs, team training, ongoing support</div></div>`,
-  metrics:`<div class="p-metrics"><div class="p-met"><div class="pm-n" style="color:#c4ff00">8<span class="pm-u">min</span></div><div class="pm-l">Lead Response (was 4h)</div></div><div class="p-met"><div class="pm-n" style="color:#c4ff00">50<span class="pm-u">%</span></div><div class="pm-l">Admin Tasks Cut</div></div><div class="p-met"><div class="pm-n" style="color:#c4ff00">14<span class="pm-u">d</span></div><div class="pm-l">Delivery Guarantee</div></div><div class="p-met"><div class="pm-n" style="color:#c4ff00">100<span class="pm-u">+</span></div><div class="pm-l">Projects Delivered</div></div></div>`,
-  testimonials:`<div class="p-testi"><div class="pt-item"><div class="pt-stars" style="color:#c4ff00">★★★★★</div><div class="pt-q">"The GHL setup works while we sleep. Lead follow-up is fully automatic."</div><div class="pt-who">James M. · Agency Owner · USA</div></div><div class="pt-item"><div class="pt-stars" style="color:#c4ff00">★★★★★</div><div class="pt-q">"Rebuilt our HubSpot in 2 weeks. ROI visible within 30 days."</div><div class="pt-who">Sarah K. · SaaS Founder · UK</div></div><div class="pt-item"><div class="pt-stars" style="color:#c4ff00">★★★★★</div><div class="pt-q">"Connected our entire Zoho stack seamlessly. Exceptional work."</div><div class="pt-who">Rajan A. · Real Estate · Canada</div></div></div>`,
-  contact:`<form class="p-form" id="contact-form" action="https://formspree.io/f/mvzypzak" method="POST" onsubmit="submitCF(event)"><div class="pf-row"><input name="name" placeholder="Your name" required><input name="email" type="email" placeholder="Email" required></div><select name="platform"><option value="">Select CRM platform</option><option>GoHighLevel</option><option>HubSpot</option><option>Zoho CRM</option><option>Multiple / Not sure</option></select><textarea name="message" placeholder="What's broken? Or just type 'CRM'..."></textarea><button type="submit" class="pf-sub">Send Message →</button>
-<div style="margin-top:8px;display:flex;align-items:center;gap:8px">
-  <div style="flex:1;height:1px;background:rgba(240,236,232,.08)"></div>
-  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,236,232,.2)">or</span>
-  <div style="flex:1;height:1px;background:rgba(240,236,232,.08)"></div>
-</div>
-<a href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20need%20a%20free%20CRM%20audit" target="_blank" class="wa-alt-btn">
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  Message me directly on WhatsApp
-</a></form>`,
+  home:`
+    <div class="p-stats">
+      <div class="ps-item"><div class="ps-n">100<span class="ps-u">+</span></div><div class="ps-l">Projects Done</div></div>
+      <div class="ps-item"><div class="ps-n">5<span class="ps-u">yr</span></div><div class="ps-l">Experience</div></div>
+      <div class="ps-item"><div class="ps-n">3<span class="ps-u">x</span></div><div class="ps-l">CRM Platforms</div></div>
+    </div>
+    <div class="p-list">
+      <div class="p-li hl">GoHighLevel (GHL) · HubSpot · Zoho CRM</div>
+      <div class="p-li">Pipeline setup, automation & full CRM buildouts</div>
+      <div class="p-li">Lead follow-up from 4 hours → 8 minutes</div>
+      <div class="p-li">Upwork Top Rated · 100% Job Success</div>
+    </div>`,
+  problem:`
+    <div class="p-list">
+      <div class="p-li hl">78% of deals go to the first responder — is that you?</div>
+      <div class="p-li">No automation = leads going cold while you sleep</div>
+      <div class="p-li">Manual follow-up means dropped balls & lost revenue</div>
+      <div class="p-li">A broken CRM pipeline loses avg. $12K–$30K/month</div>
+      <div class="p-li">Most CRMs are set up wrong from day one — chaos builds</div>
+    </div>`,
+  services:`
+    <div class="p-list">
+      <div class="p-li hl">CRM Setup & Pipeline Architecture</div>
+      <div class="p-li">Custom stages, fields, deal scoring & team permissions</div>
+      <div class="p-li hl">Workflow & Trigger Automation</div>
+      <div class="p-li">Auto follow-ups, lead routing, task creation, notifications</div>
+      <div class="p-li hl">Sales Funnel & Landing Page Integration</div>
+      <div class="p-li">Forms, booking systems & calendars wired to your CRM</div>
+      <div class="p-li hl">Third-Party Integrations</div>
+      <div class="p-li">Zapier · Make · Stripe · Slack · Google Workspace · APIs</div>
+    </div>`,
+  automation:`
+    <div class="p-list">
+      <div class="p-li hl">Lead Capture → Instant Follow-Up (under 5 min)</div>
+      <div class="p-li">SMS + email sequences triggered the moment a lead enters</div>
+      <div class="p-li hl">Appointment Booking & Reminder Sequences</div>
+      <div class="p-li">Automated confirmations, reminders, no-show re-engagements</div>
+      <div class="p-li hl">Dead Lead Re-Engagement Campaigns</div>
+      <div class="p-li">Win back cold leads with drip campaigns running in the background</div>
+      <div class="p-li hl">Pipeline Stage Automation</div>
+      <div class="p-li">Deals move themselves based on actions — zero manual updates</div>
+    </div>`,
+  platforms:`
+    <div class="p-plats">
+      <div class="plt">
+        <div class="plt-icon" style="color:#ff6b35">GHL</div>
+        <div class="plt-body">
+          <div class="plt-name">GoHighLevel</div>
+          <div class="plt-desc">Sub-accounts · White-label · Funnels · AI booking · Reputation management · Agency snapshots</div>
+        </div>
+      </div>
+      <div class="plt">
+        <div class="plt-icon" style="color:#ff7a59">HUB</div>
+        <div class="plt-body">
+          <div class="plt-name">HubSpot CRM</div>
+          <div class="plt-desc">Marketing Hub · Sales Hub · Service Hub · RevOps · Lead scoring · CRM migrations · Custom reporting</div>
+        </div>
+      </div>
+      <div class="plt">
+        <div class="plt-icon" style="color:#a78bfa">ZHO</div>
+        <div class="plt-body">
+          <div class="plt-name">Zoho CRM</div>
+          <div class="plt-desc">Zoho One ecosystem · Blueprint automation · Zia AI · Custom modules · Books + Campaigns + Desk</div>
+        </div>
+      </div>
+    </div>`,
+  process:`
+    <div class="p-proc">
+      <div class="proc-step"><div class="proc-n">01</div><div class="proc-body"><div class="proc-name">Free CRM Audit</div><div class="proc-desc">I analyse your current setup and identify every leak — no charge, no commitment</div></div></div>
+      <div class="proc-step"><div class="proc-n">02</div><div class="proc-body"><div class="proc-name">Custom Blueprint</div><div class="proc-desc">A detailed plan designed around your pipeline, team and revenue goals</div></div></div>
+      <div class="proc-step"><div class="proc-n">03</div><div class="proc-body"><div class="proc-name">Build & Automate</div><div class="proc-desc">Full implementation — CRM, workflows, funnels, integrations — in 10–14 days</div></div></div>
+      <div class="proc-step"><div class="proc-n">04</div><div class="proc-body"><div class="proc-name">Train & Hand Over</div><div class="proc-desc">SOPs, Loom walkthroughs, team training — you own it and know how to use it</div></div></div>
+    </div>`,
+  results:`
+    <div class="p-mets">
+      <div class="pm"><div class="pm-n">8<span class="pm-u">min</span></div><div class="pm-l">Lead Response</div><div class="pm-sub">Was 4+ hours. Auto follow-up sequences changed everything.</div></div>
+      <div class="pm"><div class="pm-n">50<span class="pm-u">%</span></div><div class="pm-l">Admin Cut</div><div class="pm-sub">Half of all manual tasks automated — team closes more, does less busywork.</div></div>
+      <div class="pm"><div class="pm-n">14<span class="pm-u">d</span></div><div class="pm-l">Delivery</div><div class="pm-sub">Full CRM live in under 2 weeks. Every project, every time.</div></div>
+      <div class="pm"><div class="pm-n">3x<span class="pm-u"></span></div><div class="pm-l">Pipeline Growth</div><div class="pm-sub">Clients report 3× more deals actioned after proper CRM setup.</div></div>
+    </div>`,
+  testimonials:`
+    <div class="p-testis">
+      <div class="testi"><div class="t-stars">★★★★★</div><div class="t-q">"Our GHL automation now follows up every lead within minutes. We stopped losing deals to slow responses. Game changer."</div><div class="t-who">James M. · Marketing Agency · USA</div></div>
+      <div class="testi"><div class="t-stars">★★★★★</div><div class="t-q">"Ehtasham rebuilt our entire HubSpot pipeline in 12 days. Our sales team went from confused to actually loving the CRM."</div><div class="t-who">Sarah K. · SaaS Founder · UK</div></div>
+      <div class="testi"><div class="t-stars">★★★★★</div><div class="t-q">"Full Zoho One integration — CRM, Campaigns, Desk, Bookings all connected. Best investment we made this year."</div><div class="t-who">Rajan A. · Real Estate Brokerage · Canada</div></div>
+      <div class="testi"><div class="t-stars">★★★★★</div><div class="t-q">"Honest audit, clear plan, fast delivery. He told us what we needed — not what we wanted to hear. That's rare."</div><div class="t-who">Lisa P. · E-Commerce Brand · Australia</div></div>
+    </div>`,
+  contact:`
+    <form class="p-form" action="https://formspree.io/f/mvzypzak" method="POST" onsubmit="submitForm(event)">
+      <div class="pf-row">
+        <input name="name" placeholder="Your name" required>
+        <input name="email" type="email" placeholder="Work email" required>
+      </div>
+      <select name="platform">
+        <option value="">Which CRM are you using?</option>
+        <option>GoHighLevel (GHL)</option>
+        <option>HubSpot</option>
+        <option>Zoho CRM</option>
+        <option>No CRM yet — starting fresh</option>
+        <option>Multiple platforms</option>
+      </select>
+      <textarea name="message" placeholder="Describe your situation — what's broken, what you want to fix, or just type 'audit'..."></textarea>
+      <button type="submit" class="pf-sub">Send Message →</button>
+      <div class="pf-or"><div class="pf-or-line"></div><div class="pf-or-txt">or</div><div class="pf-or-line"></div></div>
+      <a class="pf-wa" href="${WA}" target="_blank">${WA_SVG} Chat directly on WhatsApp</a>
+    </form>`,
 };
 
-function submitCF(e){
+function submitForm(e){
   e.preventDefault();
   const b=e.target.querySelector('.pf-sub');
-  b.textContent='✓ Sent — reply within 24h';b.style.background='#4ade80';
-  setTimeout(()=>{b.textContent='Send Message →';b.style.background='';e.target.reset();},4000);
+  b.textContent='✓ Sent! I\'ll reply within 24h';b.style.background='#22c55e';
+  setTimeout(()=>{b.textContent='Send Message →';b.style.background='';e.target.reset();},4500);
 }
 
-/* ════════════════════════════════════════════════
-   THREE.JS
-════════════════════════════════════════════════ */
-const cv=document.getElementById('canvas3d');
-const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true});
+/* ══════════════════════════════════════════
+   THREE.JS — 3D background
+══════════════════════════════════════════ */
+const renderer = new THREE.WebGLRenderer({canvas:document.getElementById('cv'),antialias:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 renderer.setSize(innerWidth,innerHeight);
-renderer.setClearColor(0x02020a,1);
+renderer.setClearColor(0x080b14,1);
 
-const scene=new THREE.Scene();
-scene.fog=new THREE.FogExp2(0x02020a,.013);
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x080b14,.014);
 
-const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,300);
+const camera = new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,300);
 camera.position.set(0,0,8);
 
 // Lights
-const aL=new THREE.AmbientLight(0x111133,3); scene.add(aL);
-const pA=new THREE.PointLight(0xa78bfa,8,40); pA.position.set(4,3,5); scene.add(pA);
-const pB=new THREE.PointLight(0xc4ff00,3,30); pB.position.set(-5,-2,3); scene.add(pB);
+scene.add(new THREE.AmbientLight(0x1a1f3a,4));
+const pL = new THREE.PointLight(0x8b5cf6,10,40); pL.position.set(4,3,5); scene.add(pL);
+const pL2 = new THREE.PointLight(0xb8ff00,3,30); pL2.position.set(-5,-2,3); scene.add(pL2);
 
 // Stars
 (()=>{
-  const g=new THREE.BufferGeometry();
-  const n=7000,p=new Float32Array(n*3);
+  const g=new THREE.BufferGeometry(), n=7000, p=new Float32Array(n*3);
   for(let i=0;i<n;i++){p[i*3]=(Math.random()-.5)*400;p[i*3+1]=(Math.random()-.5)*400;p[i*3+2]=(Math.random()-.5)*400}
   g.setAttribute('position',new THREE.BufferAttribute(p,3));
-  scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0xffffff,size:.055,transparent:true,opacity:.6})));
+  scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0xffffff,size:.06,transparent:true,opacity:.65})));
 })();
 
-// Ambient colour particles
-const apG=new THREE.BufferGeometry();
-const apN=500,apP=new Float32Array(apN*3),apC=new Float32Array(apN*3);
+// Ambient particles
+const apG=new THREE.BufferGeometry(), apN=500, apP=new Float32Array(apN*3), apC=new Float32Array(apN*3);
 for(let i=0;i<apN;i++){
-  apP[i*3]=(Math.random()-.5)*30;apP[i*3+1]=(Math.random()-.5)*20;apP[i*3+2]=(Math.random()-.5)*18-2;
-  const c=new THREE.Color().setHSL(.72+Math.random()*.15,.7,.5+Math.random()*.3);
+  apP[i*3]=(Math.random()-.5)*30; apP[i*3+1]=(Math.random()-.5)*20; apP[i*3+2]=(Math.random()-.5)*18-2;
+  const c=new THREE.Color().setHSL(.74+Math.random()*.12,.7,.5+Math.random()*.3);
   apC[i*3]=c.r;apC[i*3+1]=c.g;apC[i*3+2]=c.b;
 }
 apG.setAttribute('position',new THREE.BufferAttribute(apP,3));
 apG.setAttribute('color',new THREE.BufferAttribute(apC,3));
-const apMesh=new THREE.Points(apG,new THREE.PointsMaterial({size:.075,vertexColors:true,transparent:true,opacity:.4}));
+const apMesh=new THREE.Points(apG,new THREE.PointsMaterial({size:.08,vertexColors:true,transparent:true,opacity:.4}));
 scene.add(apMesh);
 
-// Node group — positioned right-center, panel is left
+// 3D node group — right-center on desktop, center on mobile
 const nodeGrp=new THREE.Group();
-nodeGrp.position.set(3.2,0,0);
+const isMob=()=>innerWidth<=768;
+nodeGrp.position.set(isMob()?0:3.2, 0, 0);
 scene.add(nodeGrp);
 
 function mkGeo(sh){
   switch(sh){
-    case 'knot':         return new THREE.TorusKnotGeometry(1.3,.36,160,18,2,3);
+    case 'knot':         return new THREE.TorusKnotGeometry(1.3,.35,160,18,2,3);
     case 'dodecahedron': return new THREE.DodecahedronGeometry(1.5,0);
     case 'octahedron':   return new THREE.OctahedronGeometry(1.55,0);
     case 'torus':        return new THREE.TorusGeometry(1.2,.4,18,80);
     case 'icosahedron':  return new THREE.IcosahedronGeometry(1.5,1);
-    case 'sphere':       return new THREE.IcosahedronGeometry(1.4,2);
-    default:             return new THREE.IcosahedronGeometry(1.4,1);
+    default:             return new THREE.IcosahedronGeometry(1.4,2);
   }
 }
 
-const curNodeCol=new THREE.Color(0xa78bfa);
-const tgtNodeCol=new THREE.Color(0xa78bfa);
-
+const curC=new THREE.Color(0x8b5cf6), tgtC=new THREE.Color(0x8b5cf6);
 function buildNode(sh,hex){
   while(nodeGrp.children.length) nodeGrp.remove(nodeGrp.children[0]);
-  const col=new THREE.Color(hex);
-  const geo=mkGeo(sh);
-  // wireframe
+  const col=new THREE.Color(hex), geo=mkGeo(sh);
   nodeGrp.add(new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:col,wireframe:true,transparent:true,opacity:.22})));
-  // solid inner
   nodeGrp.add(new THREE.Mesh(geo.clone(),new THREE.MeshStandardMaterial({color:col,transparent:true,opacity:.055,roughness:.4,metalness:.8})));
-  // orbit ring A
   const rA=new THREE.Mesh(new THREE.TorusGeometry(2.5,.007,8,120),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.1}));
   rA.rotation.x=Math.PI/2.4; nodeGrp.add(rA);
-  // orbit ring B
-  const rB=rA.clone(); rB.rotation.set(Math.PI/4,Math.PI/6,0);
-  rB.material=rA.material.clone(); rB.material.opacity=.06; nodeGrp.add(rB);
-  // halo particles
+  const rB=rA.clone(); rB.rotation.set(Math.PI/4,Math.PI/6,0); rB.material=rA.material.clone(); rB.material.opacity=.06; nodeGrp.add(rB);
   const hG=new THREE.BufferGeometry(),hN=180,hp=new Float32Array(hN*3);
   for(let i=0;i<hN;i++){const t=Math.random()*Math.PI*2,p=Math.random()*Math.PI,r=2.1+Math.random()*1.3;hp[i*3]=r*Math.sin(p)*Math.cos(t);hp[i*3+1]=r*Math.sin(p)*Math.sin(t);hp[i*3+2]=r*Math.cos(p)}
   hG.setAttribute('position',new THREE.BufferAttribute(hp,3));
-  nodeGrp.add(new THREE.Points(hG,new THREE.PointsMaterial({color:col,size:.065,transparent:true,opacity:.45})));
-  tgtNodeCol.set(col);
+  nodeGrp.add(new THREE.Points(hG,new THREE.PointsMaterial({color:col,size:.065,transparent:true,opacity:.4})));
+  tgtC.set(col);
 }
 
-/* ════════════════════════════════════════════════
+/* ══════════════════════════════════════════
    CURSOR
-════════════════════════════════════════════════ */
+══════════════════════════════════════════ */
 const cEl=document.getElementById('cur'),c2El=document.getElementById('cur2');
 let cx=innerWidth/2,cy=innerHeight/2,rx=cx,ry=cy,mx=.5,my=.5;
 document.addEventListener('mousemove',e=>{
   cx=e.clientX;cy=e.clientY;
-  cEl.style.left=cx+'px';cEl.style.top=cy+'px';
-  mx=e.clientX/innerWidth;my=e.clientY/innerHeight;
+  if(cEl){cEl.style.left=cx+'px';cEl.style.top=cy+'px';}
+  mx=e.clientX/innerWidth; my=e.clientY/innerHeight;
 });
-(function animC(){rx+=(cx-rx)*.1;ry+=(cy-ry)*.1;c2El.style.left=rx+'px';c2El.style.top=ry+'px';requestAnimationFrame(animC)})();
+(function animC(){rx+=(cx-rx)*.1;ry+=(cy-ry)*.1;if(c2El){c2El.style.left=rx+'px';c2El.style.top=ry+'px';}requestAnimationFrame(animC)})();
 
-/* ════════════════════════════════════════════════
-   RENDER LOOP
-════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   RENDER
+══════════════════════════════════════════ */
 const clock=new THREE.Clock();
-let camLX=0,camLY=0;
-
-function renderLoop(){
-  requestAnimationFrame(renderLoop);
+let cLX=0,cLY=0;
+function render(){
+  requestAnimationFrame(render);
   const t=clock.getElapsedTime();
-  camLX+=(((mx-.5)*1.6)-camLX)*.04;
-  camLY+=((-(my-.5)*1.1)-camLY)*.04;
-  camera.position.x=camLX; camera.position.y=camLY;
+  if(!isMob()){
+    cLX+=(((mx-.5)*1.5)-cLX)*.04;
+    cLY+=((-(my-.5)*1.0)-cLY)*.04;
+    camera.position.x=cLX; camera.position.y=cLY;
+  }
   camera.lookAt(nodeGrp.position);
-  nodeGrp.rotation.x=t*.17; nodeGrp.rotation.y=t*.24;
-  const b=1+Math.sin(t*1.1)*.032; nodeGrp.scale.set(b,b,b);
-  apMesh.rotation.y=t*.011; apMesh.rotation.x=t*.005;
-  curNodeCol.lerp(tgtNodeCol,.045);
-  pA.color.copy(curNodeCol);
-  pA.position.set(4+Math.sin(t*.5)*2,3+Math.cos(t*.4)*1.5,5);
+  nodeGrp.rotation.x=t*.16; nodeGrp.rotation.y=t*.22;
+  const b=1+Math.sin(t*1.1)*.03; nodeGrp.scale.set(b,b,b);
+  apMesh.rotation.y=t*.01; apMesh.rotation.x=t*.005;
+  curC.lerp(tgtC,.045); pL.color.copy(curC);
+  pL.position.set(4+Math.sin(t*.5)*2,3+Math.cos(t*.4)*1.5,5);
   renderer.render(scene,camera);
 }
 
-/* ════════════════════════════════════════════════
-   SECTIONS & NAVIGATION
-════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   NAV & SECTIONS
+══════════════════════════════════════════ */
 let cur=0, locked=false;
+const NAV_MAP={0:0,1:0,2:1,3:1,4:2,5:2,6:3,7:3,8:4};
 
-// Build side dots
+// Build dots
 const sdEl=document.getElementById('sdots');
-S.forEach((_,i)=>{
+SECTS.forEach((_,i)=>{
   const d=document.createElement('div');
-  d.className='sdot'+(i===0?' on':'');
+  d.className='sd'+(i===0?' on':'');
   d.id='sd'+i; d.onclick=()=>goTo(i);
   sdEl.appendChild(d);
 });
-document.getElementById('ct').textContent=String(S.length).padStart(2,'0');
-
-const NAV_MAP={0:0,1:0,2:1,3:1,4:2,5:2,6:3,7:3,8:4};
+document.getElementById('ct').textContent=String(SECTS.length).padStart(2,'0');
 
 function renderPanel(s){
   const p=document.getElementById('panel');
   p.className='exit';
+  // Tag style
+  const old=document.getElementById('tst'); if(old)old.remove();
   setTimeout(()=>{
-    // Build tag style
-    const old=document.getElementById('tst'); if(old) old.remove();
     const st=document.createElement('style');
     st.id='tst';
-    st.textContent=`.p-tag::before{background:${s.tagC}!important}`;
+    st.textContent=`.p-tag{color:${s.tagC}!important}.p-tag::before{background:${s.tagC}!important}`;
     document.head.appendChild(st);
-
-    const btnsHtml=s.btns.map(b=>`<button class="p-btn${b.g?' g':''}" onclick="goTo(${b.f})">${b.t}</button>`).join('');
+    const btnsHtml=s.btns.map(b=>`<button class="pb${b.g?' g':''}" onclick="(${b.f})()">${b.t}</button>`).join('');
     p.innerHTML=`
-      <div id="panel-inner">
-        <div class="p-tag" style="color:${s.tagC}">${s.tag}</div>
-        <div class="p-h">${s.title.replace(/\n/g,'<br>')}</div>
-        <div class="p-body">${s.body}</div>
-        ${EXTRA[s.extra]||''}
-        ${btnsHtml?`<div class="p-btns">${btnsHtml}</div>`:''}
-      </div>
+      <div class="p-tag">${s.tag}</div>
+      <div class="p-h">${s.title.replace(/\n/g,'<br>')}</div>
+      <div class="p-body">${s.body}</div>
+      ${EXTRA[s.extra]||''}
+      ${btnsHtml?`<div class="p-btns">${btnsHtml}</div>`:''}
     `;
     p.className='enter';
-  },270);
+  },240);
 }
 
 function goTo(idx){
-  if(locked||idx===cur||idx<0||idx>=S.length) return;
+  if(locked||idx===cur||idx<0||idx>=SECTS.length) return;
   locked=true;
-  // ── Reset lock after 1s — and ONLY after 1s. No early unlock.
-  setTimeout(()=>{ locked=false; }, 1000);
-
+  setTimeout(()=>{ locked=false; },950);
   cur=idx;
-  const s=S[idx];
-
+  const s=SECTS[idx];
   // Warp flash
   const w=document.getElementById('warp');
-  w.style.transition='opacity .1s'; w.style.opacity='1';
-  setTimeout(()=>{ w.style.transition='opacity .55s'; w.style.opacity='0'; },110);
-
-  // Rebuild 3D node
+  w.style.opacity='1'; setTimeout(()=>{ w.style.opacity='0'; },100);
+  // 3D
   buildNode(s.shape,s.nodeC);
-
-  // Accent word
-  const bw=document.getElementById('bgword');
-  bw.style.opacity='0';
-  setTimeout(()=>{ bw.textContent=s.accent; bw.style.opacity='1'; },300);
-  bw.style.transition='opacity .3s';
-
+  nodeGrp.position.set(isMob()?0:3.2,0,0);
+  // BG word
+  const bw=document.getElementById('bgw');
+  bw.style.opacity='0'; setTimeout(()=>{ bw.textContent=s.accent; bw.style.opacity='1'; },280);
   // Dots
-  document.querySelectorAll('.sdot').forEach((d,i)=>d.classList.toggle('on',i===idx));
-
+  document.querySelectorAll('.sd').forEach((d,i)=>d.classList.toggle('on',i===idx));
+  document.querySelectorAll('.mob-nl').forEach((b,i)=>b.classList.toggle('on',NAV_MAP[idx]===i));
   // Counter
   document.getElementById('cc').textContent=String(idx+1).padStart(2,'0');
-
   // Nav
-  document.querySelectorAll('.nb').forEach((b,i)=>b.classList.toggle('on',i===NAV_MAP[idx]));
-
-  // Scroll hint visibility
-  document.getElementById('shint').style.opacity=idx===0?'1':'0.4';
-
+  document.querySelectorAll('.nl').forEach((b,i)=>b.classList.toggle('on',i===NAV_MAP[idx]));
+  // Scroll hint
+  document.querySelector('.f-hint').style.opacity=idx===0?'1':'0.35';
   renderPanel(s);
 }
 
-/* ════════════════════════════════════════════════
-   INPUT — single section per gesture, strict gate
-════════════════════════════════════════════════ */
+/* Mobile hamburger */
+window.toggleMob=function(){
+  const m=document.getElementById('mob-menu');
+  m.classList.toggle('open');
+}
+// Close mob menu on outside click
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#mob-menu')&&!e.target.closest('#n-ham')) document.getElementById('mob-menu').classList.remove('open');
+});
 
-/* WHEEL — accumulate delta, fire once threshold crossed,
-   then HARD RESET accumulator and block until lock clears */
+/* ══════════════════════════════════════════
+   INPUT — strict single-step
+══════════════════════════════════════════ */
 let wAcc=0;
-const W_THRESH=80;
-
 window.addEventListener('wheel',e=>{
   e.preventDefault();
-  // If locked, swallow the event completely — no accumulation
-  if(locked){ wAcc=0; return; }
+  if(locked){wAcc=0;return;}
   wAcc+=e.deltaY;
-  if(Math.abs(wAcc)>=W_THRESH){
-    const dir=wAcc>0?1:-1;
-    wAcc=0;          // reset BEFORE goTo so it can't double-fire
+  if(Math.abs(wAcc)>=90){
+    const dir=wAcc>0?1:-1; wAcc=0;
     goTo(cur+dir);
   }
 },{passive:false});
 
-/* TOUCH */
 let tY=0;
-window.addEventListener('touchstart',e=>{ tY=e.touches[0].clientY; },{passive:true});
+window.addEventListener('touchstart',e=>{tY=e.touches[0].clientY;},{passive:true});
 window.addEventListener('touchend',e=>{
-  if(locked) return;
+  if(locked)return;
   const dy=tY-e.changedTouches[0].clientY;
-  if(Math.abs(dy)>55) goTo(cur+(dy>0?1:-1));
+  if(Math.abs(dy)>50)goTo(cur+(dy>0?1:-1));
 },{passive:true});
 
-/* KEYS */
 window.addEventListener('keydown',e=>{
-  if(locked) return;
-  if(e.key==='ArrowDown'||e.key==='ArrowRight') goTo(cur+1);
-  if(e.key==='ArrowUp'||e.key==='ArrowLeft') goTo(cur-1);
+  if(locked)return;
+  if(e.key==='ArrowDown'||e.key==='ArrowRight')goTo(cur+1);
+  if(e.key==='ArrowUp'||e.key==='ArrowLeft')goTo(cur-1);
 });
 
-/* RESIZE */
 window.addEventListener('resize',()=>{
   renderer.setSize(innerWidth,innerHeight);
   camera.aspect=innerWidth/innerHeight;
   camera.updateProjectionMatrix();
+  nodeGrp.position.set(isMob()?0:3.2,0,0);
 });
 
-/* ════════════════════════════════════════════════
+/* ══════════════════════════════════════════
+   RESPONSIVE NAV VISIBILITY
+══════════════════════════════════════════ */
+function checkNav(){
+  const links=document.getElementById('n-links');
+  const ham=document.getElementById('n-ham');
+  if(innerWidth<=768){
+    links.style.display='none'; ham.style.display='flex';
+  } else {
+    links.style.display='flex'; ham.style.display='none';
+    document.getElementById('mob-menu').classList.remove('open');
+  }
+}
+checkNav();
+window.addEventListener('resize',checkNav);
+
+/* ══════════════════════════════════════════
    LOADER
-════════════════════════════════════════════════ */
-const MSGS=['Initializing','Building Universe','Calibrating Nodes','Connecting Systems','Ready'];
+══════════════════════════════════════════ */
+const MSGS=['Initializing','Mapping CRM Nodes','Calibrating Pipeline','Connecting Systems','Ready'];
 let lp=0;
-const ldf=document.getElementById('ldf'), ldl=document.getElementById('ldl');
+const lbar=document.getElementById('lbar'), ltxt=document.getElementById('ltxt');
 const li=setInterval(()=>{
-  lp+=Math.random()*15+5; if(lp>100) lp=100;
-  ldf.style.width=lp+'%';
-  ldl.textContent=MSGS[Math.min(Math.floor(lp/25),4)];
+  lp+=Math.random()*16+5; if(lp>100)lp=100;
+  lbar.style.width=lp+'%';
+  ltxt.textContent=MSGS[Math.min(Math.floor(lp/25),4)];
   if(lp>=100){
     clearInterval(li);
     setTimeout(()=>{
@@ -593,13 +773,13 @@ const li=setInterval(()=>{
       ld.style.transition='opacity .7s'; ld.style.opacity='0';
       setTimeout(()=>{
         ld.style.display='none';
-        buildNode(S[0].shape,S[0].nodeC);
-        renderPanel(S[0]);
-        renderLoop();
-      },730);
+        buildNode(SECTS[0].shape,SECTS[0].nodeC);
+        renderPanel(SECTS[0]);
+        render();
+      },720);
     },350);
   }
-},60);
+},65);
 </script>
 </body>
 </html>
