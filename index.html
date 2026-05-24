@@ -1,947 +1,1627 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ehtasham Ali S. — CRM Automation Architect</title>
-<meta name="description" content="CRM Automation Expert. GoHighLevel · HubSpot · Zoho. I engineer revenue systems that never sleep.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iIzBhMDgwNSIvPjxyZWN0IHg9IjIiIHk9IjIiIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgcng9IjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGNTUwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48dGV4dCB4PSI2IiB5PSIyMyIgZm9udC1mYW1pbHk9IkFyaWFsIEJsYWNrIiBmb250LXdlaWdodD0iOTAwIiBmb250LXNpemU9IjE4IiBmaWxsPSIjZjVmMGU4Ij5FPC90ZXh0PjxjaXJjbGUgY3g9IjI1IiBjeT0iOCIgcj0iMyIgZmlsbD0iI0ZGNTUwMCIvPjwvc3ZnPg==">
+<title>Ehtasham Ali — CRM Architect</title>
+<meta name="description" content="The world's first CRM diagnostic portfolio. Find your revenue leaks in 60 seconds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap');
-
-/* ══════════════════════════════════════════════════════════
-   THEME SYSTEM
-══════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   DESIGN SYSTEM
+══════════════════════════════════════════ */
 :root {
-  --orange: #FF5500;
-  --amber:  #ffaa00;
-  --green:  #4ade80;
-  --NAV:    48px;
-  --DOCK:   80px;
-  --mono:   'Space Mono', monospace;
-  --display:'Syne', sans-serif;
-  --body:   'DM Sans', sans-serif;
-  --radius: 0px;
+  --bg:       #F7F6F3;
+  --surface:  #FFFFFF;
+  --ink:      #0C0C0C;
+  --ink2:     #5A5A5A;
+  --ink3:     #B8B8B8;
+  --line:     #E9E8E4;
+  --accent:   #1A56DB;
+  --accent-l: #EBF0FD;
+  --green:    #059669;
+  --green-l:  #ECFDF5;
+  --amber:    #D97706;
+  --red:      #DC2626;
+  --red-l:    #FEF2F2;
+  --ff-sans:  'Onest', system-ui, sans-serif;
+  --ff-serif: 'Instrument Serif', Georgia, serif;
+  --ff-mono:  'JetBrains Mono', monospace;
+  --ease:     cubic-bezier(.16,1,.3,1);
+  --ease2:    cubic-bezier(.34,1.56,.64,1);
 }
 
-/* DARK THEME */
-[data-theme="dark"] {
-  --bg:        #0a0805;
-  --bg2:       #110e09;
-  --bg3:       #181208;
-  --surface:   rgba(20,16,10,.82);
-  --border:    rgba(245,240,232,.1);
-  --border2:   rgba(245,240,232,.06);
-  --text-1:    #f5f0e8;      /* headings */
-  --text-2:    #c8bfb0;      /* body */
-  --text-3:    #8a8070;      /* labels/muted */
-  --text-4:    #4a4438;      /* very muted */
-  --input-bg:  rgba(245,240,232,.06);
-  --input-bdr: rgba(245,240,232,.15);
-  --input-txt: #f5f0e8;
-  --input-ph:  rgba(245,240,232,.3);
-  --card-bg:   rgba(20,16,10,.85);
-  --tag-bdr:   rgba(245,240,232,.18);
-  --tag-txt:   #8a8070;
-}
-
-/* LIGHT THEME */
-[data-theme="light"] {
-  --bg:        #f7f4ee;
-  --bg2:       #edeae3;
-  --bg3:       #e3e0d8;
-  --surface:   rgba(255,252,245,.92);
-  --border:    rgba(10,8,5,.12);
-  --border2:   rgba(10,8,5,.07);
-  --text-1:    #0f0c08;
-  --text-2:    #3a342a;
-  --text-3:    #6a6050;
-  --text-4:    #a09080;
-  --input-bg:  rgba(10,8,5,.04);
-  --input-bdr: rgba(10,8,5,.2);
-  --input-txt: #0f0c08;
-  --input-ph:  rgba(10,8,5,.35);
-  --card-bg:   rgba(255,252,245,.95);
-  --tag-bdr:   rgba(10,8,5,.18);
-  --tag-txt:   #6a6050;
-}
-
-/* ══ RESET ══════════════════════════════════════════════════ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text-1);font-family:var(--body);-webkit-font-smoothing:antialiased;transition:background .35s,color .35s}
-body{cursor:none}
+html{overflow-x:hidden;scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--ff-sans);font-size:16px;line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
 @media(max-width:768px){body{cursor:auto}}
 
-/* ══ CURSOR ══════════════════════════════════════════════════ */
-#xh{position:fixed;pointer-events:none;z-index:99999;transform:translate(-50%,-50%)}
-#xh::before,#xh::after{content:'';position:absolute;background:var(--orange)}
-#xh::before{width:1px;height:16px;left:50%;top:-8px;margin-left:-.5px}
-#xh::after{width:16px;height:1px;top:50%;left:-8px;margin-top:-.5px}
-#xh-dot{position:fixed;width:4px;height:4px;background:var(--orange);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%)}
-#xh-ring{position:fixed;width:28px;height:28px;border:1px solid rgba(255,85,0,.4);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%)}
-@media(max-width:768px){#xh,#xh-dot,#xh-ring{display:none}}
+/* ── SHISHA CURSOR ───────────────────────────────────── */
+/* cursor base handled below */
 
-/* ══ THREE.JS CANVAS ═════════════════════════════════════════ */
-#three-cv{position:fixed;inset:0;z-index:0;transition:opacity .35s}
-[data-theme="light"] #three-cv{opacity:.4}
 
-/* ══ GRID OVERLAY ════════════════════════════════════════════ */
-#grid-cv{position:fixed;inset:0;z-index:1;pointer-events:none}
-[data-theme="dark"] #grid-cv{opacity:.3}
-[data-theme="light"] #grid-cv{opacity:.15}
 
-/* ══ VIGNETTE ════════════════════════════════════════════════ */
-#vig{position:fixed;inset:0;z-index:2;pointer-events:none;transition:opacity .35s}
-[data-theme="dark"]  #vig{background:radial-gradient(ellipse at center,transparent 35%,rgba(10,8,5,.75) 100%);opacity:1}
-[data-theme="light"] #vig{background:radial-gradient(ellipse at center,transparent 35%,rgba(247,244,238,.6) 100%);opacity:1}
+/* ── SCANLINE TEXT footer ─────────────────────────────── */
+#scanline-footer{
+  background:#080808;
+  padding:100px 0;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:380px;
+}
+.sl-wrap{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.sl-text{
+  font-family:'Onest',sans-serif;font-weight:700;
+  font-size:clamp(72px,13vw,190px);
+  letter-spacing:.02em;line-height:1;
+  color:transparent;
+  background-image:repeating-linear-gradient(
+    180deg,
+    rgba(255,255,255,.0)  0px,
+    rgba(255,255,255,.0)  3px,
+    rgba(255,255,255,.09) 3px,
+    rgba(255,255,255,.09) 5px
+  );
+  -webkit-background-clip:text;
+  background-clip:text;
+  user-select:none;white-space:nowrap;
+  display:block;
+  text-align:center;
+}
+.sl-glow{
+  /* The cursor-proximity glow — updated by JS */
+  position:absolute;pointer-events:none;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,180,60,.45) 0%,rgba(255,120,20,.15) 40%,transparent 70%);
+  transform:translate(-50%,-50%);
+  transition:left .05s,top .05s,opacity .3s;
+  mix-blend-mode:screen;
+  z-index:2;
+  width:480px;height:480px;
+}
+.sl-wrap{position:relative;overflow:hidden}
+.sl-line{position:relative;z-index:1}
+.sl-sub{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.2);padding:20px 48px 0;
+  display:flex;justify-content:space-between;align-items:center;
+}
 
-/* ══ BOOT ════════════════════════════════════════════════════ */
-#boot{position:fixed;inset:0;z-index:9999;background:#0a0805;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:60px}
-.bl{font-family:var(--mono);font-size:12px;color:var(--orange);margin-bottom:3px;opacity:0;transform:translateX(-6px);white-space:nowrap}
-.bl.dim{color:#2a2018}.bl.hi{color:#f5f0e8}.bl.am{color:var(--amber)}
-#boot-track{width:240px;height:1px;background:#1a1208;margin-top:24px}
-#boot-bar{width:0%;height:100%;background:var(--orange)}
-#boot-pct{font-family:var(--mono);font-size:10px;color:var(--orange);letter-spacing:3px;margin-top:6px}
+/* ── NAV ─────────────────────────────────────────────── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;height:60px;
+  padding:0 48px;display:flex;align-items:center;justify-content:space-between;
+  transition:background .4s,border-color .4s;border-bottom:1px solid transparent;
+}
+#nav.blur{background:rgba(247,246,243,.88);border-color:var(--line);backdrop-filter:blur(18px)}
+.n-logo{font-family:var(--ff-mono);font-size:13px;font-weight:500;letter-spacing:.06em;color:var(--ink)}
+.n-logo b{color:var(--accent)}
+.n-links{display:flex;gap:28px}
+.n-links a{font-size:13px;color:var(--ink2);text-decoration:none;font-weight:500;transition:color .2s}
+.n-links a:hover{color:var(--ink)}
+.n-btn{
+  font-size:12px;font-weight:600;color:#fff;background:var(--accent);
+  border:none;padding:9px 20px;border-radius:6px;
+  text-decoration:none;transition:all .2s;letter-spacing:.01em;
+}
+.n-btn:hover{background:#1344b0;transform:translateY(-1px)}
+@media(max-width:900px){
+  #nav{padding:0 20px}
+  .n-links{display:none}
+  .n-btn{cursor:pointer;font-size:11px;padding:8px 16px}
+}
 
-/* ══════════════════════════════════════════════════════════
-   STATUS BAR — 48px, fully opaque, always on top
-══════════════════════════════════════════════════════════ */
-#sbar{
-  position:fixed;top:0;left:0;right:0;
-  height:var(--NAV);  /* 48px */
-  z-index:800;
-  background:var(--bg);  /* fully opaque — no blur needed */
-  border-bottom:1px solid var(--border);
+/* ══════════════════════════════════════════
+   HERO — DIAGNOSTIC ENTRY
+══════════════════════════════════════════ */
+#hero{
+  min-height:100vh;padding:100px 48px 60px;
+  display:flex;align-items:center;position:relative;overflow:hidden;
+}
+#hero-bg-canvas{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.5}
+
+.hero-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:72px;
+  align-items:center;max-width:1200px;width:100%;position:relative;z-index:2;
+}
+
+/* Left */
+.hero-flag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent-l);color:var(--accent);
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;padding:5px 14px;border-radius:100px;
+  margin-bottom:24px;
+}
+.hero-flag-pulse{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.hero-h{
+  font-family:var(--ff-serif);
+  font-size:clamp(42px,5.2vw,72px);
+  line-height:1.04;letter-spacing:-.02em;
+  color:var(--ink);margin-bottom:20px;
+}
+.hero-h em{color:var(--accent);font-style:italic}
+.hero-p{font-size:16px;line-height:1.8;color:var(--ink2);max-width:440px;margin-bottom:36px;font-weight:300}
+.hero-trust{display:flex;align-items:center;gap:16px;margin-top:32px}
+.trust-avatars{display:flex}
+.trust-av{width:28px;height:28px;border-radius:50%;border:2px solid var(--bg);margin-left:-8px;first:margin-left:0;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff}
+.trust-av:first-child{margin-left:0}
+.trust-txt{font-size:12px;color:var(--ink2);font-weight:400}
+.trust-txt b{color:var(--ink);font-weight:600}
+
+/* Right — Diagnostic Widget */
+.diag-card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 4px 6px rgba(0,0,0,.04),0 16px 48px rgba(0,0,0,.07);
+}
+.dc-head{
+  padding:18px 24px;border-bottom:1px solid var(--line);
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 24px;
-  font-family:var(--mono);font-size:10px;
-  transition:background .35s,border-color .35s;
 }
-.sb-l{display:flex;align-items:center;gap:14px}
-.sb-pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(74,222,128,.9);animation:pulse 2s infinite;flex-shrink:0}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.sb-brand{color:var(--text-1);letter-spacing:5px;font-size:11px;font-weight:700}
-.sb-tag{color:var(--text-3);letter-spacing:2px;font-size:10px}
-.sb-r{display:flex;align-items:center;gap:16px}
-.sb-stat{text-align:right}
-.sb-sn{color:var(--orange);font-size:11px;letter-spacing:1px}
-.sb-sl{font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--text-4)}
-#sb-clock{color:var(--text-3);letter-spacing:3px;font-size:10px}
+.dc-head-l{display:flex;align-items:center;gap:10px}
+.dc-dots{display:flex;gap:5px}
+.dc-dot{width:10px;height:10px;border-radius:50%}
+.dc-title{font-family:var(--ff-mono);font-size:11px;font-weight:500;color:var(--ink2);letter-spacing:.04em}
+.dc-badge{font-family:var(--ff-mono);font-size:9px;color:var(--green);background:var(--green-l);padding:3px 10px;border-radius:100px;letter-spacing:.06em}
 
-/* Theme toggle button */
-#theme-btn{
-  background:transparent;border:1px solid var(--border);
-  color:var(--text-2);font-family:var(--mono);font-size:10px;
-  letter-spacing:2px;padding:5px 10px;cursor:none;
-  transition:all .25s;border-radius:4px;
+/* Diagnostic steps */
+.dc-body{padding:28px 24px}
+.diag-step{display:none}
+.diag-step.active{display:block}
+
+.ds-q{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:18px;line-height:1.4;letter-spacing:-.01em}
+.ds-opts{display:flex;flex-direction:column;gap:8px}
+.ds-opt{
+  display:flex;align-items:center;gap:12px;padding:12px 16px;
+  border:1px solid var(--line);border-radius:8px;
+  transition:all .2s;background:var(--bg);
+  font-size:13px;font-weight:500;color:var(--ink2);
 }
-#theme-btn:hover{border-color:var(--orange);color:var(--orange)}
-@media(max-width:768px){#theme-btn{cursor:pointer;font-size:9px;padding:4px 8px}}
-@media(max-width:480px){.sb-tag,.sb-stat:not(:last-child){display:none}}
+.ds-opt:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-l)}
+.ds-opt.selected{border-color:var(--accent);color:var(--accent);background:var(--accent-l)}
+.ds-opt-n{font-family:var(--ff-mono);font-size:10px;font-weight:500;color:var(--ink3);width:18px;flex-shrink:0;letter-spacing:.02em}
+@media(max-width:768px){.ds-opt{cursor:pointer}}
 
-/* ══════════════════════════════════════════════════════════
-   MAIN AREA
-   top: 48px (below status bar)
-   bottom: 80px (above dock)
-   All content lives here
-══════════════════════════════════════════════════════════ */
-#main{
-  position:fixed;
-  top:var(--NAV);      /* 48px — flush under status bar */
-  bottom:var(--DOCK);  /* 80px — flush above dock */
-  left:0;right:0;
-  z-index:100;
+.dc-progress{
+  padding:16px 24px;border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:12px;
+}
+.dc-prog-bar{flex:1;height:3px;background:var(--line);border-radius:100px;overflow:hidden}
+.dc-prog-fill{height:100%;background:var(--accent);border-radius:100px;transition:width .5s var(--ease)}
+.dc-prog-txt{font-family:var(--ff-mono);font-size:10px;color:var(--ink3);white-space:nowrap}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  #hero{padding:80px 20px 48px}
+}
+
+/* ══════════════════════════════════════════
+   DIAGNOSTIC RESULT — BLUEPRINT
+══════════════════════════════════════════ */
+#blueprint{
+  display:none;
+  padding:100px 48px;background:var(--ink);position:relative;overflow:hidden;
+}
+#blueprint.show{display:block}
+#bp-canvas{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.6}
+.bp-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.bp-eyebrow{
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.35);
+  display:flex;align-items:center;gap:12px;margin-bottom:16px;
+}
+.bp-eyebrow::before{content:'';width:20px;height:1px;background:rgba(255,255,255,.35)}
+.bp-title{
+  font-family:var(--ff-serif);font-size:clamp(32px,4vw,52px);
+  color:#fff;line-height:1.1;letter-spacing:-.02em;margin-bottom:48px;
+}
+.bp-title em{color:#60a5fa;font-style:italic}
+
+/* AI streaming text */
+.bp-ai-box{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:32px;margin-bottom:32px;position:relative;
+}
+.bp-ai-label{
+  font-family:var(--ff-mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:#60a5fa;margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.bp-ai-label::before{content:'▶';font-size:8px}
+#bp-ai-text{
+  font-size:15px;line-height:1.85;color:rgba(255,255,255,.75);
+  font-weight:300;min-height:80px;
+}
+.bp-cursor{display:inline-block;width:2px;height:16px;background:#60a5fa;animation:blink .8s step-end infinite;vertical-align:middle;margin-left:2px}
+@keyframes blink{50%{opacity:0}}
+
+/* Pipeline flow viz */
+.bp-flow{display:flex;align-items:stretch;gap:0;margin-bottom:32px;overflow-x:auto;padding-bottom:8px}
+.bp-flow::-webkit-scrollbar{height:2px}
+.bp-flow::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:100px}
+.bp-stage{
+  flex:1;min-width:140px;padding:20px 16px;
+  border-right:1px solid rgba(255,255,255,.06);
+  position:relative;
+  opacity:0;transform:translateY(16px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease);
+}
+.bp-stage.show{opacity:1;transform:none}
+.bp-stage:last-child{border-right:none}
+.bp-s-num{font-family:var(--ff-mono);font-size:9px;letter-spacing:.08em;color:rgba(255,255,255,.25);margin-bottom:8px}
+.bp-s-name{font-size:13px;font-weight:600;color:#fff;margin-bottom:4px;letter-spacing:-.01em}
+.bp-s-tool{font-family:var(--ff-mono);font-size:10px;color:#60a5fa;margin-bottom:12px}
+.bp-s-bar{height:3px;border-radius:100px;background:rgba(255,255,255,.1);overflow:hidden;margin-bottom:8px}
+.bp-s-fill{height:100%;border-radius:100px;background:#60a5fa;width:0;transition:width 1.2s var(--ease)}
+.bp-s-pct{font-family:var(--ff-mono);font-size:10px;color:rgba(255,255,255,.4)}
+.bp-s-leak{
+  margin-top:10px;font-family:var(--ff-mono);font-size:9px;
+  color:#f87171;background:rgba(248,113,113,.08);
+  padding:4px 8px;border-radius:4px;letter-spacing:.04em;
+  border:1px solid rgba(248,113,113,.15);
+}
+
+/* Leak score */
+.bp-score{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:rgba(255,255,255,.06);border-radius:8px;overflow:hidden;
+}
+
+@media(max-width:600px){.bp-score{grid-template-columns:repeat(2,1fr)}}
+.bp-sc{
+  background:rgba(255,255,255,.03);padding:24px 20px;
+  opacity:0;transform:translateY(12px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease);
+}
+.bp-sc.show{opacity:1;transform:none}
+.bp-sc-n{
+  font-family:var(--ff-serif);font-size:36px;
+  line-height:1;letter-spacing:-.02em;margin-bottom:6px;
+}
+.bp-sc-l{font-family:var(--ff-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.bp-cta-row{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.bp-cta-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;color:#fff;background:var(--accent);
+  padding:13px 26px;border-radius:8px;text-decoration:none;
+  transition:all .2s;border:none;
+  box-shadow:0 4px 16px rgba(26,86,219,.4);
+}
+.bp-cta-primary:hover{background:#1344b0;transform:translateY(-2px)}
+.bp-cta-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:500;color:rgba(255,255,255,.7);
+  background:transparent;border:1px solid rgba(255,255,255,.2);
+  padding:13px 26px;border-radius:8px;text-decoration:none;transition:all .2s;
+}
+.bp-cta-ghost:hover{border-color:rgba(255,255,255,.5);color:#fff}
+@media(max-width:768px){
+  .bp-cta-primary,.bp-cta-ghost{cursor:pointer}
+  #blueprint{padding:64px 20px}
+}
+
+/* ══════════════════════════════════════════
+   LOGOS
+══════════════════════════════════════════ */
+#logos{padding:0 48px;border-bottom:1px solid var(--line);height:52px;display:flex;align-items:center;gap:32px;overflow:hidden}
+.logos-l{font-family:var(--ff-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);white-space:nowrap;flex-shrink:0}
+.logos-track{display:flex;gap:32px;animation:lt 24s linear infinite;flex-shrink:0}
+.logos-track span{font-family:var(--ff-mono);font-size:10px;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;transition:color .2s}
+.logos-track span:hover{color:var(--accent)}
+@keyframes lt{to{transform:translateX(-50%)}}
+@media(max-width:768px){#logos{padding:0 20px;gap:20px}}
+
+/* ══════════════════════════════════════════
+   SECTIONS BASE
+══════════════════════════════════════════ */
+.sec{padding:96px 48px}
+.si{max-width:1200px;margin:0 auto}
+.ew{font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.ew::before{content:'';width:18px;height:1px;background:var(--accent)}
+.sh{font-family:var(--ff-serif);font-size:clamp(32px,4vw,52px);line-height:1.07;letter-spacing:-.02em;color:var(--ink);margin-bottom:56px}
+.sh em{color:var(--accent);font-style:italic}
+@media(max-width:768px){.sec{padding:64px 20px}}
+
+/* ══════════════════════════════════════════
+   ABOUT — PROBLEM STATEMENT
+══════════════════════════════════════════ */
+#about{background:var(--surface)}
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.ab-body p{font-size:15px;line-height:1.9;color:var(--ink2);margin-bottom:16px;font-weight:300}
+.ab-body p strong{color:var(--ink);font-weight:600}
+.ab-stats{display:flex;flex-direction:column;gap:1px;background:var(--line)}
+.ab-stat{background:var(--surface);padding:24px 28px;display:flex;align-items:center;gap:20px;transition:background .2s;cursor:default}
+.ab-stat:hover{background:var(--bg)}
+.ab-n{font-family:var(--ff-serif);font-size:40px;color:var(--accent);line-height:1;min-width:90px;letter-spacing:-.02em}
+.ab-t strong{display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.ab-t span{font-size:12px;color:var(--ink2);font-weight:300}
+@media(max-width:900px){.ab-grid{grid-template-columns:1fr;gap:40px}}
+
+/* ══════════════════════════════════════════
+   ALL CRMs — ANIMATED GRID
+══════════════════════════════════════════ */
+#crms{background:var(--bg)}
+.crm-intro{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;margin-bottom:0}
+.crm-sub{font-size:15px;line-height:1.8;color:var(--ink2);font-weight:300;padding-bottom:8px}
+
+.crm-universe{
+  margin-top:56px;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--line);
+}
+.crm-card{
+  background:var(--bg);padding:28px 24px;position:relative;
+  transition:background .25s,transform .3s var(--ease2);
   overflow:hidden;
 }
-
-/* ══ WINDOWS ════════════════════════════════════════════════ */
-.win{position:absolute;inset:0;display:none;opacity:0;overflow:hidden}
-.win.active{display:flex;animation:wIn .4s cubic-bezier(.16,1,.3,1) forwards}
-.win.closing{animation:wOut .2s ease-in forwards}
-@keyframes wIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@keyframes wOut{to{opacity:0;transform:translateY(8px)}}
-
-/* ── Shared window chrome ─────────────────────────────── */
-/* ALL windows start their visible content with padding-top:28px
-   This keeps content below the status bar with a clean gap */
-.w-glass{background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);transition:background .35s,border-color .35s}
-.w-tag{font-family:var(--mono);font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--orange);margin-bottom:8px;display:flex;align-items:center;gap:10px}
-.w-tag::before{content:'';display:block;width:16px;height:1px;background:var(--orange);flex-shrink:0}
-.w-h{font-family:var(--display);font-weight:800;font-size:clamp(26px,2.8vw,44px);line-height:.94;letter-spacing:-1px;color:var(--text-1)}
-.w-body{font-size:14px;line-height:1.75;color:var(--text-2);margin-bottom:18px;font-weight:400}
-
-/* Buttons */
-.btn-pr{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;background:var(--orange);color:#fff;border:none;padding:12px 22px;cursor:none;transition:all .25s;text-decoration:none;display:inline-block;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
-.btn-pr:hover{background:var(--amber);color:#0a0805;transform:translateY(-2px)}
-.btn-gh{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;background:transparent;color:var(--text-2);border:1px solid var(--border);padding:12px 22px;cursor:none;transition:all .25s;text-decoration:none;display:inline-block}
-.btn-gh:hover{border-color:var(--orange);color:var(--orange)}
-@media(max-width:768px){.btn-pr,.btn-gh{cursor:pointer}}
-
-/* ══════════════════════════════════════════════════════════
-   WIN 0: HOME
-══════════════════════════════════════════════════════════ */
-#w0{flex-direction:row}
-.w0-l{
-  flex:0 0 50%;
-  /* padding-top:36px keeps content off the status bar */
-  padding:36px 48px 28px;
-  display:flex;flex-direction:column;justify-content:center;
-  border-right:1px solid var(--border);
-  position:relative;z-index:2;
-  background:var(--surface);backdrop-filter:blur(24px);
-  overflow-y:auto;scrollbar-width:none;
-  transition:background .35s,border-color .35s;
-}
-.w0-l::-webkit-scrollbar{display:none}
-.w0-eye{font-family:var(--mono);font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--orange);margin-bottom:20px;display:flex;align-items:center;gap:10px}
-.w0-eye::before{content:'';width:16px;height:1px;background:var(--orange);display:block;flex-shrink:0}
-.hero-h{font-family:var(--display);font-weight:800;font-size:clamp(38px,4.5vw,68px);line-height:.91;letter-spacing:-2px;color:var(--text-1);margin-bottom:18px}
-.hero-h .or{color:transparent;-webkit-text-stroke:1.5px var(--orange);filter:drop-shadow(0 0 16px rgba(255,85,0,.35))}
-.hero-desc{font-size:14px;line-height:1.75;color:var(--text-2);margin-bottom:24px;max-width:380px}
-.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
-.hero-pills{display:flex;gap:7px;flex-wrap:wrap}
-.pill{font-family:var(--mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--tag-bdr);padding:5px 12px;color:var(--tag-txt);transition:border-color .25s,color .25s}
-.w0-r{flex:1;padding:36px 28px 28px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;scrollbar-width:none;position:relative;z-index:2}
-.w0-r::-webkit-scrollbar{display:none}
-
-/* Pipeline widget */
-.pw{background:var(--card-bg);border:1px solid var(--border);padding:18px;backdrop-filter:blur(10px);transition:background .35s,border-color .35s}
-.pw-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.pw-title{font-family:var(--mono);font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--text-3)}
-.pw-live{font-family:var(--mono);font-size:8px;letter-spacing:2px;color:var(--green);display:flex;align-items:center;gap:5px}
-.pw-live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
-.pr{display:flex;align-items:center;gap:8px;margin-bottom:7px}
-.pr-l{font-family:var(--mono);font-size:9px;color:var(--text-3);min-width:72px}
-.pr-wrap{flex:1;height:4px;background:var(--border2);overflow:hidden}
-.pr-bar{height:100%;background:var(--orange);width:0%;transition:width 1.8s cubic-bezier(.16,1,.3,1)}
-.pr-val{font-family:var(--mono);font-size:9px;color:var(--text-1);min-width:28px;text-align:right}
-
-/* Stats row */
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
-.sc{background:var(--card-bg);padding:13px 10px;text-align:center;backdrop-filter:blur(10px);transition:background .35s}
-.sc-n{font-family:var(--display);font-weight:800;font-size:24px;color:var(--orange);letter-spacing:-1px;line-height:1}
-.sc-u{font-size:13px;color:var(--amber)}
-.sc-l{font-family:var(--mono);font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);margin-top:3px}
-
-/* Activity feed */
-.af{background:var(--card-bg);border:1px solid var(--border);padding:14px;backdrop-filter:blur(10px);transition:background .35s,border-color .35s}
-.af-t{font-family:var(--mono);font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
-.af-i{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--border2)}
-.af-i:last-child{border:none}
-.af-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px}
-.af-txt{font-size:11px;color:var(--text-2);line-height:1.4;flex:1}
-.af-time{font-family:var(--mono);font-size:8px;color:var(--text-4);white-space:nowrap}
-
-@media(max-width:768px){
-  #w0{flex-direction:column;overflow-y:auto}
-  .w0-l{flex:none;padding:28px 20px 20px;border-right:none;border-bottom:1px solid var(--border)}
-  .w0-r{padding:18px 20px;gap:10px}
-}
-
-/* ══════════════════════════════════════════════════════════
-   WIN 1: PROBLEM
-══════════════════════════════════════════════════════════ */
-#w1{align-items:center;justify-content:center;padding:24px 24px 20px;overflow-y:auto;scrollbar-width:none}
-#w1::-webkit-scrollbar{display:none}
-.w1-inner{max-width:780px;width:100%;text-align:center;position:relative;z-index:2;background:var(--surface);backdrop-filter:blur(24px);padding:28px 40px 28px;border:1px solid var(--border);transition:background .35s,border-color .35s}
-.w1-h{font-family:var(--display);font-weight:800;font-size:clamp(24px,3vw,44px);line-height:.93;letter-spacing:-1.5px;color:var(--text-1);margin-bottom:12px}
-.w1-h .or{color:var(--orange)}
-.w1-sub{font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:20px;max-width:480px;margin-left:auto;margin-right:auto}
-.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-bottom:18px;text-align:left}
-.pg{background:var(--card-bg);padding:16px 16px;transition:background .35s}
-.pg-n{font-family:var(--display);font-weight:800;font-size:32px;color:var(--orange);letter-spacing:-2px;line-height:1;margin-bottom:3px}
-.pg-u{font-size:20px;color:var(--amber)}
-.pg-l{font-family:var(--mono);font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);margin-bottom:8px}
-.pg-d{font-size:12px;color:var(--text-2);line-height:1.6}
-@media(max-width:600px){
-  #w1{padding:20px 14px}
-  .w1-inner{padding:24px 18px}
-  .prob-grid{grid-template-columns:1fr}
-}
-
-/* ══════════════════════════════════════════════════════════
-   WIN 2: SERVICES
-══════════════════════════════════════════════════════════ */
-#w2{flex-direction:column}
-.w2-head{
-  /* padding-top:28px guarantees content clears status bar */
-  padding:28px 44px 16px;
-  border-bottom:1px solid var(--border);flex-shrink:0;
-  background:var(--surface);backdrop-filter:blur(24px);position:relative;z-index:2;
-  transition:background .35s,border-color .35s;
-}
-.svc-g{display:grid;grid-template-columns:repeat(4,1fr);flex:1;overflow:hidden}
-.svc-c{border-right:1px solid var(--border);padding:22px 24px;display:flex;flex-direction:column;transition:background .3s;cursor:none;overflow:hidden;position:relative;z-index:2;background:rgba(0,0,0,.01)}
-.svc-c:last-child{border-right:none}
-.svc-c:hover{background:var(--surface)}
-[data-theme="light"] .svc-c{background:rgba(255,252,245,.5)}
-[data-theme="light"] .svc-c:hover{background:rgba(255,252,245,.95)}
-.svc-c:hover .svc-arr{opacity:1;transform:translateX(4px)}
-.svc-num{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--text-3);margin-bottom:16px}
-.svc-ico{font-size:22px;margin-bottom:12px}
-.svc-name{font-family:var(--display);font-weight:700;font-size:16px;color:var(--text-1);margin-bottom:8px;letter-spacing:-.2px}
-.svc-d{font-size:12px;color:var(--text-2);line-height:1.65;flex:1}
-.svc-tgs{margin-top:10px;display:flex;flex-wrap:wrap;gap:4px}
-.svc-tg{font-family:var(--mono);font-size:7px;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--tag-bdr);padding:3px 7px;color:var(--tag-txt);transition:border-color .25s,color .25s}
-.svc-c:hover .svc-tg{border-color:rgba(255,85,0,.35);color:var(--orange)}
-.svc-arr{font-size:14px;color:var(--orange);opacity:0;transition:opacity .3s,transform .3s;margin-top:10px;align-self:flex-end}
-@media(max-width:768px){
-  .svc-g{grid-template-columns:1fr 1fr;overflow-y:auto;flex:none}
-  .svc-c{cursor:pointer;border-right:none;border-bottom:1px solid var(--border)}
-  #w2{overflow-y:auto}
-  .w2-head{padding:28px 20px 14px}
-}
-
-/* ══════════════════════════════════════════════════════════
-   WIN 3: PLATFORMS
-══════════════════════════════════════════════════════════ */
-#w3{flex-direction:row;overflow:hidden}
-.plt-sb{
-  flex:0 0 240px;border-right:1px solid var(--border);
-  display:flex;flex-direction:column;overflow-y:auto;
-  background:var(--surface);backdrop-filter:blur(24px);
-  position:relative;z-index:2;
-  transition:background .35s,border-color .35s;
-}
-.plt-sb-top{padding:28px 24px 16px;border-bottom:1px solid var(--border);flex-shrink:0}
-.plt-tab{padding:16px 24px;border-bottom:1px solid var(--border);cursor:none;transition:all .25s;display:flex;align-items:center;gap:10px}
-.plt-tab:hover,.plt-tab.on{background:rgba(255,85,0,.07)}
-.plt-tab.on .ptab-n{color:var(--orange)}
-.plt-tab.on .ptab-bar{background:var(--orange)}
-.ptab-bar{width:2px;height:28px;background:var(--border);flex-shrink:0;transition:background .25s}
-.ptab-tag{font-family:var(--mono);font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);margin-bottom:3px}
-.ptab-n{font-family:var(--display);font-weight:700;font-size:15px;color:var(--text-1);transition:color .25s}
-@media(max-width:768px){
-  #w3{flex-direction:column}
-  .plt-sb{flex:none;border-right:none;border-bottom:1px solid var(--border);flex-direction:row;overflow-x:auto}
-  .plt-sb-top{display:none}
-  .plt-tab{border-bottom:none;border-right:1px solid var(--border);padding:12px 16px;flex-shrink:0;cursor:pointer}
-}
-.plt-body{flex:1;overflow-y:auto;scrollbar-width:none;position:relative;z-index:2}
-.plt-body::-webkit-scrollbar{display:none}
-.plt-pnl{display:none;padding:28px 40px;animation:panIn .3s ease-out}
-.plt-pnl.on{display:block}
-@keyframes panIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
-.pp-logo{font-family:var(--display);font-weight:800;font-size:44px;letter-spacing:-2px;line-height:1;margin-bottom:2px}
-.pp-sub{font-family:var(--mono);font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--text-3);margin-bottom:16px}
-.pp-desc{font-size:14px;line-height:1.78;color:var(--text-2);margin-bottom:20px;max-width:480px}
-.pp-feats{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.pp-f{padding:8px 0;border-bottom:1px solid var(--border2);font-size:12px;color:var(--text-2);display:flex;align-items:center;gap:8px}
-.pp-f::before{content:'→';color:var(--orange);font-size:10px;flex-shrink:0}
-@media(max-width:600px){
-  .pp-feats{grid-template-columns:1fr}
-  .plt-pnl{padding:20px}
-}
-
-/* ══════════════════════════════════════════════════════════
-   WIN 4: RESULTS
-══════════════════════════════════════════════════════════ */
-#w4{flex-direction:column;overflow-y:auto}
-#w4::-webkit-scrollbar{display:none}
-.w4-inner{padding:28px 48px 24px;display:flex;flex-direction:column;min-height:100%;position:relative;z-index:2;gap:1px}
-.w4-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:14px;flex-shrink:0}
-.w4-h{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.5vw,58px);letter-spacing:-2px;line-height:.92;color:var(--text-1)}
-.w4-h .or{color:var(--orange)}
-.w4-note{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);max-width:180px;line-height:1.6;text-align:right}
-.mets{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);flex-shrink:0}
-.met{background:var(--card-bg);padding:22px 20px;position:relative;overflow:hidden;transition:background .35s}
-.met::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--orange),transparent)}
-.met-n{font-family:var(--display);font-weight:800;font-size:clamp(32px,3.5vw,50px);color:var(--orange);letter-spacing:-2px;line-height:1;filter:drop-shadow(0 0 16px rgba(255,85,0,.25))}
-.met-u{font-size:22px;color:var(--amber)}
-.met-l{font-family:var(--mono);font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);margin-top:5px;margin-bottom:5px}
-.met-d{font-size:12px;color:var(--text-2);line-height:1.5}
-.proc{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);flex-shrink:0}
-.proc-c{background:var(--card-bg);padding:18px 20px;transition:background .35s}
-.proc-n{font-family:var(--display);font-weight:800;font-size:40px;color:rgba(255,85,0,.1);letter-spacing:-2px;line-height:1;margin-bottom:5px}
-.proc-name{font-family:var(--display);font-weight:700;font-size:13px;color:var(--text-1);margin-bottom:4px}
-.proc-d{font-size:11px;color:var(--text-2);line-height:1.55}
-@media(max-width:600px){
-  .mets{grid-template-columns:1fr 1fr}
-  .proc{grid-template-columns:1fr 1fr}
-  .w4-inner{padding:20px 18px}
-}
-
-/* ══════════════════════════════════════════════════════════
-   WIN 5: TESTIMONIALS
-══════════════════════════════════════════════════════════ */
-#w5{flex-direction:column}
-.w5-head{
-  padding:28px 44px 16px;
-  border-bottom:1px solid var(--border);flex-shrink:0;
-  display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:10px;
-  background:var(--surface);backdrop-filter:blur(24px);position:relative;z-index:2;
-  transition:background .35s,border-color .35s;
-}
-.w5-note{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3)}
-.tg{display:grid;grid-template-columns:1fr 1fr;flex:1;overflow:hidden}
-.tg-col{display:flex;flex-direction:column;overflow:hidden}
-.tg-col:first-child{border-right:1px solid var(--border)}
-.testi{padding:20px 30px;border-bottom:1px solid var(--border);transition:background .25s;cursor:default;position:relative;z-index:2;background:rgba(0,0,0,.01)}
-[data-theme="light"] .testi{background:rgba(255,252,245,.5)}
-.testi:hover{background:var(--surface)}
-.t-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
-.t-stars{color:var(--orange);font-size:12px;letter-spacing:2px;filter:drop-shadow(0 0 5px rgba(255,85,0,.3))}
-.t-plat{font-family:var(--mono);font-size:7px;letter-spacing:3px;text-transform:uppercase;border:1px solid var(--tag-bdr);padding:3px 7px;color:var(--tag-txt)}
-.t-q{font-size:13px;line-height:1.7;color:var(--text-2);margin-bottom:12px;font-style:italic}
-.t-who{display:flex;align-items:center;gap:10px}
-.t-av{width:28px;height:28px;background:var(--orange);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:11px;color:#fff;flex-shrink:0}
-.t-name{font-weight:500;font-size:12px;color:var(--text-1);margin-bottom:1px}
-.t-role{font-family:var(--mono);font-size:8px;letter-spacing:1px;color:var(--text-3)}
-@media(max-width:600px){
-  .tg{grid-template-columns:1fr;overflow-y:auto;flex:none}
-  #w5{overflow-y:auto}
-  .testi{padding:15px 18px;cursor:pointer}
-  .w5-head{padding:28px 18px 14px}
-}
-
-/* ══════════════════════════════════════════════════════════
-   WIN 6: CONTACT
-   This window has been the main problem — fully rebuilt
-══════════════════════════════════════════════════════════ */
-#w6{flex-direction:row;overflow:hidden}
-
-.w6-l{
-  flex:0 0 42%;
-  border-right:1px solid var(--border);
-  /* padding-top:28px gives visible gap below status bar */
-  padding:28px 40px 24px;
-  display:flex;flex-direction:column;justify-content:center;
-  overflow-y:auto;scrollbar-width:none;
-  background:var(--surface);backdrop-filter:blur(24px);
-  position:relative;z-index:2;
-  transition:background .35s,border-color .35s;
-}
-.w6-l::-webkit-scrollbar{display:none}
-.w6-desc{font-size:14px;line-height:1.75;color:var(--text-2);margin-bottom:24px}
-.w6-links{display:flex;flex-direction:column}
-.w6-lnk{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border2);text-decoration:none;color:var(--text-2);font-family:var(--mono);font-size:10px;letter-spacing:2px;transition:color .25s;cursor:none}
-.w6-lnk:hover{color:var(--orange)}
-.w6-lic{width:28px;height:28px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;transition:border-color .25s}
-.w6-lnk:hover .w6-lic{border-color:var(--orange)}
-@media(max-width:768px){.w6-lnk{cursor:pointer}}
-
-.w6-r{
-  flex:1;
-  padding:28px 36px 24px;
-  display:flex;flex-direction:column;justify-content:center;
-  overflow-y:auto;scrollbar-width:none;
-  position:relative;z-index:2;
-  background:var(--surface);backdrop-filter:blur(24px);
-  transition:background .35s;
-}
-.w6-r::-webkit-scrollbar{display:none}
-
-/* FORM — all inputs fully visible in both themes */
-.cf{display:flex;flex-direction:column;gap:8px}
-.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.cf input,.cf textarea,.cf select{
-  background:var(--input-bg);
-  border:1px solid var(--input-bdr);
-  color:var(--input-txt);
-  font-family:var(--body);font-size:13px;
-  padding:11px 14px;outline:none;
-  transition:border-color .25s,background .25s,color .25s;
-  -webkit-appearance:none;appearance:none;width:100%;
-  border-radius:2px;
-}
-.cf input::placeholder,.cf textarea::placeholder{color:var(--input-ph)}
-.cf input:focus,.cf textarea:focus,.cf select:focus{
-  border-color:var(--orange);
-  background:rgba(255,85,0,.04);
-}
-.cf textarea{min-height:68px;resize:none}
-.cf select option{background:var(--bg2);color:var(--text-1)}
-.cf-sub{
-  font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;
-  background:var(--orange);color:#fff;border:none;padding:13px;
-  cursor:none;width:100%;
-  transition:background .25s,opacity .25s;
-  clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%);
-}
-.cf-sub:hover{background:var(--amber);color:#0a0805}
-@media(max-width:768px){.cf-sub{cursor:pointer}}
-.cf-or{display:flex;align-items:center;gap:8px}
-.cf-orl{flex:1;height:1px;background:var(--border)}
-.cf-ort{font-family:var(--mono);font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3)}
-.cf-wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px;font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#25D366;border:1px solid rgba(37,211,102,.22);text-decoration:none;transition:all .25s;background:transparent}
-.cf-wa:hover{background:rgba(37,211,102,.07);border-color:rgba(37,211,102,.4)}
-@media(max-width:480px){.cf-row{grid-template-columns:1fr}}
-
-@media(max-width:768px){
-  #w6{flex-direction:column;overflow-y:auto}
-  .w6-l{flex:none;padding:24px 18px;border-right:none;border-bottom:1px solid var(--border)}
-  .w6-r{flex:none;padding:20px 18px}
-}
-
-/* ══ DOCK ════════════════════════════════════════════════════ */
-#dock{
-  position:fixed;
-  bottom:12px;left:50%;transform:translateX(-50%);
-  height:56px;
+.crm-card:hover{background:var(--surface);transform:translateY(-2px)}
+.crm-card.featured{
   background:var(--surface);
-  backdrop-filter:blur(24px);
-  border:1px solid var(--border);
-  border-radius:16px;
-  display:flex;align-items:center;
-  padding:0 6px;gap:1px;
-  z-index:800;
-  box-shadow:0 8px 32px rgba(0,0,0,.3),0 0 0 1px rgba(255,85,0,.06);
-  transition:background .35s,border-color .35s;
+  box-shadow:inset 0 0 0 1.5px var(--accent);
 }
-.di{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 12px;border-radius:10px;cursor:none;transition:transform .25s cubic-bezier(.34,1.56,.64,1),background .2s;position:relative;min-width:52px}
-.di:hover{transform:translateY(-5px) scale(1.06);background:rgba(255,85,0,.1)}
-.di.on{background:rgba(255,85,0,.14)}
-.di.on .di-lbl{color:var(--orange)}
-.di-ico{font-size:18px;line-height:1}
-.di-lbl{font-family:var(--mono);font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);transition:color .2s}
-.di-dot{position:absolute;bottom:3px;width:3px;height:3px;border-radius:50%;background:var(--orange);opacity:0;transition:opacity .25s;box-shadow:0 0 5px var(--orange)}
-.di.on .di-dot{opacity:1}
-.d-sep{width:1px;height:32px;background:var(--border);margin:0 3px;flex-shrink:0}
-@media(max-width:768px){
-  #dock{bottom:8px;padding:0 3px;gap:0;height:50px;border-radius:12px}
-  .di{padding:5px 8px;min-width:44px}
-  .di-ico{font-size:16px}
-  .di-lbl{display:none}
-  .di:hover{transform:none}
+.crm-card.featured::after{
+  content:'TOP';position:absolute;top:12px;right:12px;
+  font-family:var(--ff-mono);font-size:8px;letter-spacing:.1em;
+  color:var(--accent);background:var(--accent-l);
+  padding:2px 8px;border-radius:100px;
 }
-@media(max-width:400px){.di{padding:5px 6px;min-width:38px}}
+.crm-logo{font-size:13px;margin-bottom:10px;font-family:var(--ff-mono);font-weight:700;color:var(--accent);letter-spacing:.04em}
+.crm-name{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:3px;letter-spacing:-.01em}
+.crm-cat{font-family:var(--ff-mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.crm-bar{height:2px;background:var(--line);border-radius:100px;overflow:hidden}
+.crm-bar-fill{height:100%;border-radius:100px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 1s var(--ease)}
+.crm-bar-fill.go{transform:scaleX(1)}
+.crm-exp{font-family:var(--ff-mono);font-size:9px;color:var(--ink3);margin-top:6px}
+.crm-spec{font-family:var(--ff-mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-top:8px}
+@media(max-width:900px){.crm-universe{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.crm-universe{grid-template-columns:1fr}}
+@media(max-width:900px){.crm-intro{grid-template-columns:1fr;gap:16px}.sec{padding:64px 20px}}
 
-/* ══ WA FLOAT ════════════════════════════════════════════════ */
-#wa-float{
-  position:fixed;bottom:calc(var(--DOCK) + 4px);right:24px;
-  z-index:700;background:#25D366;color:#000;
-  display:flex;align-items:center;gap:6px;padding:9px 16px;
-  font-family:var(--mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;
-  text-decoration:none;
-  clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%);
-  transition:background .25s,transform .2s;
-  box-shadow:0 4px 18px rgba(37,211,102,.25);
+/* ══════════════════════════════════════════
+   SERVICES
+══════════════════════════════════════════ */
+#services{background:var(--surface)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.svc{
+  background:var(--surface);padding:36px 32px;position:relative;overflow:hidden;
+  transition:background .25s;
 }
-#wa-float:hover{background:#1ebe5c;transform:translateY(-2px)}
-@media(max-width:768px){#wa-float{right:12px;font-size:7px;padding:7px 12px}}
+.svc:hover{background:var(--bg)}
+.svc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease);
+}
+.svc:hover::before{transform:scaleX(1)}
+.svc-n{font-family:var(--ff-mono);font-size:10px;letter-spacing:.06em;color:var(--ink3);margin-bottom:20px}
+.svc-icon{
+  width:40px;height:40px;stroke:var(--accent);fill:none;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-bottom:16px;
+}
+.svc-t{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:10px;letter-spacing:-.01em;line-height:1.3}
+.svc-d{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:18px;font-weight:300}
+.svc-tags{display:flex;flex-wrap:wrap;gap:5px}
+.svc-tag{
+  font-family:var(--ff-mono);font-size:9px;letter-spacing:.04em;
+  color:var(--ink3);border:1px solid var(--line);padding:3px 9px;border-radius:4px;
+  transition:all .2s;
+}
+.svc:hover .svc-tag{border-color:var(--accent-l);color:var(--accent)}
+@media(max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.svc-grid{grid-template-columns:1fr}.svc{cursor:pointer}}
+
+/* ══════════════════════════════════════════
+   RESULTS — DARK
+══════════════════════════════════════════ */
+#results{background:var(--ink);overflow:hidden;position:relative}
+#results-canvas{position:absolute;inset:0;pointer-events:none;z-index:0}
+#results .ew{color:rgba(255,255,255,.3)}
+#results .ew::before{background:rgba(255,255,255,.3)}
+#results .sh{color:#fff}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.07);position:relative;z-index:1}
+.mc{background:var(--ink);padding:44px 32px;transition:background .25s;cursor:default}
+.mc:hover{background:#111}
+.mc-n{font-family:var(--ff-serif);font-size:clamp(44px,5vw,68px);color:#fff;line-height:1;letter-spacing:-.03em;margin-bottom:8px}
+.mc-n sub{font-size:.42em;color:#60a5fa;vertical-align:baseline;font-family:var(--ff-mono)}
+.mc-l{font-family:var(--ff-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:6px}
+.mc-d{font-size:12px;color:rgba(255,255,255,.25);line-height:1.6;font-weight:300}
+@media(max-width:900px){.metrics{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.metrics{grid-template-columns:1fr}}
+
+/* ══════════════════════════════════════════
+   PROCESS
+══════════════════════════════════════════ */
+#process{background:var(--bg)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.proc-grid::after{content:'';position:absolute;top:21px;left:5%;right:5%;height:1px;background:var(--line);z-index:0}
+.pi{padding:0 20px 0 0;position:relative;z-index:1}
+.pi:last-child{padding-right:0}
+.pi-c{
+  width:42px;height:42px;border-radius:50%;background:var(--bg);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+  font-family:var(--ff-mono);font-size:12px;font-weight:500;color:var(--accent);
+  margin-bottom:22px;transition:all .25s;
+}
+.pi:hover .pi-c{background:var(--accent);border-color:var(--accent);color:#fff}
+.pi-t{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+.pi-d{font-size:13px;color:var(--ink2);line-height:1.65;font-weight:300}
+.pi-tag{display:inline-block;margin-top:12px;font-family:var(--ff-mono);font-size:9px;letter-spacing:.06em;color:var(--accent);background:var(--accent-l);padding:3px 10px;border-radius:4px}
+@media(max-width:768px){.proc-grid{grid-template-columns:1fr 1fr;gap:32px}.proc-grid::after{display:none}.pi{padding:0}}
+@media(max-width:480px){.proc-grid{grid-template-columns:1fr}}
+
+/* ══════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════ */
+#testi{background:var(--surface)}
+.tc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.tc{
+  background:var(--bg);border:1px solid var(--line);border-radius:12px;
+  padding:32px;transition:box-shadow .25s,border-color .25s,transform .3s var(--ease);cursor:default;
+}
+.tc:hover{box-shadow:0 8px 32px rgba(0,0,0,.07);border-color:transparent;transform:translateY(-2px)}
+.tc-plat{font-family:var(--ff-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-l);padding:3px 10px;border-radius:4px;display:inline-block;margin-bottom:16px}
+.tc-stars{display:flex;gap:2px;margin-bottom:14px}
+.tc-star{color:#f59e0b;font-size:12px}
+.tc-q{font-size:14px;line-height:1.8;color:var(--ink2);margin-bottom:20px;font-weight:300;font-style:italic}
+.tc-who{display:flex;align-items:center;gap:10px}
+.tc-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-family:var(--ff-mono);font-size:11px;font-weight:500;color:#fff;flex-shrink:0}
+.tc-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:1px}
+.tc-role{font-size:11px;color:var(--ink3)}
+@media(max-width:700px){.tc-grid{grid-template-columns:1fr}}
+
+/* ══════════════════════════════════════════
+   CTA STRIP
+══════════════════════════════════════════ */
+#cta{
+  background:var(--accent);padding:64px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:32px;flex-wrap:wrap;
+}
+.cta-t h2{font-family:var(--ff-serif);font-size:clamp(24px,3.5vw,42px);color:#fff;line-height:1.1;margin-bottom:6px}
+.cta-t p{font-size:14px;color:rgba(255,255,255,.7);font-weight:300}
+.cta-acts{display:flex;gap:12px;flex-wrap:wrap}
+.btn-w{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--accent);background:#fff;border:none;padding:13px 24px;border-radius:6px;text-decoration:none;transition:all .2s}
+.btn-w:hover{background:#f0f0f0;transform:translateY(-1px)}
+.btn-wo{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:rgba(255,255,255,.85);background:transparent;border:1px solid rgba(255,255,255,.3);padding:13px 24px;border-radius:6px;text-decoration:none;transition:all .2s}
+.btn-wo:hover{border-color:rgba(255,255,255,.7);color:#fff}
+@media(max-width:768px){#cta{padding:48px 20px;flex-direction:column}.btn-w,.btn-wo{cursor:pointer}}
+
+/* ══════════════════════════════════════════
+   CONTACT
+══════════════════════════════════════════ */
+#contact{background:var(--surface)}
+.ct-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start}
+.ct-l p{font-size:15px;line-height:1.85;color:var(--ink2);margin-bottom:32px;font-weight:300}
+.ct-links{display:flex;flex-direction:column}
+.ct-lnk{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink2);font-size:13px;font-weight:500;transition:color .2s}
+.ct-lnk:hover{color:var(--accent)}
+.ct-lnk-icon{width:32px;height:32px;border:1px solid var(--line);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:border-color .2s}
+.ct-lnk:hover .ct-lnk-icon{border-color:var(--accent)}
+@media(max-width:768px){.ct-lnk{cursor:pointer}}
+
+.cf-wrap{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:36px}
+.cf-title{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:22px;letter-spacing:-.01em}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:540px){.f-row{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.fl{font-size:12px;font-weight:600;color:var(--ink);letter-spacing:.01em}
+.fi,.fsel,.fta{background:var(--surface);border:1px solid var(--line);color:var(--ink);font-family:var(--ff-sans);font-size:14px;padding:11px 13px;border-radius:6px;outline:none;width:100%;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+.fi::placeholder,.fta::placeholder{color:var(--ink3)}
+.fi:focus,.fsel:focus,.fta:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,86,219,.09)}
+.fta{min-height:88px;resize:none}
+.fsel option{background:var(--surface);color:var(--ink)}
+.fsub{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:var(--ff-sans);font-size:14px;font-weight:600;transition:all .2s;box-shadow:0 2px 8px rgba(26,86,219,.25)}
+.fsub:hover{background:#1344b0;transform:translateY(-1px)}
+@media(max-width:768px){.fsub{cursor:pointer}}
+.fwa{margin-top:10px;width:100%;padding:11px;border-radius:6px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:500;color:#16a34a;text-decoration:none;transition:all .2s}
+.fwa:hover{border-color:#16a34a;background:var(--green-l)}
+
+@media(max-width:900px){.ct-grid{grid-template-columns:1fr;gap:40px}}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer{background:var(--bg);border-top:1px solid var(--line);padding:26px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-l{font-family:var(--ff-mono);font-size:12px;color:var(--ink);font-weight:500}.ft-l b{color:var(--accent)}
+.ft-c{font-size:12px;color:var(--ink3)}
+.ft-s{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:500}
+.ft-sd{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
+@media(max-width:768px){footer{padding:20px;flex-direction:column;align-items:flex-start}}
+
+/* WA FLOAT */
+#wa{position:fixed;bottom:28px;right:28px;z-index:700;background:#25D366;color:#fff;display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:100px;font-size:12px;font-weight:600;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.3);transition:all .25s}
+#wa:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(37,211,102,.4)}
+@media(max-width:768px){#wa{cursor:pointer;bottom:18px;right:18px;padding:10px 16px}}
+
+/* SUCCESS */
+#succ{display:none;position:fixed;inset:0;z-index:9000;background:rgba(247,246,243,.96);backdrop-filter:blur(20px);align-items:center;justify-content:center;flex-direction:column;gap:14px;text-align:center;padding:40px}
+#succ.on{display:flex}
+.succ-icon{width:60px;height:60px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.succ-icon svg{width:26px;height:26px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round}
+.succ-t{font-family:var(--ff-serif);font-size:40px;color:var(--ink);letter-spacing:-.02em}
+.succ-s{font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.succ-x{margin-top:8px;padding:10px 24px;border:1px solid var(--line);background:none;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;color:var(--ink2);transition:all .2s}
+.succ-x:hover{border-color:var(--accent);color:var(--accent)}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(20px)}
+@keyframes su{to{opacity:1;transform:none}}
+.rv{animation:su .01s 1.2s forwards}
+.rv.in{animation:none;opacity:1;transform:none}
+
+
+
 </style>
 </head>
 <body>
 
-<!-- CURSORS -->
-<div id="xh"></div>
-<div id="xh-dot"></div>
-<div id="xh-ring"></div>
 
-<!-- THREE.JS + GRID CANVASES -->
-<canvas id="three-cv"></canvas>
-<canvas id="grid-cv"></canvas>
-<div id="vig"></div>
 
-<!-- BOOT -->
-<div id="boot">
-  <div class="bl dim" id="bl0">EAS-CRM-OS v3.0 — starting up...</div>
-  <div class="bl" id="bl1">[ OK ] Pipeline architecture engine loaded</div>
-  <div class="bl" id="bl2">[ OK ] GoHighLevel integration active</div>
-  <div class="bl" id="bl3">[ OK ] HubSpot &amp; Zoho modules online</div>
-  <div class="bl" id="bl4">[ OK ] Automation sequences armed</div>
-  <div class="bl hi" id="bl5">[ OK ] All systems operational</div>
-  <div class="bl am" id="bl6">→ Launching Command Center...</div>
-  <div id="boot-track"><div id="boot-bar"></div></div>
-  <div id="boot-pct">0%</div>
+
+
+<div id="succ">
+  <div class="succ-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div class="succ-t">Sent.</div>
+  <div class="succ-s">Expect a reply within 24 hours</div>
+  <button class="succ-x" onclick="document.getElementById('succ').classList.remove('on')">Close</button>
 </div>
 
-<!-- STATUS BAR -->
-<div id="sbar">
-  <div class="sb-l">
-    <div class="sb-pulse"></div>
-    <div class="sb-brand">EAS · CRM</div>
-    <div class="sb-tag">Command Center</div>
+<!-- NAV -->
+<nav id="nav">
+  <div class="n-logo">EAS<b>.</b></div>
+  <div class="n-links">
+    <a href="#crms">Platforms</a>
+    <a href="#services">Services</a>
+    <a href="#results">Results</a>
+    <a href="#contact">Contact</a>
   </div>
-  <div class="sb-r">
-    <div class="sb-stat"><div class="sb-sn">100+</div><div class="sb-sl">Projects</div></div>
-    <div class="sb-stat"><div class="sb-sn">5yr</div><div class="sb-sl">Expert</div></div>
-    <div class="sb-stat"><div class="sb-sn">GHL·HUB·ZHO</div><div class="sb-sl">Platforms</div></div>
-    <button id="theme-btn" onclick="toggleTheme()">☀ Light</button>
-    <div id="sb-clock">00:00:00</div>
+  <a class="n-btn" href="#contact">Free Audit →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-bg-canvas"></canvas>
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-flag rv"><div class="hero-flag-pulse"></div>CRM Architect · Est. 2019</div>
+      <h1 class="hero-h rv">Find Where Your<br>Revenue Is <em>Leaking.</em></h1>
+      <p class="hero-p rv">Answer 4 quick questions and get a personalised CRM blueprint — free, instant, no email required. Then decide if you want me to build it.</p>
+      <div class="hero-trust rv">
+        <div class="trust-avatars">
+          <div class="trust-av">JM</div><div class="trust-av">SK</div><div class="trust-av">RA</div><div class="trust-av">LP</div>
+        </div>
+        <div class="trust-txt"><b>100+ businesses</b> fixed their CRM with me</div>
+      </div>
+    </div>
+
+    <!-- DIAGNOSTIC WIDGET -->
+    <div class="diag-card rv" id="diag-card">
+      <div class="dc-head">
+        <div class="dc-head-l">
+          <div class="dc-dots">
+            <div class="dc-dot" style="background:#FF5F57"></div>
+            <div class="dc-dot" style="background:#FEBC2E"></div>
+            <div class="dc-dot" style="background:#28C840"></div>
+          </div>
+          <span class="dc-title">CRM Revenue Diagnostic</span>
+        </div>
+        <span class="dc-badge">FREE</span>
+      </div>
+      <div class="dc-body">
+
+        <!-- Q1: Industry -->
+        <div class="diag-step active" id="ds1">
+          <div class="ds-q">What industry is your business in?</div>
+          <div class="ds-opts">
+            <div class="ds-opt" onclick="pick(1,'agency',this)"><span class="ds-opt-n">A</span>Marketing / Digital Agency</div>
+            <div class="ds-opt" onclick="pick(1,'realestate',this)"><span class="ds-opt-n">B</span>Real Estate / Property</div>
+            <div class="ds-opt" onclick="pick(1,'saas',this)"><span class="ds-opt-n">C</span>SaaS / Software / Tech</div>
+            <div class="ds-opt" onclick="pick(1,'ecom',this)"><span class="ds-opt-n">D</span>E-Commerce / Retail</div>
+            <div class="ds-opt" onclick="pick(1,'finance',this)"><span class="ds-opt-n">E</span>Finance / Insurance / Legal</div>
+            <div class="ds-opt" onclick="pick(1,'services',this)"><span class="ds-opt-n">F</span>Coaching / Consulting / Services</div>
+          </div>
+        </div>
+
+        <!-- Q2: Current CRM state -->
+        <div class="diag-step" id="ds2">
+          <div class="ds-q">What is your current CRM situation?</div>
+          <div class="ds-opts">
+            <div class="ds-opt" onclick="pick(2,'none',this)"><span class="ds-opt-n">A</span>No CRM — using spreadsheets or email only</div>
+            <div class="ds-opt" onclick="pick(2,'unused',this)"><span class="ds-opt-n">B</span>Have a CRM but the team barely uses it</div>
+            <div class="ds-opt" onclick="pick(2,'manual',this)"><span class="ds-opt-n">C</span>CRM set up but everything is done manually</div>
+            <div class="ds-opt" onclick="pick(2,'partial',this)"><span class="ds-opt-n">D</span>Some automations running, many gaps</div>
+            <div class="ds-opt" onclick="pick(2,'broken',this)"><span class="ds-opt-n">E</span>CRM is a mess — data everywhere, no trust in it</div>
+          </div>
+        </div>
+
+        <!-- Q3: Lead volume -->
+        <div class="diag-step" id="ds3">
+          <div class="ds-q">How many new leads enter your pipeline each month?</div>
+          <div class="ds-opts">
+            <div class="ds-opt" onclick="pick(3,'lt50',this)"><span class="ds-opt-n">A</span>Fewer than 50 leads / month</div>
+            <div class="ds-opt" onclick="pick(3,'50to200',this)"><span class="ds-opt-n">B</span>50 – 200 leads / month</div>
+            <div class="ds-opt" onclick="pick(3,'200to500',this)"><span class="ds-opt-n">C</span>200 – 500 leads / month</div>
+            <div class="ds-opt" onclick="pick(3,'500plus',this)"><span class="ds-opt-n">D</span>500 – 2,000 leads / month</div>
+            <div class="ds-opt" onclick="pick(3,'2kplus',this)"><span class="ds-opt-n">E</span>2,000+ leads / month</div>
+          </div>
+        </div>
+
+        <!-- Q4: Biggest bottleneck -->
+        <div class="diag-step" id="ds4">
+          <div class="ds-q">Where do leads most often fall through the cracks?</div>
+          <div class="ds-opts">
+            <div class="ds-opt" onclick="pick(4,'speed',this)"><span class="ds-opt-n">A</span>Slow first response — leads go cold fast</div>
+            <div class="ds-opt" onclick="pick(4,'nurture',this)"><span class="ds-opt-n">B</span>No follow-up after the first touchpoint</div>
+            <div class="ds-opt" onclick="pick(4,'qualify',this)"><span class="ds-opt-n">C</span>Wasting time on unqualified leads</div>
+            <div class="ds-opt" onclick="pick(4,'visibility',this)"><span class="ds-opt-n">D</span>No idea what stage leads are at</div>
+            <div class="ds-opt" onclick="pick(4,'handoff',this)"><span class="ds-opt-n">E</span>Sales to delivery handoff breaks down</div>
+          </div>
+        </div>
+
+        <!-- Q5: Team size -->
+        <div class="diag-step" id="ds5">
+          <div class="ds-q">How large is the team working deals in your CRM?</div>
+          <div class="ds-opts">
+            <div class="ds-opt" onclick="pick(5,'solo',this)"><span class="ds-opt-n">A</span>Just me — solo operator</div>
+            <div class="ds-opt" onclick="pick(5,'small',this)"><span class="ds-opt-n">B</span>2 – 5 people</div>
+            <div class="ds-opt" onclick="pick(5,'mid',this)"><span class="ds-opt-n">C</span>6 – 20 people</div>
+            <div class="ds-opt" onclick="pick(5,'large',this)"><span class="ds-opt-n">D</span>20+ people / multiple teams</div>
+          </div>
+        </div>
+
+        <!-- Q6: What they've tried -->
+        <div class="diag-step" id="ds6">
+          <div class="ds-q">What have you already tried to fix this?</div>
+          <div class="ds-opts">
+            <div class="ds-opt" onclick="pick(6,'nothing',this)"><span class="ds-opt-n">A</span>Nothing yet — this is a fresh start</div>
+            <div class="ds-opt" onclick="pick(6,'diy',this)"><span class="ds-opt-n">B</span>Tried to set it up ourselves — didn't stick</div>
+            <div class="ds-opt" onclick="pick(6,'freelancer',this)"><span class="ds-opt-n">C</span>Hired a freelancer — results were poor</div>
+            <div class="ds-opt" onclick="pick(6,'agency',this)"><span class="ds-opt-n">D</span>Worked with an agency — too expensive, too slow</div>
+            <div class="ds-opt" onclick="pick(6,'tools',this)"><span class="ds-opt-n">E</span>Bought more tools — still broken</div>
+          </div>
+        </div>
+
+        <!-- Generating -->
+        <div class="diag-step" id="ds7">
+          <div style="padding:24px 0 8px">
+            <div style="width:28px;height:28px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 18px"></div>
+            <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;text-align:center" id="gen-txt">Scoring your pipeline health…</div>
+            <div style="font-size:12px;color:var(--ink2);font-weight:300;text-align:center;margin-bottom:20px">Running 47 diagnostic checks</div>
+            <div style="background:var(--bg);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:8px" id="gen-checks"></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="dc-progress">
+        <div class="dc-prog-bar"><div class="dc-prog-fill" id="prog-fill" style="width:0%"></div></div>
+        <span class="dc-prog-txt" id="prog-txt">Question 1 of 6</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLUEPRINT RESULT (shown after diagnostic) -->
+<section id="blueprint">
+  <canvas id="bp-canvas"></canvas>
+  <div class="bp-inner">
+    <div class="bp-eyebrow">Your Personalised Blueprint</div>
+    <h2 class="bp-title">Here's Exactly Where<br>Your Revenue Is <em>Leaking.</em></h2>
+    <div class="bp-ai-box">
+      <div class="bp-ai-label">AI Analysis</div>
+      <div id="bp-ai-text"><span class="bp-cursor"></span></div>
+    </div>
+    <div class="bp-flow" id="bp-flow"></div>
+    <div class="bp-score" id="bp-score"></div>
+    <div class="bp-cta-row">
+      <a class="bp-cta-primary" href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20just%20ran%20your%20CRM%20diagnostic%20and%20want%20to%20fix%20my%20pipeline" target="_blank">
+        Fix My Pipeline → 
+      </a>
+      <a class="bp-cta-ghost" href="#contact">Send Message Instead</a>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div id="logos">
+  <span class="logos-l">Integrations</span>
+  <div style="display:flex;overflow:hidden;flex:1">
+    <div class="logos-track">
+      <span>GoHighLevel</span><span>·</span><span>HubSpot</span><span>·</span><span>Zoho CRM</span><span>·</span><span>Salesforce</span><span>·</span><span>Pipedrive</span><span>·</span><span>ActiveCampaign</span><span>·</span><span>Keap</span><span>·</span><span>Monday CRM</span><span>·</span><span>Freshsales</span><span>·</span><span>Close.io</span><span>·</span><span>Zapier</span><span>·</span><span>Make</span><span>·</span><span>Stripe</span><span>·</span><span>Twilio</span><span>·</span><span>Calendly</span><span>·</span>
+      <span>GoHighLevel</span><span>·</span><span>HubSpot</span><span>·</span><span>Zoho CRM</span><span>·</span><span>Salesforce</span><span>·</span><span>Pipedrive</span><span>·</span><span>ActiveCampaign</span><span>·</span><span>Keap</span><span>·</span><span>Monday CRM</span><span>·</span><span>Freshsales</span><span>·</span><span>Close.io</span><span>·</span><span>Zapier</span><span>·</span><span>Make</span><span>·</span><span>Stripe</span><span>·</span><span>Twilio</span><span>·</span><span>Calendly</span><span>·</span>
+    </div>
   </div>
 </div>
 
-<!-- MAIN AREA -->
-<div id="main">
-
-  <!-- WIN 0: HOME -->
-  <div class="win active" id="w0">
-    <div class="w0-l">
-      <div class="w0-eye">CRM Automation Architect</div>
-      <h1 class="hero-h">Engineer<br>Your <span class="or">Revenue</span><br>Machine.</h1>
-      <p class="hero-desc">Most businesses leak 30–40% of leads through a broken CRM. I build automation infrastructure that captures, follows up, qualifies and closes — while you sleep.</p>
-      <div class="hero-btns">
-        <a class="btn-pr" href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20want%20a%20free%20CRM%20audit" target="_blank">Get Free Audit</a>
-        <button class="btn-gh" onclick="openWin(2)">See Services</button>
-      </div>
-      <div class="hero-pills">
-        <div class="pill">GoHighLevel</div>
-        <div class="pill">HubSpot</div>
-        <div class="pill">Zoho CRM</div>
-        <div class="pill">Upwork Top Rated</div>
-      </div>
-    </div>
-    <div class="w0-r">
-      <div class="pw">
-        <div class="pw-top"><div class="pw-title">Live Pipeline</div><div class="pw-live">Active</div></div>
-        <div class="pr"><div class="pr-l">New Leads</div><div class="pr-wrap"><div class="pr-bar" data-w="82"></div></div><div class="pr-val">82%</div></div>
-        <div class="pr"><div class="pr-l">Contacted</div><div class="pr-wrap"><div class="pr-bar" data-w="67"></div></div><div class="pr-val">67%</div></div>
-        <div class="pr"><div class="pr-l">Qualified</div><div class="pr-wrap"><div class="pr-bar" data-w="51"></div></div><div class="pr-val">51%</div></div>
-        <div class="pr"><div class="pr-l">Closed Won</div><div class="pr-wrap"><div class="pr-bar" data-w="34"></div></div><div class="pr-val">34%</div></div>
-      </div>
-      <div class="stats-row">
-        <div class="sc"><div class="sc-n">8<span class="sc-u">m</span></div><div class="sc-l">Response</div></div>
-        <div class="sc"><div class="sc-n">50<span class="sc-u">%</span></div><div class="sc-l">Admin Cut</div></div>
-        <div class="sc"><div class="sc-n">14<span class="sc-u">d</span></div><div class="sc-l">Go Live</div></div>
-      </div>
-      <div class="af">
-        <div class="af-t">Automation Feed</div>
-        <div class="af-i"><div class="af-dot" style="background:#4ade80"></div><div class="af-txt">Lead auto-followed up via SMS — GHL</div><div class="af-time">2m ago</div></div>
-        <div class="af-i"><div class="af-dot" style="background:#60a5fa"></div><div class="af-txt">HubSpot deal moved to Proposal stage</div><div class="af-time">8m ago</div></div>
-        <div class="af-i"><div class="af-dot" style="background:var(--amber)"></div><div class="af-txt">Zoho: Appointment booked automatically</div><div class="af-time">15m ago</div></div>
-        <div class="af-i"><div class="af-dot" style="background:var(--orange)"></div><div class="af-txt">Dead lead re-engaged — drip started</div><div class="af-time">22m ago</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- WIN 1: PROBLEM -->
-  <div class="win" id="w1">
-    <div class="w1-inner">
-      <div class="w-tag" style="justify-content:center;margin-bottom:12px">The Hidden Problem</div>
-      <h2 class="w1-h">Your CRM Is Costing<br>You Money <span class="or">Right Now.</span></h2>
-      <p class="w1-sub">78% of buyers go with the first vendor to respond. Every hour without automation is revenue leaving through the cracks.</p>
-      <div class="prob-grid">
-        <div class="pg"><div class="pg-n">78<span class="pg-u">%</span></div><div class="pg-l">First Mover Wins</div><div class="pg-d">Deals go to whoever responds first — not whoever has the best product or price.</div></div>
-        <div class="pg"><div class="pg-n">4<span class="pg-u">hr</span></div><div class="pg-l">Avg Response Time</div><div class="pg-d">Average business takes 4 hours to follow up. I get it to under 8 minutes.</div></div>
-        <div class="pg"><div class="pg-n">$30<span class="pg-u">k</span></div><div class="pg-l">Monthly Revenue Leak</div><div class="pg-d">Average monthly revenue lost by businesses running broken CRM pipelines.</div></div>
-      </div>
-      <button class="btn-pr" onclick="openWin(2)" style="margin:0 auto;display:block">See How I Fix This →</button>
-    </div>
-  </div>
-
-  <!-- WIN 2: SERVICES -->
-  <div class="win" id="w2">
-    <div class="w2-head">
-      <div class="w-tag">02 · Services</div>
-      <div class="w-h">What I Build For You</div>
-    </div>
-    <div class="svc-g">
-      <div class="svc-c"><div class="svc-num">01</div><div class="svc-ico">⚙️</div><div class="svc-name">CRM Architecture</div><p class="svc-d">Full pipeline design, custom stages, deal scoring, and team permissions — built to scale from day one.</p><div class="svc-tgs"><span class="svc-tg">Pipeline</span><span class="svc-tg">Scoring</span></div><div class="svc-arr">→</div></div>
-      <div class="svc-c"><div class="svc-num">02</div><div class="svc-ico">⚡</div><div class="svc-name">Workflow Automation</div><p class="svc-d">Trigger-based sequences handling follow-up, lead routing, task creation — 24/7, zero manual input.</p><div class="svc-tgs"><span class="svc-tg">Triggers</span><span class="svc-tg">Sequences</span></div><div class="svc-arr">→</div></div>
-      <div class="svc-c"><div class="svc-num">03</div><div class="svc-ico">🔗</div><div class="svc-name">Integrations</div><p class="svc-d">Zapier, Make, native APIs — your CRM connected to Stripe, Slack, Google Workspace, calendars and more.</p><div class="svc-tgs"><span class="svc-tg">Zapier</span><span class="svc-tg">Make</span><span class="svc-tg">API</span></div><div class="svc-arr">→</div></div>
-      <div class="svc-c"><div class="svc-num">04</div><div class="svc-ico">📊</div><div class="svc-name">Funnels & Dashboards</div><p class="svc-d">Landing pages, booking systems, and real-time dashboards showing deal velocity and attribution.</p><div class="svc-tgs"><span class="svc-tg">Funnels</span><span class="svc-tg">Analytics</span></div><div class="svc-arr">→</div></div>
-    </div>
-  </div>
-
-  <!-- WIN 3: PLATFORMS -->
-  <div class="win" id="w3">
-    <div class="plt-sb">
-      <div class="plt-sb-top">
-        <div class="w-tag">03 · Platforms</div>
-        <div class="w-h" style="font-size:22px">Platform<br>Mastery</div>
-      </div>
-      <div class="plt-tab on" onclick="switchPlt('ghl',this)"><div class="ptab-bar"></div><div><div class="ptab-tag">Agency Platform</div><div class="ptab-n">GoHighLevel</div></div></div>
-      <div class="plt-tab" onclick="switchPlt('hs',this)"><div class="ptab-bar"></div><div><div class="ptab-tag">Enterprise CRM</div><div class="ptab-n">HubSpot</div></div></div>
-      <div class="plt-tab" onclick="switchPlt('zo',this)"><div class="ptab-bar"></div><div><div class="ptab-tag">SMB Powerhouse</div><div class="ptab-n">Zoho CRM</div></div></div>
-    </div>
-    <div class="plt-body">
-      <div class="plt-pnl on" id="pp-ghl">
-        <div class="pp-logo" style="color:var(--orange)">GoHighLevel</div>
-        <div class="pp-sub">All-In-One Agency Platform</div>
-        <p class="pp-desc">The most powerful agency platform on the market. I build complete white-label ecosystems, sub-account structures, and automated workflows that scale to hundreds of clients without extra headcount.</p>
-        <div class="pp-feats">
-          <div class="pp-f">Sub-account architecture & white-labeling</div>
-          <div class="pp-f">AI-powered appointment booking</div>
-          <div class="pp-f">Reputation management automation</div>
-          <div class="pp-f">Funnel & website builder integration</div>
-          <div class="pp-f">SMS & email campaign sequences</div>
-          <div class="pp-f">Agency snapshot templates</div>
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <div class="si">
+    <div class="ab-grid">
+      <div>
+        <div class="ew rv">The Problem</div>
+        <h2 class="sh rv">Your Leads Aren't the<br>Issue. Your <em>Follow-up</em> Is.</h2>
+        <div class="ab-body">
+          <p class="rv">Most businesses are sitting on <strong>unconverted revenue</strong> right now. Not because of bad marketing or bad products — because of what happens after a lead arrives.</p>
+          <p class="rv">Manual follow-up is slow. Leads go cold in hours. Your team spends more time entering data than closing deals. <strong>A properly built CRM system eliminates every one of those problems.</strong></p>
+          <p class="rv">I've built and fixed CRM systems for 100+ businesses across the US, UK, Canada and Australia — real estate, SaaS, agencies, e-commerce, professional services. The fix is always the same: automate the repetitive, free the humans to close.</p>
         </div>
       </div>
-      <div class="plt-pnl" id="pp-hs">
-        <div class="pp-logo" style="color:#ff7a59">HubSpot</div>
-        <div class="pp-sub">Enterprise Revenue Operations</div>
-        <p class="pp-desc">Full Marketing, Sales, and Service Hub implementations. Deep experience in B2B, SaaS, and e-commerce with seamless cross-platform migrations from Salesforce and Zoho.</p>
-        <div class="pp-feats">
-          <div class="pp-f">Marketing Hub automation & lead scoring</div>
-          <div class="pp-f">Sales Hub pipeline & deal automation</div>
-          <div class="pp-f">Service Hub ticketing & SLA workflows</div>
-          <div class="pp-f">Custom reporting & revenue attribution</div>
-          <div class="pp-f">CRM migrations from Salesforce & Zoho</div>
-          <div class="pp-f">RevOps workflow architecture</div>
-        </div>
-      </div>
-      <div class="plt-pnl" id="pp-zo">
-        <div class="pp-logo" style="color:#a78bfa">Zoho CRM</div>
-        <div class="pp-sub">Full Ecosystem Integration</div>
-        <p class="pp-desc">Zoho One is a complete business suite — CRM, Books, Campaigns, Desk, Projects. I connect the entire ecosystem into a unified revenue engine tailored to your process.</p>
-        <div class="pp-feats">
-          <div class="pp-f">Zoho One full ecosystem setup</div>
-          <div class="pp-f">Blueprint & workflow automation</div>
-          <div class="pp-f">Zia AI predictions & intelligence</div>
-          <div class="pp-f">Custom modules & functions (Deluge)</div>
-          <div class="pp-f">Books + Campaigns + Desk integration</div>
-          <div class="pp-f">Third-party API & webhook connections</div>
-        </div>
+      <div class="ab-stats rv">
+        <div class="ab-stat"><div class="ab-n">8<small style="font-size:.4em;font-family:var(--ff-mono);color:var(--ink2)">min</small></div><div class="ab-t"><strong>Lead Response Time</strong><span>Down from 4+ hours. Automated sequences fire the instant a lead arrives.</span></div></div>
+        <div class="ab-stat"><div class="ab-n">50<small style="font-size:.4em;font-family:var(--ff-mono);color:var(--ink2)">%</small></div><div class="ab-t"><strong>Admin Work Eliminated</strong><span>Your team only touches deals that genuinely need a human.</span></div></div>
+        <div class="ab-stat"><div class="ab-n">14<small style="font-size:.4em;font-family:var(--ff-mono);color:var(--ink2)">d</small></div><div class="ab-t"><strong>Go-Live Guarantee</strong><span>Full system built, tested and team trained in under two weeks.</span></div></div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- WIN 4: RESULTS -->
-  <div class="win" id="w4">
-    <div class="w4-inner">
-      <div class="w4-top">
-        <h2 class="w4-h">Real Numbers.<br><span class="or">Real Impact.</span></h2>
-        <div class="w4-note">From actual projects — not projections</div>
+<!-- ALL CRMs -->
+<section id="crms" class="sec">
+  <div class="si">
+    <div class="crm-intro">
+      <div>
+        <div class="ew rv">Platform Expertise</div>
+        <h2 class="sh rv" style="margin-bottom:0">Every Major CRM.<br><em>One Architect.</em></h2>
       </div>
-      <div class="mets">
-        <div class="met"><div class="met-n">8<span class="met-u">min</span></div><div class="met-l">Lead Response</div><div class="met-d">Down from 4+ hours. Sequences that never miss a new lead.</div></div>
-        <div class="met"><div class="met-n">50<span class="met-u">%</span></div><div class="met-l">Admin Eliminated</div><div class="met-d">Half of all manual tasks automated — your team closes more.</div></div>
-        <div class="met"><div class="met-n">14<span class="met-u">d</span></div><div class="met-l">Delivery</div><div class="met-d">Full CRM live, tested, team trained in under 2 weeks. Every time.</div></div>
-        <div class="met"><div class="met-n">100<span class="met-u">+</span></div><div class="met-l">Projects Done</div><div class="met-d">Real estate, SaaS, e-commerce, agencies — globally.</div></div>
-      </div>
-      <div class="proc">
-        <div class="proc-c"><div class="proc-n">01</div><div class="proc-name">Free Audit</div><div class="proc-d">I map every leak in your CRM — no charge, no commitment.</div></div>
-        <div class="proc-c"><div class="proc-n">02</div><div class="proc-name">Blueprint</div><div class="proc-d">Custom architecture for your pipeline, team and revenue goals.</div></div>
-        <div class="proc-c"><div class="proc-n">03</div><div class="proc-name">Build & Automate</div><div class="proc-d">Full implementation — CRM, workflows, funnels — in 10–14 days.</div></div>
-        <div class="proc-c"><div class="proc-n">04</div><div class="proc-name">Train & Hand Over</div><div class="proc-d">SOPs, Loom videos, team training — you own it completely.</div></div>
-      </div>
+      <p class="crm-sub rv">I work across all major CRM platforms — not locked into one. Whatever you're on, I can build it, fix it, or migrate you to something better.</p>
+    </div>
+    <div class="crm-universe rv" id="crm-grid">
+      <!-- Populated by JS -->
     </div>
   </div>
+</section>
 
-  <!-- WIN 5: TESTIMONIALS -->
-  <div class="win" id="w5">
-    <div class="w5-head">
-      <div><div class="w-tag">05 · Client Stories</div><div class="w-h">What Clients Say</div></div>
-      <div class="w5-note">100+ projects · 5 countries</div>
-    </div>
-    <div class="tg">
-      <div class="tg-col">
-        <div class="testi"><div class="t-top"><div class="t-stars">★★★★★</div><div class="t-plat">GHL</div></div><p class="t-q">"Our GHL automation follows up every lead within minutes. We stopped losing deals to slow responses. Completely transformed our agency."</p><div class="t-who"><div class="t-av">JM</div><div><div class="t-name">James M.</div><div class="t-role">Agency Owner · USA</div></div></div></div>
-        <div class="testi"><div class="t-top"><div class="t-stars">★★★★★</div><div class="t-plat">ZOHO</div></div><p class="t-q">"Full Zoho One integration — CRM, Campaigns, Desk, Bookings all connected. Every department now works from one system. Best investment we made."</p><div class="t-who"><div class="t-av">RA</div><div><div class="t-name">Rajan A.</div><div class="t-role">Real Estate · Canada</div></div></div></div>
-      </div>
-      <div class="tg-col">
-        <div class="testi"><div class="t-top"><div class="t-stars">★★★★★</div><div class="t-plat">HUBSPOT</div></div><p class="t-q">"Ehtasham rebuilt our entire HubSpot pipeline in 12 days. Our sales team went from confused to loving the CRM. ROI visible in 30 days."</p><div class="t-who"><div class="t-av">SK</div><div><div class="t-name">Sarah K.</div><div class="t-role">SaaS Founder · UK</div></div></div></div>
-        <div class="testi"><div class="t-top"><div class="t-stars">★★★★★</div><div class="t-plat">GHL</div></div><p class="t-q">"Honest audit, clear plan, fast delivery. He told us what we needed — not what we wanted to hear. That integrity combined with skill is rare."</p><div class="t-who"><div class="t-av">LP</div><div><div class="t-name">Lisa P.</div><div class="t-role">E-Commerce · Australia</div></div></div></div>
-      </div>
+<!-- SERVICES -->
+<section id="services" class="sec">
+  <div class="si">
+    <div class="ew rv">Services</div>
+    <h2 class="sh rv">Everything Your<br>Revenue System <em>Needs.</em></h2>
+    <div class="svc-grid">
+      <div class="svc rv"><div class="svc-n">01</div><svg class="svc-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M17.5 14v6M14.5 17h6"/></svg><div class="svc-t">CRM Architecture & Pipeline</div><p class="svc-d">Custom pipeline design, deal scoring, team permissions and automated handoffs built for how your business actually operates.</p><div class="svc-tags"><span class="svc-tag">Pipeline</span><span class="svc-tag">Deal Scoring</span><span class="svc-tag">Permissions</span></div></div>
+      <div class="svc rv"><div class="svc-n">02</div><svg class="svc-icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><div class="svc-t">Workflow Automation</div><p class="svc-d">Trigger-based sequences that handle follow-up, routing and task creation — 24/7, with zero manual input from your team.</p><div class="svc-tags"><span class="svc-tag">Triggers</span><span class="svc-tag">Sequences</span><span class="svc-tag">Routing</span></div></div>
+      <div class="svc rv"><div class="svc-n">03</div><svg class="svc-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><div class="svc-t">Third-Party Integrations</div><p class="svc-d">Your CRM connected to every tool in your stack — Zapier, Make, Stripe, Calendly, Twilio, Slack — seamlessly and reliably.</p><div class="svc-tags"><span class="svc-tag">Zapier</span><span class="svc-tag">Make</span><span class="svc-tag">API</span></div></div>
+      <div class="svc rv"><div class="svc-n">04</div><svg class="svc-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><div class="svc-t">Email & SMS Sequences</div><p class="svc-d">Drip campaigns and re-engagement sequences that nurture leads over weeks and months while you focus on closing.</p><div class="svc-tags"><span class="svc-tag">Email</span><span class="svc-tag">SMS</span><span class="svc-tag">Re-engagement</span></div></div>
+      <div class="svc rv"><div class="svc-n">05</div><svg class="svc-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><div class="svc-t">Funnels & Landing Pages</div><p class="svc-d">Conversion-optimised landing pages and booking systems wired directly into your CRM — no lead slips through.</p><div class="svc-tags"><span class="svc-tag">Funnels</span><span class="svc-tag">Booking</span><span class="svc-tag">Lead Capture</span></div></div>
+      <div class="svc rv"><div class="svc-n">06</div><svg class="svc-icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><div class="svc-t">Reporting & Dashboards</div><p class="svc-d">Real-time visibility into pipeline health, conversion rates and revenue attribution — the numbers that drive decisions.</p><div class="svc-tags"><span class="svc-tag">Analytics</span><span class="svc-tag">Attribution</span><span class="svc-tag">Real-time</span></div></div>
     </div>
   </div>
+</section>
 
-  <!-- WIN 6: CONTACT -->
-  <div class="win" id="w6">
-    <div class="w6-l">
-      <div class="w-tag">06 · Get Started</div>
-      <div class="w-h" style="margin-bottom:12px">Let's Fix<br>Your CRM.</div>
-      <p class="w6-desc">I'll audit your current setup for free and tell you exactly where leads are leaking. No pitch. No upsell. Just honest answers.</p>
-      <div class="w6-links">
-        <a class="w6-lnk" href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20want%20a%20free%20CRM%20audit" target="_blank"><div class="w6-lic">📱</div>WhatsApp · +92 315 868 0001</a>
-        <a class="w6-lnk" href="https://www.upwork.com" target="_blank"><div class="w6-lic">↗</div>Upwork Profile</a>
-        <a class="w6-lnk" href="https://www.linkedin.com/in/ehtasham-ali-crm" target="_blank"><div class="w6-lic">in</div>LinkedIn · Ehtasham Ali S.</a>
-      </div>
-    </div>
-    <div class="w6-r">
-      <div class="w-tag" style="margin-bottom:16px">Send a Message</div>
-      <form class="cf" onsubmit="submitCF(event)">
-        <input type="hidden" name="_subject" value="New CRM Audit Request — EAS">
-        <div class="cf-row">
-          <input name="name" placeholder="Your name" required>
-          <input name="email" type="email" placeholder="Work email" required>
-        </div>
-        <select name="platform">
-          <option value="">Which CRM are you using?</option>
-          <option>GoHighLevel (GHL)</option>
-          <option>HubSpot</option>
-          <option>Zoho CRM</option>
-          <option>No CRM yet</option>
-          <option>Multiple platforms</option>
-        </select>
-        <textarea name="message" placeholder="What's broken, what you need, or just type 'audit'..."></textarea>
-        <button type="submit" class="cf-sub" id="cf-btn">Send Message →</button>
-        <div class="cf-or"><div class="cf-orl"></div><div class="cf-ort">or</div><div class="cf-orl"></div></div>
-        <a class="cf-wa" href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20want%20a%20free%20CRM%20audit" target="_blank">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Chat on WhatsApp
-        </a>
-      </form>
+<!-- RESULTS -->
+<section id="results" class="sec">
+  <canvas id="results-canvas"></canvas>
+  <div class="si" style="position:relative;z-index:1">
+    <div class="ew rv">Results</div>
+    <h2 class="sh rv">Real Numbers,<br>Real <em>Projects.</em></h2>
+    <div class="metrics">
+      <div class="mc rv"><div class="mc-n" id="r1">0<sub>min</sub></div><div class="mc-l">Lead Response</div><div class="mc-d">Down from 4+ hours. Fires the moment a lead arrives.</div></div>
+      <div class="mc rv"><div class="mc-n" id="r2">0<sub>%</sub></div><div class="mc-l">Admin Eliminated</div><div class="mc-d">Your team only touches what needs a human.</div></div>
+      <div class="mc rv"><div class="mc-n" id="r3">0<sub>d</sub></div><div class="mc-l">Delivery SLA</div><div class="mc-d">Full system live, tested, team trained.</div></div>
+      <div class="mc rv"><div class="mc-n" id="r4">0<sub>+</sub></div><div class="mc-l">Projects Done</div><div class="mc-d">US · UK · Canada · Australia.</div></div>
     </div>
   </div>
+</section>
 
-</div><!-- /main -->
+<!-- PROCESS -->
+<section id="process" class="sec">
+  <div class="si">
+    <div class="ew rv">Process</div>
+    <h2 class="sh rv">Audit to Live<br>in <em>14 Days.</em></h2>
+    <div class="proc-grid">
+      <div class="pi rv"><div class="pi-c">01</div><div class="pi-t">Free Audit</div><p class="pi-d">I review your setup, map every revenue leak and give you an honest assessment — no charge, no obligation.</p><span class="pi-tag">Day 1</span></div>
+      <div class="pi rv"><div class="pi-c">02</div><div class="pi-t">Blueprint</div><p class="pi-d">Custom architecture around your pipeline and goals. You approve everything before we build a single thing.</p><span class="pi-tag">Day 2–3</span></div>
+      <div class="pi rv"><div class="pi-c">03</div><div class="pi-t">Build & Automate</div><p class="pi-d">Full implementation — CRM, automations, integrations, funnels. Built properly, tested thoroughly.</p><span class="pi-tag">Day 4–13</span></div>
+      <div class="pi rv"><div class="pi-c">04</div><div class="pi-t">Train & Hand Over</div><p class="pi-d">Video walkthroughs, SOPs and live training. You own the system completely and know how to use it.</p><span class="pi-tag">Day 14</span></div>
+    </div>
+  </div>
+</section>
 
-<!-- DOCK -->
-<div id="dock">
-  <div class="di on" id="di0" onclick="openWin(0)"><div class="di-ico">🏠</div><div class="di-lbl">Home</div><div class="di-dot"></div></div>
-  <div class="di" id="di1" onclick="openWin(1)"><div class="di-ico">⚠️</div><div class="di-lbl">Problem</div><div class="di-dot"></div></div>
-  <div class="di" id="di2" onclick="openWin(2)"><div class="di-ico">⚙️</div><div class="di-lbl">Services</div><div class="di-dot"></div></div>
-  <div class="d-sep"></div>
-  <div class="di" id="di3" onclick="openWin(3)"><div class="di-ico">🔧</div><div class="di-lbl">Platforms</div><div class="di-dot"></div></div>
-  <div class="di" id="di4" onclick="openWin(4)"><div class="di-ico">📈</div><div class="di-lbl">Results</div><div class="di-dot"></div></div>
-  <div class="d-sep"></div>
-  <div class="di" id="di5" onclick="openWin(5)"><div class="di-ico">💬</div><div class="di-lbl">Clients</div><div class="di-dot"></div></div>
-  <div class="di" id="di6" onclick="openWin(6)"><div class="di-ico">📩</div><div class="di-lbl">Contact</div><div class="di-dot"></div></div>
+<!-- TESTIMONIALS -->
+<section id="testi" class="sec">
+  <div class="si">
+    <div class="ew rv">Client Feedback</div>
+    <h2 class="sh rv">What Clients Say<br>After <em>Going Live.</em></h2>
+    <div class="tc-grid">
+      <div class="tc rv"><span class="tc-plat">GoHighLevel</span><div class="tc-stars"><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span></div><p class="tc-q">"Our GHL automation follows up every lead within minutes. We stopped losing deals to slow response times. The system handles everything — our team just closes."</p><div class="tc-who"><div class="tc-av">JM</div><div><div class="tc-name">James M.</div><div class="tc-role">Agency Owner · United States</div></div></div></div>
+      <div class="tc rv"><span class="tc-plat">HubSpot</span><div class="tc-stars"><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span></div><p class="tc-q">"Rebuilt our entire HubSpot pipeline in 12 days. Sales team went from dreading the CRM to actually using it. ROI visible within 30 days. Should've done this years ago."</p><div class="tc-who"><div class="tc-av">SK</div><div><div class="tc-name">Sarah K.</div><div class="tc-role">SaaS Founder · United Kingdom</div></div></div></div>
+      <div class="tc rv"><span class="tc-plat">Zoho CRM</span><div class="tc-stars"><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span></div><p class="tc-q">"Full Zoho One integration — CRM, Campaigns, Desk, Bookings all connected. Every department works from one system. Best investment we made this year."</p><div class="tc-who"><div class="tc-av">RA</div><div><div class="tc-name">Rajan A.</div><div class="tc-role">Real Estate Director · Canada</div></div></div></div>
+      <div class="tc rv"><span class="tc-plat">Pipedrive</span><div class="tc-stars"><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span></div><p class="tc-q">"Honest audit, clear plan, fast delivery. He told us what we needed — not what made the biggest invoice. That kind of integrity is genuinely rare to find."</p><div class="tc-who"><div class="tc-av">LP</div><div><div class="tc-name">Lisa P.</div><div class="tc-role">E-Commerce Founder · Australia</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div id="cta">
+  <div class="cta-t"><h2>Ready to Stop Losing Deals?</h2><p>Free audit — I'll map every revenue leak, no strings attached.</p></div>
+  <div class="cta-acts">
+    <a class="btn-w" href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20want%20a%20free%20CRM%20audit" target="_blank">Get Free Audit →</a>
+    <a class="btn-wo" href="#contact">Send a Message</a>
+  </div>
 </div>
 
-<!-- WA FLOAT -->
-<a id="wa-float" href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20need%20a%20CRM%20audit" target="_blank">
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<!-- CONTACT -->
+<section id="contact" class="sec">
+  <div class="si">
+    <div class="ct-grid">
+      <div class="ct-l">
+        <div class="ew rv">Contact</div>
+        <h2 class="sh rv">Let's Fix<br>Your <em>CRM.</em></h2>
+        <p class="rv">Free audit, honest assessment, zero pressure. I've fixed this problem 100+ times — I'll tell you exactly what's broken and exactly how to fix it.</p>
+        <div class="ct-links rv">
+          <a class="ct-lnk" href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20want%20a%20free%20CRM%20audit" target="_blank"><div class="ct-lnk-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.5" stroke-width="2.5"/></svg></div>WhatsApp · +92 315 868 0001</a>
+          <a class="ct-lnk" href="https://www.upwork.com" target="_blank"><div class="ct-lnk-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>Upwork Profile</a>
+          <a class="ct-lnk" href="https://www.linkedin.com/in/ehtasham-ali-crm" target="_blank"><div class="ct-lnk-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>LinkedIn · Ehtasham Ali S.</a>
+        </div>
+      </div>
+      <div class="cf-wrap rv">
+        <div class="cf-title">Send a Message</div>
+        <form onsubmit="doForm(event)">
+          <div class="f-row">
+            <div class="fg" style="margin-bottom:0"><label class="fl">Name</label><input class="fi" name="name" placeholder="Full name" required></div>
+            <div class="fg" style="margin-bottom:0"><label class="fl">Email</label><input class="fi" name="email" type="email" placeholder="Work email" required></div>
+          </div>
+          <div class="fg"><label class="fl">CRM Platform</label><select class="fsel" name="platform"><option value="">Select platform</option><option>GoHighLevel</option><option>HubSpot</option><option>Zoho CRM</option><option>Salesforce</option><option>Pipedrive</option><option>ActiveCampaign</option><option>Other / No CRM yet</option></select></div>
+          <div class="fg"><label class="fl">Message</label><textarea class="fta" name="message" placeholder="Describe your situation, or just type 'audit'…"></textarea></div>
+          <button type="submit" class="fsub" id="fsub">Send Message</button>
+          <a class="fwa" href="https://wa.me/923158680001?text=Hi%20Ehtasham%2C%20I%20want%20a%20free%20CRM%20audit" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Or chat on WhatsApp
+          </a>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCANLINE TEXT FOOTER -->
+<div id="scanline-footer">
+  <div class="sl-glow" id="sl-glow"></div>
+  <div class="sl-wrap">
+    <div class="sl-line">
+      <span class="sl-text">EHTASHAM</span>
+    </div>
+  </div>
+  <div class="sl-sub">
+    <span>© 2025 Ehtasham Ali S.</span>
+    <span>GHL &nbsp;·&nbsp; HubSpot &nbsp;·&nbsp; Zoho &nbsp;·&nbsp; All CRMs</span>
+    <span>Available for Projects &nbsp;●</span>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-l">EAS<b>.</b></div>
+  <div class="ft-c">© 2025 Ehtasham Ali — CRM Systems Architect</div>
+  <div class="ft-s"><div class="ft-sd"></div>Available for Projects</div>
+</footer>
+
+<a id="wa" href="https://wa.me/923158680001?text=Hi%20Ehtasham" target="_blank">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   WhatsApp
 </a>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
 <script>
-/* ══ THEME ════════════════════════════════════════════════════ */
-let isDark=true;
-function toggleTheme(){
-  isDark=!isDark;
-  document.documentElement.setAttribute('data-theme',isDark?'dark':'light');
-  document.getElementById('theme-btn').textContent=isDark?'☀ Light':'🌙 Dark';
-}
+gsap.registerPlugin(ScrollTrigger);
 
-/* ══ CURSOR ══════════════════════════════════════════════════ */
-const xh=document.getElementById('xh'),xhD=document.getElementById('xh-dot'),xhR=document.getElementById('xh-ring');
-let CX=innerWidth/2,CY=innerHeight/2,RX=CX,RY=CY;
-document.addEventListener('mousemove',e=>{
-  CX=e.clientX;CY=e.clientY;
-  if(xh){xh.style.left=CX+'px';xh.style.top=CY+'px';}
-  if(xhD){xhD.style.left=CX+'px';xhD.style.top=CY+'px';}
+
+/* ══════════════════════════════════════════
+   THREE.JS HERO BG — flowing data lines
+══════════════════════════════════════════ */
+(function(){
+  const canvas=document.getElementById('hero-bg-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setClearColor(0,0);
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,1000);
+  cam.position.z=60;
+
+  const COLS=20,ROWS=12,SP=6;
+  const pts=[];
+  const geo=new THREE.SphereGeometry(.1,4,4);
+  for(let r=0;r<ROWS;r++){
+    for(let c=0;c<COLS;c++){
+      const x=(c-COLS/2)*SP,y=(r-ROWS/2)*SP*.7;
+      const fade=c<COLS*.6?1:Math.max(0,1-(c-COLS*.6)/(COLS*.4));
+      if(fade<.05)continue;
+      const accent=Math.random()<.05;
+      const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({
+        color:accent?0x1A56DB:0xD4D3CF,transparent:true,opacity:accent?.8*fade:.4*fade
+      }));
+      m.position.set(x,y,0);
+      m.userData={phase:Math.random()*Math.PI*2,spd:.4+Math.random()*.6,amp:.8+Math.random()*.6,accent};
+      scene.add(m);pts.push(m);
+    }
+  }
+  function resize(){renderer.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix()}
+  resize();window.addEventListener('resize',resize);
+  let mmx=0,mmy=0;
+  window.addEventListener('mousemove',e=>{mmx=(e.clientX/innerWidth-.5);mmy=-(e.clientY/innerHeight-.5)});
+  let t=0;
+  (function tick(){requestAnimationFrame(tick);t+=.01;
+    pts.forEach(p=>{
+      const u=p.userData;
+      p.position.y=u.oy===undefined?(u.oy=p.position.y):u.oy;
+      p.position.y=u.oy+Math.sin(t*u.spd+u.phase)*u.amp*.5+mmy*2;
+      p.position.x+=mmx*.01;
+      if(u.accent){const s=1+Math.sin(t*u.spd*2+u.phase)*.4;p.scale.setScalar(s)}
+    });
+    renderer.render(scene,cam);
+  })();
+})();
+
+/* ══════════════════════════════════════════
+   CRM GRID — populate
+══════════════════════════════════════════ */
+const CRMS=[
+  {name:'GoHighLevel',cat:'Agency/SMB Platform',logo:'GHL',exp:95,featured:true,spec:'PRIMARY'},
+  {name:'HubSpot',cat:'Enterprise RevOps',logo:'HS',exp:92,featured:true,spec:'PRIMARY'},
+  {name:'Zoho CRM',cat:'Full Ecosystem',logo:'ZO',exp:90,featured:true,spec:'PRIMARY'},
+  {name:'Salesforce',cat:'Enterprise CRM',logo:'SF',exp:75,featured:false,spec:''},
+  {name:'Pipedrive',cat:'Sales CRM',logo:'PD',exp:85,featured:false,spec:''},
+  {name:'ActiveCampaign',cat:'Marketing + CRM',logo:'AC',exp:80,featured:false,spec:''},
+  {name:'Keap',cat:'SMB Automation',logo:'KP',exp:70,featured:false,spec:''},
+  {name:'Monday CRM',cat:'Work OS + CRM',logo:'MN',exp:72,featured:false,spec:''},
+  {name:'Freshsales',cat:'AI-powered CRM',logo:'FS',exp:68,featured:false,spec:''},
+  {name:'Close.io',cat:'Inside Sales CRM',logo:'CL',exp:74,featured:false,spec:''},
+  {name:'Nutshell',cat:'B2B CRM',logo:'NT',exp:65,featured:false,spec:''},
+  {name:'SugarCRM',cat:'Enterprise CRM',logo:'SU',exp:60,featured:false,spec:''},
+];
+const grid=document.getElementById('crm-grid');
+CRMS.forEach(crm=>{
+  const d=document.createElement('div');
+  d.className='crm-card'+(crm.featured?' featured':'');
+  d.innerHTML=`<div class="crm-logo" style="font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.04em;margin-bottom:10px">${crm.logo}</div><div class="crm-name">${crm.name}</div><div class="crm-cat">${crm.cat}</div><div class="crm-bar"><div class="crm-bar-fill" data-w="${crm.exp/100}"></div></div><div class="crm-exp">${crm.exp}% proficiency</div>${crm.spec?`<div class="crm-spec">${crm.spec}</div>`:''}`;
+  grid.appendChild(d);
 });
-(function aC(){RX+=(CX-RX)*.1;RY+=(CY-RY)*.1;if(xhR){xhR.style.left=RX+'px';xhR.style.top=RY+'px';}requestAnimationFrame(aC)})();
 
-/* ══ THREE.JS ════════════════════════════════════════════════ */
-const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('three-cv'),antialias:true,alpha:true});
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-renderer.setSize(innerWidth,innerHeight);
-renderer.setClearColor(0x0a0805,1);
-const scene=new THREE.Scene();
-scene.fog=new THREE.FogExp2(0x0a0805,.012);
-const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,300);
-cam.position.set(0,0,8);
-scene.add(new THREE.AmbientLight(0x1a1208,4));
-const pL=new THREE.PointLight(0xFF5500,8,40);pL.position.set(4,3,5);scene.add(pL);
-const pL2=new THREE.PointLight(0xffaa00,3,25);pL2.position.set(-5,-2,3);scene.add(pL2);
-// Stars
-(()=>{const g=new THREE.BufferGeometry(),n=7000,p=new Float32Array(n*3),c=new Float32Array(n*3);for(let i=0;i<n;i++){p[i*3]=(Math.random()-.5)*400;p[i*3+1]=(Math.random()-.5)*400;p[i*3+2]=(Math.random()-.5)*400;const w=Math.random()>.7;c[i*3]=w?.9:.8;c[i*3+1]=w?.55:.78;c[i*3+2]=w?.15:.78;}g.setAttribute('position',new THREE.BufferAttribute(p,3));g.setAttribute('color',new THREE.BufferAttribute(c,3));scene.add(new THREE.Points(g,new THREE.PointsMaterial({size:.055,vertexColors:true,transparent:true,opacity:.65})))})();
-// Nebula
-(()=>{const g=new THREE.BufferGeometry(),n=500,p=new Float32Array(n*3),c=new Float32Array(n*3);for(let i=0;i<n;i++){p[i*3]=(Math.random()-.5)*30;p[i*3+1]=(Math.random()-.5)*20;p[i*3+2]=(Math.random()-.5)*18-2;const col=new THREE.Color().setHSL(.07+Math.random()*.05,.8,.5+Math.random()*.3);c[i*3]=col.r;c[i*3+1]=col.g;c[i*3+2]=col.b;}g.setAttribute('position',new THREE.BufferAttribute(p,3));g.setAttribute('color',new THREE.BufferAttribute(c,3));const m=new THREE.Points(g,new THREE.PointsMaterial({size:.09,vertexColors:true,transparent:true,opacity:.32}));scene.add(m);window._neb=m})();
-// Node
-const nodeG=new THREE.Group();const mob=()=>innerWidth<=768;nodeG.position.set(mob()?0:3,0,0);scene.add(nodeG);
-const WIN_SH=['knot','dodecahedron','octahedron','torus','icosahedron','sphere','knot'];
-const WIN_CL=[0xFF5500,0xff3300,0xFF5500,0xffaa00,0xFF6600,0xff8800,0xFF5500];
-const curC=new THREE.Color(0xFF5500),tgtC=new THREE.Color(0xFF5500);
-function mkGeo(sh){switch(sh){case 'knot':return new THREE.TorusKnotGeometry(1.3,.35,160,18,2,3);case 'dodecahedron':return new THREE.DodecahedronGeometry(1.5,0);case 'octahedron':return new THREE.OctahedronGeometry(1.55,0);case 'torus':return new THREE.TorusGeometry(1.2,.4,18,80);case 'icosahedron':return new THREE.IcosahedronGeometry(1.5,1);default:return new THREE.IcosahedronGeometry(1.4,2)}}
-function buildNode(sh,hex){
-  while(nodeG.children.length)nodeG.remove(nodeG.children[0]);
-  const col=new THREE.Color(hex),geo=mkGeo(sh);
-  nodeG.add(new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:col,wireframe:true,transparent:true,opacity:.18})));
-  nodeG.add(new THREE.Mesh(geo.clone(),new THREE.MeshStandardMaterial({color:col,transparent:true,opacity:.05,roughness:.3,metalness:.9})));
-  const rA=new THREE.Mesh(new THREE.TorusGeometry(2.4,.007,8,120),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.1}));
-  rA.rotation.x=Math.PI/2.4;nodeG.add(rA);
-  const rB=rA.clone();rB.rotation.set(Math.PI/4,Math.PI/6,0);rB.material=rA.material.clone();rB.material.opacity=.06;nodeG.add(rB);
-  const hG=new THREE.BufferGeometry(),hN=150,hp=new Float32Array(hN*3);
-  for(let i=0;i<hN;i++){const t=Math.random()*Math.PI*2,p=Math.random()*Math.PI,r=2+Math.random()*1.4;hp[i*3]=r*Math.sin(p)*Math.cos(t);hp[i*3+1]=r*Math.sin(p)*Math.sin(t);hp[i*3+2]=r*Math.cos(p)}
-  hG.setAttribute('position',new THREE.BufferAttribute(hp,3));
-  nodeG.add(new THREE.Points(hG,new THREE.PointsMaterial({color:col,size:.06,transparent:true,opacity:.32})));
-  tgtC.set(col);
-}
-buildNode('knot',0xFF5500);
-const clock=new THREE.Clock();let cLX=0,cLY=0,mX=.5,mY=.5;
-document.addEventListener('mousemove',e=>{mX=e.clientX/innerWidth;mY=e.clientY/innerHeight;});
-function render(){
-  requestAnimationFrame(render);const t=clock.getElapsedTime();
-  if(!mob()){cLX+=(((mX-.5)*1.4)-cLX)*.04;cLY+=((-(mY-.5)*.9)-cLY)*.04;cam.position.x=cLX;cam.position.y=cLY;}
-  cam.lookAt(nodeG.position);
-  nodeG.rotation.x=t*.14;nodeG.rotation.y=t*.19;
-  const b=1+Math.sin(t*.9)*.03;nodeG.scale.set(b,b,b);
-  if(window._neb){window._neb.rotation.y=t*.009;window._neb.rotation.x=t*.004;}
-  curC.lerp(tgtC,.04);pL.color.copy(curC);
-  pL.position.set(4+Math.sin(t*.5)*2,3+Math.cos(t*.4)*1.5,5);
-  renderer.render(scene,cam);
-}
-render();
+/* ══════════════════════════════════════════
+   DIAGNOSTIC ENGINE
+══════════════════════════════════════════ */
+const answers = {};
+const STEPS   = 6;
 
-/* ══ GRID CANVAS ══════════════════════════════════════════════ */
-const gc=document.getElementById('grid-cv');const gctx=gc.getContext('2d');
-function resizeGC(){gc.width=innerWidth;gc.height=innerHeight}resizeGC();
-const GN=[];for(let i=0;i<18;i++)GN.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28});
-function drawGC(){
-  gc.width=gc.width;
-  const dark=document.documentElement.getAttribute('data-theme')==='dark';
-  const dotC=dark?'rgba(245,240,232,.1)':'rgba(10,8,5,.1)';
-  const lineC=dark?'rgba(255,85,0,.09)':'rgba(255,85,0,.12)';
-  const nodeC=dark?'rgba(255,85,0,.18)':'rgba(255,85,0,.22)';
-  gctx.fillStyle=dotC;
-  for(let x=0;x<innerWidth;x+=44){for(let y=0;y<innerHeight;y+=44){gctx.beginPath();gctx.arc(x,y,.7,0,Math.PI*2);gctx.fill()}}
-  GN.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>innerWidth)n.vx*=-1;if(n.y<0||n.y>innerHeight)n.vy*=-1;});
-  GN.forEach((a,i)=>{GN.slice(i+1).forEach(b=>{const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<130){gctx.beginPath();gctx.moveTo(a.x,a.y);gctx.lineTo(b.x,b.y);gctx.strokeStyle=`rgba(255,85,0,${(1-d/130)*(dark?.08:.11)})`;gctx.lineWidth=.7;gctx.stroke();}});gctx.beginPath();gctx.arc(a.x,a.y,1.8,0,Math.PI*2);gctx.fillStyle=nodeC;gctx.fill();});
-  requestAnimationFrame(drawGC);
-}
-drawGC();
-
-/* ══ CLOCK ════════════════════════════════════════════════════ */
-function tick(){const n=new Date(),p=x=>String(x).padStart(2,'0');document.getElementById('sb-clock').textContent=`${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}`}
-setInterval(tick,1000);tick();
-
-/* ══ BOOT ════════════════════════════════════════════════════ */
-const bLines=Array.from({length:7},(_,i)=>document.getElementById('bl'+i)).filter(Boolean);
-const bBar=document.getElementById('boot-bar'),bPct=document.getElementById('boot-pct');
-let bp=0;
-function bootTick(){
-  bp+=Math.random()*13+6;if(bp>100)bp=100;
-  bBar.style.width=bp+'%';bPct.textContent=Math.floor(bp)+'%';
-  const idx=Math.floor(bp/15);if(idx<bLines.length&&bLines[idx]){bLines[idx].style.opacity='1';bLines[idx].style.transform='none';bLines[idx].style.transition='opacity .3s,transform .3s';}
-  if(bp>=100){setTimeout(()=>{const bt=document.getElementById('boot');bt.style.transition='opacity .65s';bt.style.opacity='0';setTimeout(()=>{bt.style.display='none';document.querySelectorAll('.pr-bar').forEach(b=>{setTimeout(()=>{b.style.width=b.dataset.w+'%';},200);});},660);},500);}
-  else setTimeout(bootTick,Math.random()*100+50);
-}
-setTimeout(bootTick,500);
-
-/* ══ WINDOW SYSTEM ════════════════════════════════════════════ */
-let CW=0;
-function openWin(idx){
-  if(idx===CW)return;
-  const wins=document.querySelectorAll('.win');
-  const old=wins[CW];old.classList.remove('active');old.classList.add('closing');
-  setTimeout(()=>{old.classList.remove('closing');old.style.display='none';},200);
-  setTimeout(()=>{
-    CW=idx;wins[idx].style.display='';wins[idx].classList.add('active');
-    document.querySelectorAll('.di').forEach((d,i)=>d.classList.toggle('on',i===idx));
-    buildNode(WIN_SH[idx],WIN_CL[idx]);nodeG.position.set(mob()?0:3,0,0);
-    if(idx===0){document.querySelectorAll('.pr-bar').forEach(b=>{b.style.width='0%';setTimeout(()=>{b.style.width=b.dataset.w+'%';},100);});}
-  },130);
-}
-
-/* ══ PLATFORM SWITCHER ════════════════════════════════════════ */
-window.switchPlt=function(id,tab){
-  document.querySelectorAll('.plt-tab').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.plt-pnl').forEach(p=>p.classList.remove('on'));
-  tab.classList.add('on');document.getElementById('pp-'+id).classList.add('on');
+window.pick = function(q, val, el){
+  el.closest('.ds-opts').querySelectorAll('.ds-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[q] = val;
+  setTimeout(() => advanceStep(q), 400);
 };
 
-/* ══ KEYBOARD + SWIPE ═════════════════════════════════════════ */
-window.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight'||e.key==='ArrowDown')openWin(Math.min(CW+1,6));
-  if(e.key==='ArrowLeft'||e.key==='ArrowUp')openWin(Math.max(CW-1,0));
-  const k={'1':0,'2':1,'3':2,'4':3,'5':4,'6':5,'7':6};if(k[e.key]!==undefined)openWin(k[e.key]);
-});
-let swX=0;
-window.addEventListener('touchstart',e=>{swX=e.touches[0].clientX;},{passive:true});
-window.addEventListener('touchend',e=>{const dx=swX-e.changedTouches[0].clientX;if(Math.abs(dx)>55){if(dx>0)openWin(Math.min(CW+1,6));else openWin(Math.max(CW-1,0));}},{passive:true});
-
-window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();resizeGC();nodeG.position.set(mob()?0:3,0,0);});
-
-/* ══ FORM ═════════════════════════════════════════════════════ */
-async function submitCF(e){
-  e.preventDefault();const form=e.target,btn=document.getElementById('cf-btn');
-  const name=form.querySelector('[name="name"]').value.trim();
-  const email=form.querySelector('[name="email"]').value.trim();
-  if(!name||!email){btn.textContent='Fill name & email';btn.style.background='#dc2626';setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';},3000);return;}
-  btn.textContent='Sending...';btn.style.opacity='.6';btn.disabled=true;
-  try{
-    const res=await fetch('https://formspree.io/f/mvzypzak',{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
-    const j=await res.json();if(res.ok){btn.textContent='✓ Sent!';btn.style.background='#16a34a';btn.style.opacity='1';form.reset();setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';btn.disabled=false;},5000);}
-    else{btn.textContent='Error — try WhatsApp';btn.style.background='#dc2626';btn.style.opacity='1';btn.disabled=false;setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';},4000);}
-  }catch{btn.textContent='Network error — try WhatsApp';btn.style.background='#dc2626';btn.style.opacity='1';btn.disabled=false;setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';},4000);}
+function advanceStep(from){
+  document.getElementById('ds'+from).classList.remove('active');
+  const next = from + 1;
+  document.getElementById('prog-fill').style.width = (from / STEPS * 100) + '%';
+  document.getElementById('prog-txt').textContent = 'Question ' + Math.min(next, STEPS) + ' of ' + STEPS;
+  if(next <= STEPS){
+    document.getElementById('ds'+next).classList.add('active');
+  } else {
+    // Show analysis screen
+    document.getElementById('prog-fill').style.width = '100%';
+    document.getElementById('prog-txt').textContent = 'Analysing…';
+    document.getElementById('ds7').classList.add('active');
+    runAnalysisAnimation();
+  }
 }
+
+function runAnalysisAnimation(){
+  const checks = [
+    'Checking lead response time benchmarks…',
+    'Scoring pipeline stage conversion rates…',
+    'Auditing automation coverage gaps…',
+    'Calculating monthly revenue at risk…',
+    'Mapping CRM maturity level…',
+    'Identifying highest-ROI quick wins…',
+    'Generating personalised fix roadmap…',
+    'Estimating time-to-value…',
+  ];
+  const container = document.getElementById('gen-checks');
+  let i = 0;
+  const iv = setInterval(() => {
+    if(i >= checks.length){ clearInterval(iv); setTimeout(buildBlueprint, 600); return; }
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:8px;font-size:11px;font-family:var(--ff-mono);color:var(--ink2);opacity:0;transition:opacity .3s';
+    row.innerHTML = '<span style="color:var(--green);font-size:12px">✓</span>' + checks[i];
+    container.appendChild(row);
+    setTimeout(() => row.style.opacity = '1', 30);
+    document.getElementById('gen-txt').textContent = checks[i];
+    i++;
+  }, 340);
+}
+
+/* ══════════════════════════════════════════
+   EXPERT CRM DIAGNOSTIC ENGINE v2
+   Industry-specific 6-dimension audit:
+   Speed · Automation · Visibility · Data · Attribution · Adoption
+══════════════════════════════════════════ */
+
+const INDUSTRIES = {
+  agency:    { label:'Marketing / Digital Agency',   avgDealSize:3500,  closeCycle:'14–21 days', topCRM:'GoHighLevel',  altCRM:'HubSpot', roiMultiplier:3.2,
+    competitorBench:'Top-performing agencies respond in under 4 minutes and close 2.4× more deals than the industry average.',
+    automationGaps:['Lead source attribution tracking','Discovery-call no-show recovery','Proposal follow-up (days 2–5)','Win/loss reason tagging','Referral request post-delivery'] },
+  realestate:{ label:'Real Estate / Property',       avgDealSize:8500,  closeCycle:'30–90 days', topCRM:'GoHighLevel',  altCRM:'Follow Up Boss', roiMultiplier:4.1,
+    competitorBench:'Top-5% agents run 12-month drip campaigns. 72% of buyers work with the first agent who responds — no exceptions.',
+    automationGaps:['Portal lead instant SMS (<90s)','12-month long-term drip','Showing confirmation + reminders','Post-showing follow-up sequence','Referral + review request at close'] },
+  saas:      { label:'SaaS / Software',              avgDealSize:2200,  closeCycle:'21–45 days', topCRM:'HubSpot',      altCRM:'Pipedrive', roiMultiplier:2.8,
+    competitorBench:'Best-in-class SaaS teams run usage-triggered sequences. SDRs spend 4h/day on manual outreach that should be automated.',
+    automationGaps:['Trial activation email sequence','In-app behaviour triggers','Lead scoring by usage data','Post-demo follow-up (days 1–5)','Churn-risk re-engagement flow'] },
+  ecom:      { label:'E-Commerce / Retail',          avgDealSize:180,   closeCycle:'0–3 days',   topCRM:'Klaviyo + Zoho', altCRM:'ActiveCampaign', roiMultiplier:2.1,
+    competitorBench:'Top e-com brands run 5-step abandon sequences + post-purchase upsell. Repeat buyers spend 67% more — most brands ignore them.',
+    automationGaps:['Cart abandonment sequence (3-step)','Post-purchase upsell flow','Repeat-buyer VIP segmentation','Review request automation','Win-back for 90-day dormant customers'] },
+  finance:   { label:'Finance / Insurance / Legal',  avgDealSize:12000, closeCycle:'30–60 days', topCRM:'Zoho CRM',     altCRM:'HubSpot', roiMultiplier:5.8,
+    competitorBench:'Top finance firms use automated pre-qual questionnaires, compliance-aware workflows, and progress updates to eliminate ghosting.',
+    automationGaps:['Compliance pre-qualification flow','Pre-call preparation sequence','Application progress updates','Referral trigger at completion','Annual review reminder drip'] },
+  services:  { label:'Coaching / Consulting / Services', avgDealSize:4500, closeCycle:'7–21 days', topCRM:'GoHighLevel', altCRM:'Zoho CRM', roiMultiplier:3.6,
+    competitorBench:'Top coaches and consultants run instant-acknowledge + booking sequences. 78% of proposals lose from zero follow-up after day 2.',
+    automationGaps:['Instant-acknowledge + booking link','Pre-discovery-call prep email','Proposal follow-up (days 2, 5, 10)','Onboarding task automation','NPS + referral trigger at 30 days'] },
+};
+
+const CRM_MATURITY = {
+  none:    { score:8,  label:'Critical', color:'#DC2626', riskLevel:'SEVERE',
+    detail:'No CRM infrastructure — losing leads daily with zero visibility.',
+    insight:'Without a CRM, your business depends entirely on human memory. Every lead that arrives has a coin-flip chance of being followed up at all.',
+    dimScores:{ speed:5, automation:0, visibility:5, dataQuality:10, attribution:0, adoption:0 } },
+  unused:  { score:18, label:'Critical', color:'#DC2626', riskLevel:'SEVERE',
+    detail:'Investment wasted — team reverted to manual habits within 60 days.',
+    insight:'A CRM nobody uses is worse than no CRM — it creates false confidence while leads fall through. Root cause: poor initial setup, not team resistance.',
+    dimScores:{ speed:15, automation:5, visibility:20, dataQuality:25, attribution:10, adoption:15 } },
+  manual:  { score:32, label:'Poor',     color:'#D97706', riskLevel:'HIGH',
+    detail:'CRM is a contact database, not a revenue machine. Zero automation ROI.',
+    insight:'Manual CRM usage means every deal requires a human at every stage — inconsistency, delays, and a hard ceiling on scalable revenue.',
+    dimScores:{ speed:30, automation:10, visibility:40, dataQuality:45, attribution:20, adoption:55 } },
+  partial: { score:54, label:'Fair',     color:'#D97706', riskLevel:'MODERATE',
+    detail:'Partial automation with significant gaps — leaking mid-funnel revenue.',
+    insight:'Half-built automation is deceptive. It looks like it\'s working while leads quietly fall through the gaps between your sequences.',
+    dimScores:{ speed:55, automation:45, visibility:60, dataQuality:60, attribution:40, adoption:65 } },
+  broken:  { score:12, label:'Critical', color:'#DC2626', riskLevel:'SEVERE',
+    detail:'Data integrity issues — the sales team has lost trust in the system.',
+    insight:'A broken CRM causes active harm. Teams build shadow pipelines in spreadsheets and WhatsApp groups. Every day compounds the cleanup cost.',
+    dimScores:{ speed:20, automation:15, visibility:10, dataQuality:5, attribution:5, adoption:10 } },
+};
+
+const VOLUME = {
+  lt50:      { label:'< 50/mo',    mul:1.0, monthlyLeads:30,   tier:'Early Stage' },
+  '50to200': { label:'50–200/mo',  mul:1.8, monthlyLeads:120,  tier:'Growth Stage' },
+  '200to500':{ label:'200–500/mo', mul:2.8, monthlyLeads:350,  tier:'Scale Stage' },
+  '500plus': { label:'500–2k/mo',  mul:4.2, monthlyLeads:1100, tier:'Enterprise Track' },
+  '2kplus':  { label:'2,000+/mo',  mul:6.5, monthlyLeads:3500, tier:'High Volume' },
+};
+
+const BOTTLENECKS = {
+  speed:      { label:'Slow first response',
+    leakStage:'Lead Capture → First Contact',
+    stat:'78% of deals go to the first responder. Responding after 5 minutes drops conversion by 80%. After 1 hour, it drops 97%.',
+    rootCause:'No webhook from lead source to CRM, or CRM notifications going to email nobody monitors in real time.',
+    weeklyImpact:'Estimated 3–8 deals lost per week to faster competitors — deals you already paid to acquire.',
+    fix:'Automated multi-channel trigger (SMS + email + CRM task) firing within 90 seconds of lead submission. No human required.',
+    automationStack:['Instant SMS trigger (Twilio / GHL)','Personal-tone email fires simultaneously','CRM task assigned to sales rep','Slack/WhatsApp alert to team lead','4-hour follow-up if no reply'] },
+  nurture:    { label:'No follow-up after first touch',
+    leakStage:'First Contact → Nurture',
+    stat:'Only 2% of deals close on first contact. 80% need 5–12 touchpoints — most teams stop at 2 and mark the lead dead.',
+    rootCause:'No automated sequence configured, or sequences stop at 2–3 steps because they were built reactively, not strategically.',
+    weeklyImpact:'Dead leads in your CRM right now contain 40–60% of your recoverable revenue. They just need consistent, automated contact.',
+    fix:'12-step, 90-day multi-channel nurture sequence — email, SMS, and voicemail drops — running automatically without any manual input.',
+    automationStack:['Days 1–3: High-frequency touch (3 messages)','Week 2: Value-add content email','Week 3–4: Case study + social proof','Day 30: Re-engagement "last attempt"','Day 45–90: Long-tail monthly drip'] },
+  qualify:    { label:'Unqualified leads wasting time',
+    leakStage:'Nurture → Qualification',
+    stat:'Sales teams spend 65% of their time on leads that will never buy. AI lead scoring reduces this to under 20%.',
+    rootCause:'No lead scoring model. Every enquiry gets equal treatment regardless of fit, budget, or intent level.',
+    weeklyImpact:'Your best salespeople are spending most of their week on leads with a < 5% close probability. The #1 killer of team morale.',
+    fix:'Automated pre-qualification questionnaire + AI lead scoring that routes hot leads to sales instantly and cold leads to long-term nurture.',
+    automationStack:['Pre-qual form (5 questions, 60 seconds)','CRM score assigned based on answers','Hot leads → instant sales notification','Cold leads → long-term drip sequence','Disqualified → tagged and removed from sales queue'] },
+  visibility: { label:'No pipeline visibility',
+    leakStage:'Throughout pipeline',
+    stat:'Teams without real-time pipeline visibility miss 43% more quota. Deals stall in "Proposal Sent" for weeks with no trigger.',
+    rootCause:'CRM used as a contact database, not a pipeline tool. No deal stages, no probability scores, no forecast view.',
+    weeklyImpact:'Without visibility, your monthly revenue number is a guess. There is no system to catch stalled deals before they die quietly.',
+    fix:'Custom pipeline dashboard with deal probability weighting, stage velocity tracking, and revenue forecast by close date.',
+    automationStack:['Defined stages with exit criteria','Deal probability % by stage','Stalled-deal alert after X days no activity','Weekly pipeline report auto-emailed to leadership','Revenue forecast with confidence intervals'] },
+  handoff:    { label:'Sales-to-delivery breakdown',
+    leakStage:'Closed Won → Delivery',
+    stat:'Poor handoff causes 23% of new clients to churn within 90 days — after you\'ve already done the hardest work of closing them.',
+    rootCause:'No automation bridges CRM (sales) and delivery tool (ops). Onboarding depends on someone remembering to send a Slack message.',
+    weeklyImpact:'Every client who churns in the first 90 days is a 100% loss — acquisition cost + delivery time + the referral they will never give you.',
+    fix:'Automated onboarding workflow triggered the moment a deal is marked Closed Won — zero manual steps, zero information gaps.',
+    automationStack:['Closed Won → onboarding checklist fires instantly','Welcome email + intake form to client','Internal task assigned to account manager','Slack alert to delivery team','Day 7 + Day 30 NPS check-in automated'] },
+};
+
+const TEAM = {
+  solo:  { label:'Solo Operator', roles:1, complexityScore:1,
+    need:'Lightweight automation — lead capture, follow-up, booking — with minimum admin overhead.',
+    techStack:['Single CRM seat + pipeline','Calendly or GHL booking','Email + SMS sequences','Weekly pipeline summary'] },
+  small: { label:'2–5 People', roles:4, complexityScore:2,
+    need:'Role-based access with clear deal ownership. Shared inbox rules, assignment automation, and team visibility.',
+    techStack:['CRM with role permissions','Round-robin lead assignment','Shared team inbox','Manager dashboard + deal alerts'] },
+  mid:   { label:'6–20 People', roles:12, complexityScore:3,
+    need:'Territory management, team-level dashboards, approval workflows, and performance leaderboards.',
+    techStack:['Multi-pipeline architecture','Territory + assignment rules','Approval workflow for high-value deals','Department-level reporting','Automated performance digest'] },
+  large: { label:'20+ People / Multi-team', roles:25, complexityScore:4,
+    need:'Multi-team pipelines with separate views, SSO, custom roles, and executive reporting. Data governance required.',
+    techStack:['Multi-BU pipelines','SSO + advanced role management','Custom reporting + BI integration','Audit logs + data governance','Quarterly architecture review'] },
+};
+
+const PREV = {
+  nothing:    { urgency:'high',
+    credibility:'Fresh start — no legacy config to undo, no team habits to break. Starting clean is an advantage.',
+    insight:'We build it right from day one, which means no migration cost and no re-training.' },
+  diy:        { urgency:'high',
+    credibility:'DIY setup rarely survives real pipeline volume — built for the idea of the business, not how it actually operates.',
+    insight:'Most DIY CRMs collapse at 3 months when sales complexity exceeds what a non-specialist can architect.' },
+  freelancer: { urgency:'medium',
+    credibility:'CRM freelancers are tool operators, not systems architects — they configure features without designing a revenue system.',
+    insight:'The gap between "CRM set up" and "CRM that drives revenue" is strategy. That is the gap we close.' },
+  agency:     { urgency:'medium',
+    credibility:'Agencies optimise for billable hours, not your outcome — the incentives are structurally misaligned.',
+    insight:'The fix is an accountable individual with skin in the game and deep CRM specialisation, not a bigger retainer.' },
+  tools:      { urgency:'high',
+    credibility:'More tools without architecture creates more complexity, not less — you have a traffic jam, not a pipeline.',
+    insight:'Every new tool added without system design makes the next fix 30% harder. The answer is architecture, not features.' },
+};
+
+const PIPELINE_STAGES = {
+  agency: [
+    { n:'Lead Arrives',       tool:'Website / Ad / Referral / Portal',    conv:100, warn:'Avg response time: 4h 22min — industry standard is < 5min' },
+    { n:'Instant Outreach',   tool:'GHL Automation — SMS + Email < 2min', conv:68,  warn:'32% of leads never receive a response within the first hour' },
+    { n:'Lead Qualification', tool:'AI scoring + pre-qual chatbot',       conv:44,  warn:'No scoring = 65% of SDR time on leads that will not close' },
+    { n:'Discovery Call',     tool:'Calendly + CRM auto-booking + prep',  conv:29,  warn:'Manual booking causes 38% no-show rate industry-wide' },
+    { n:'Proposal Sent',      tool:'CRM pipeline + doc automation',       conv:19,  warn:'74% of proposals receive zero follow-up after day 3' },
+    { n:'Closed Won',         tool:'CRM + Stripe + onboarding trigger',   conv:11,  warn:'' },
+  ],
+  realestate: [
+    { n:'Lead Intake',        tool:'Zillow / Portal / Website + CRM',    conv:100, warn:'72% of buyers sign with the first agent who responds' },
+    { n:'Instant SMS',        tool:'GHL auto-SMS < 90 seconds',          conv:71,  warn:'29% of portal leads are never contacted the same day' },
+    { n:'Long-term Nurture',  tool:'12-month email + SMS drip sequence', conv:52,  warn:'68% of buyers take 3–6 months — without nurture, you are invisible' },
+    { n:'Showing Booked',     tool:'CRM booking + 3-step confirmation',  conv:34,  warn:'No automated reminders = 41% no-show rate on showings' },
+    { n:'Offer Submitted',    tool:'CRM pipeline + task triggers',       conv:21,  warn:'Post-showing follow-up missing in 67% of transactions reviewed' },
+    { n:'Closed / Referred',  tool:'CRM + DocuSign + referral trigger',  conv:14,  warn:'' },
+  ],
+  saas: [
+    { n:'Trial Signup',       tool:'Website + CRM sync + welcome seq.',  conv:100, warn:'Only 40% of trials complete the first onboarding step' },
+    { n:'Activation',         tool:'Behavioural email triggers',         conv:58,  warn:'60% of trials churn before reaching their "aha moment"' },
+    { n:'Engagement Score',   tool:'Usage-based lead scoring + tags',    conv:38,  warn:'No usage triggers = sales team is blind to hot leads' },
+    { n:'Sales Touch',        tool:'HubSpot Sequences + Calendly',       conv:26,  warn:'SDRs spend 4h/day on manual outreach that should be automated' },
+    { n:'Demo / POC',         tool:'CRM + meeting recording + debrief',  conv:17,  warn:'No post-demo nurture = 58% of prospects go dark after demo' },
+    { n:'Conversion',         tool:'CRM + Stripe + CS handoff flow',    conv:9,   warn:'' },
+  ],
+  ecom: [
+    { n:'Store Visitor',      tool:'Shopify + CRM pixel + capture',     conv:100, warn:'82% of visitors leave without purchasing' },
+    { n:'Cart Recovery',      tool:'3-step SMS + email (15min, 2h, 24h)', conv:61, warn:'No recovery flow = 15–20% of revenue permanently lost' },
+    { n:'First Purchase',     tool:'CRM + Shopify post-purchase seq.',  conv:24,  warn:'No upsell sequence triggered after first purchase' },
+    { n:'Repeat Buyer',       tool:'LTV email flows + SMS + loyalty',   conv:16,  warn:'Repeat buyers spend 67% more — most brands never nurture them' },
+    { n:'VIP / Subscriber',   tool:'CRM segmentation + loyalty offers', conv:9,   warn:'< 5% of customers are ever asked for a review' },
+    { n:'Brand Advocate',     tool:'CRM + referral automation',        conv:4,   warn:'' },
+  ],
+  finance: [
+    { n:'Enquiry',             tool:'Website + CRM form + call tracking', conv:100, warn:'Average finance response time: 6.2 hours' },
+    { n:'Compliance Pre-qual', tool:'Automated questionnaire + scoring',  conv:72,  warn:'No pre-qual = advisors waste 40% of time on ineligible leads' },
+    { n:'Fact-find Call',      tool:'Calendly + CRM + pre-call prep',    conv:51,  warn:'No pre-call email = demonstrably lower close rate' },
+    { n:'Recommendation',      tool:'CRM pipeline + document workflow',  conv:34,  warn:'Avg 3 weeks between fact-find and recommendation (fixable)' },
+    { n:'Application',         tool:'CRM + e-sign + progress updates',   conv:23,  warn:'No progress automation = client anxiety and ghosting' },
+    { n:'Completion + Review', tool:'CRM + referral trigger + NPS',      conv:16,  warn:'' },
+  ],
+  services: [
+    { n:'Initial Enquiry',     tool:'Website / Referral / Social + CRM', conv:100, warn:'Avg 8h response for service businesses — fatal in competitive markets' },
+    { n:'Instant Acknowledge', tool:'GHL auto-response + booking link',  conv:74,  warn:'50% of enquiries have contacted 3+ competitors before you reply' },
+    { n:'Discovery Call',      tool:'Calendly + pre-call sequence',      conv:52,  warn:'No pre-call prep = 30% lower show rate and lower conversion' },
+    { n:'Proposal',            tool:'CRM + proposal automation',         conv:33,  warn:'78% of proposals lose from zero follow-up after day 2' },
+    { n:'Onboarding',          tool:'CRM + task automation + SOPs',      conv:22,  warn:'Manual onboarding = chaos and a poor first impression' },
+    { n:'Retained / Referred', tool:'CRM + NPS + referral flow',        conv:15,  warn:'' },
+  ],
+};
+
+// ── Expert 6-dimension scoring ─────────────
+function calculateScore(){
+  const ind  = answers[1] || 'agency';
+  const crmS = answers[2] || 'manual';
+  const vol  = answers[3] || '50to200';
+  const pain = answers[4] || 'speed';
+  const team = answers[5] || 'small';
+  const prev = answers[6] || 'diy';
+
+  const maturity = CRM_MATURITY[crmS];
+  const volData  = VOLUME[vol] || VOLUME['50to200'];
+  const industry = INDUSTRIES[ind];
+  const painData = BOTTLENECKS[pain];
+  const teamData = TEAM[team];
+  const prevData = PREV[prev];
+  const stages   = PIPELINE_STAGES[ind] || PIPELINE_STAGES.agency;
+  const dims     = maturity.dimScores;
+
+  // Health score: weighted composite
+  const healthScore = Math.round(
+    dims.speed       * 0.22 +
+    dims.automation  * 0.25 +
+    dims.visibility  * 0.18 +
+    dims.dataQuality * 0.15 +
+    dims.attribution * 0.12 +
+    dims.adoption    * 0.08
+  );
+
+  // Revenue at risk
+  const baseLeakRate  = 1 - (maturity.score / 100);
+  const leadsAtRisk   = Math.round(volData.monthlyLeads * baseLeakRate * 0.62);
+  const convRate      = stages[stages.length - 1].conv / 100;
+  const dealsLost     = Math.max(1, Math.round(leadsAtRisk * convRate));
+  const revAtRisk     = dealsLost * industry.avgDealSize;
+  const fmt = v => v >= 100000 ? '$'+(v/1000).toFixed(0)+'k' : v >= 10000 ? '$'+(v/1000).toFixed(1)+'k' : '$'+v.toLocaleString();
+  const revFormatted    = fmt(revAtRisk);
+  const annualFormatted = fmt(revAtRisk * 12);
+
+  // Automation coverage
+  const gapCount   = industry.automationGaps.length;
+  const coveredN   = Math.round(gapCount * (dims.automation / 100));
+
+  // Fix timeline
+  const basedays   = { solo:7, small:12, mid:16, large:21 }[team];
+  const fixDays    = basedays + (prevData.urgency === 'high' ? -2 : 0);
+
+  // Expert 5-step roadmap
+  const fixes = [
+    {
+      priority:'CRITICAL — Week 1',
+      effort:'1–3 days to configure + test',
+      action: painData.fix,
+      impact:`Directly targets your #1 leak: ${painData.label}. Visible impact within 7 days.`,
+    },
+    {
+      priority:'HIGH — Week 1–2',
+      effort:'3–8 days depending on current state',
+      action: maturity.score < 25
+        ? `Full CRM build from scratch on ${industry.topCRM} — data model, pipeline stages, team access, and full automation layer.`
+        : maturity.score < 45
+          ? `Rebuild automation layer — remove conflicting workflows, establish clean trigger logic, fill ${gapCount} automation gaps identified.`
+          : `Close high-ROI automation gaps: ${industry.automationGaps.slice(0,3).join(', ')}.`,
+      impact: `${revFormatted}/mo in recoverable revenue — ${annualFormatted}/yr at current run-rate.`,
+    },
+    {
+      priority:'HIGH — Week 2',
+      effort:'2–4 days to configure + validate',
+      action: `${teamData.label} infrastructure: ${teamData.techStack.slice(0,2).join(' + ')} + full reporting layer.`,
+      impact:'Leadership sees the number before month-end, not after. No more revenue surprises.',
+    },
+    {
+      priority:'MEDIUM — Week 3',
+      effort:'1–3 days per integration',
+      action: `Full stack integration — ${industry.topCRM} connected to your booking, billing, and communication tools with bidirectional data sync.`,
+      impact:'Eliminates manual data entry. Every lead, deal, and client record stays current automatically.',
+    },
+    {
+      priority:'DONE — Week 4',
+      effort:'1–2 days. Included in every engagement.',
+      action: `Team training + SOP documentation — ${teamData.roles}-person team fully trained with recorded walkthroughs and written SOPs.`,
+      impact:'A system the team actually uses returns 4× more than one they tolerate. Adoption is everything.',
+    },
+  ];
+
+  return { ind, industry, maturity, volData, painData, teamData, prevData, stages, dims,
+    healthScore, revFormatted, annualFormatted, dealsLost, fixDays, fixes, leadsAtRisk, gapCount, coveredN };
+}
+
+function typeText(id, text, delay){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.innerHTML = '<span class="bp-cursor"></span>';
+  let i = 0;
+  setTimeout(() => {
+    const iv = setInterval(() => {
+      if(i >= text.length){ clearInterval(iv); return; }
+      el.innerHTML = text.slice(0,i+1).replace(/\n/g,'<br>') + '<span class="bp-cursor"></span>';
+      i++;
+    }, 14);
+  }, delay);
+}
+
+function buildBlueprint(){
+  const d = calculateScore();
+  const bp = document.getElementById('blueprint');
+  bp.classList.add('show');
+  bp.scrollIntoView({ behavior:'smooth', block:'start' });
+
+  // ── Expert typewritten audit summary ─────────────────────
+  const diagText =
+    `EXPERT CRM AUDIT — ${d.industry.label.toUpperCase()}\n` +
+    `Pipeline Health: ${d.healthScore}/100  [${d.maturity.label} — ${d.maturity.riskLevel} RISK]\n\n` +
+    `DIAGNOSIS: ${d.maturity.insight}\n\n` +
+    `PRIMARY LEAK — ${d.painData.label.toUpperCase()}:\n` +
+    `${d.painData.stat}\n` +
+    `Root cause: ${d.painData.rootCause}\n\n` +
+    `REVENUE IMPACT:\n` +
+    `With ${d.volData.label} (${d.volData.tier}) and your current setup, ~${d.leadsAtRisk} leads/month\n` +
+    `are leaking before reaching a salesperson — approximately ${d.revFormatted}/mo\n` +
+    `or ${d.annualFormatted}/yr in recoverable revenue.\n\n` +
+    `COMPETITOR BENCHMARK:\n${d.industry.competitorBench}\n\n` +
+    `RECOMMENDED STACK: ${d.industry.topCRM}  |  Alt: ${d.industry.altCRM}\n` +
+    `PREVIOUS ATTEMPT: ${d.prevData.credibility}\n` +
+    `${d.prevData.insight}\n\n` +
+    `ESTIMATED BUILD-TO-LIVE: ${d.fixDays} business days`;
+
+  typeText('bp-ai-text', diagText, 400);
+
+  // ── 6-dimension radar ─────────────────────────────────────
+  setTimeout(() => {
+    const existingR = document.getElementById('bp-radar');
+    if(existingR) existingR.remove();
+    const rWrap = document.createElement('div');
+    rWrap.id = 'bp-radar';
+    rWrap.style.cssText = 'margin-bottom:28px';
+    const rHead = document.createElement('div');
+    rHead.style.cssText = 'font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px;display:flex;align-items:center;gap:12px';
+    rHead.innerHTML = '<span style="width:16px;height:1px;background:rgba(255,255,255,.3);display:inline-block"></span>6-Dimension CRM Audit Scorecard';
+    rWrap.appendChild(rHead);
+    const dimGrid = document.createElement('div');
+    dimGrid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px';
+    [
+      { label:'Speed-to-Lead',      val: d.dims.speed },
+      { label:'Automation Coverage',val: d.dims.automation },
+      { label:'Pipeline Visibility', val: d.dims.visibility },
+      { label:'Data Quality',        val: d.dims.dataQuality },
+      { label:'Revenue Attribution', val: d.dims.attribution },
+      { label:'Team Adoption',       val: d.dims.adoption },
+    ].forEach(dim => {
+      const col   = dim.val < 25 ? '#f87171' : dim.val < 50 ? '#fbbf24' : dim.val < 75 ? '#60a5fa' : '#34d399';
+      const lbl   = dim.val < 25 ? 'Critical' : dim.val < 50 ? 'Poor' : dim.val < 75 ? 'Fair' : 'Good';
+      const row   = document.createElement('div');
+      row.style.cssText = 'background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px 16px';
+      row.innerHTML =
+        `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">` +
+        `<span style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7)">${dim.label}</span>` +
+        `<span style="font-family:var(--ff-mono);font-size:9px;color:${col};background:${col}18;padding:2px 7px;border-radius:4px">${lbl}</span>` +
+        `</div><div style="height:3px;background:rgba(255,255,255,.08);border-radius:100px;overflow:hidden">` +
+        `<div class="dim-bar" data-w="${dim.val/100}" style="height:100%;width:0;border-radius:100px;background:${col};transition:width 1s cubic-bezier(.16,1,.3,1)"></div>` +
+        `</div><div style="font-family:var(--ff-mono);font-size:9px;color:rgba(255,255,255,.25);margin-top:5px">${dim.val}/100</div>`;
+      dimGrid.appendChild(row);
+    });
+    rWrap.appendChild(dimGrid);
+    document.getElementById('bp-flow').before(rWrap);
+    setTimeout(() => document.querySelectorAll('.dim-bar').forEach(b => b.style.width = (parseFloat(b.dataset.w)*100)+'%'), 200);
+  }, 700);
+
+  // ── Pipeline funnel ──────────────────────────────────────
+  const flow = document.getElementById('bp-flow');
+  flow.innerHTML = '';
+  d.stages.forEach((s, i) => {
+    const el = document.createElement('div');
+    el.className = 'bp-stage';
+    el.innerHTML =
+      `<div class="bp-s-num">0${i+1}</div>` +
+      `<div class="bp-s-name">${s.n}</div>` +
+      `<div class="bp-s-tool">${s.tool}</div>` +
+      `<div class="bp-s-bar"><div class="bp-s-fill" data-w="${s.conv/100}"></div></div>` +
+      `<div class="bp-s-pct">${s.conv}% conversion</div>` +
+      (s.warn ? `<div class="bp-s-leak">⚠ ${s.warn}</div>` : '');
+    flow.appendChild(el);
+    setTimeout(() => {
+      el.classList.add('show');
+      const bar = el.querySelector('.bp-s-fill');
+      if(bar) bar.style.width = (parseFloat(bar.dataset.w)*100)+'%';
+    }, i * 130 + 300);
+  });
+
+  // ── Score cards (4 KPIs) ─────────────────────────────────
+  const sc = document.getElementById('bp-score');
+  sc.innerHTML = '';
+  [
+    { n: d.healthScore+'/100', l:'CRM Health Score',        col: d.maturity.color },
+    { n: d.revFormatted+'/mo', l:'Monthly Revenue at Risk', col:'#DC2626' },
+    { n: d.annualFormatted,    l:'Annual Revenue at Risk',  col:'#f87171' },
+    { n: d.fixDays+' days',    l:'Time to Fix',             col:'#059669' },
+  ].forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'bp-sc';
+    el.innerHTML = `<div class="bp-sc-n" style="color:${item.col}">${item.n}</div><div class="bp-sc-l">${item.l}</div>`;
+    sc.appendChild(el);
+    setTimeout(() => el.classList.add('show'), i * 160 + 900);
+  });
+
+  // ── Automation gap audit ─────────────────────────────────
+  setTimeout(() => {
+    const existingG = document.getElementById('bp-gaps');
+    if(existingG) existingG.remove();
+    const gWrap = document.createElement('div');
+    gWrap.id = 'bp-gaps';
+    gWrap.style.cssText = 'margin-top:24px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:20px 22px';
+    const gHead = document.createElement('div');
+    gHead.style.cssText = 'font-family:var(--ff-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:14px;display:flex;align-items:center;gap:8px';
+    gHead.innerHTML = `▶ Automation Coverage Audit — ${d.gapCount} Critical Sequences Checked`;
+    gWrap.appendChild(gHead);
+    const gGrid = document.createElement('div');
+    gGrid.style.cssText = 'display:flex;flex-direction:column;gap:7px';
+    d.industry.automationGaps.forEach((gap, i) => {
+      const active = i < d.coveredN;
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:10px;font-size:12px;opacity:0;transition:opacity .3s';
+      row.innerHTML =
+        `<span style="color:${active?'#34d399':'#f87171'};font-size:13px;flex-shrink:0">${active?'✓':'✗'}</span>` +
+        `<span style="color:${active?'rgba(255,255,255,.45)':'rgba(255,255,255,.8)'};${active?'text-decoration:line-through':''}">${gap}</span>` +
+        `<span style="margin-left:auto;font-family:var(--ff-mono);font-size:9px;color:${active?'#34d399':'#f87171'};opacity:.7">${active?'Active':'Missing'}</span>`;
+      gGrid.appendChild(row);
+      setTimeout(() => row.style.opacity='1', i*80+100);
+    });
+    gWrap.appendChild(gGrid);
+    document.querySelector('.bp-score').after(gWrap);
+  }, 1100);
+
+  // ── 5-step expert roadmap ────────────────────────────────
+  setTimeout(() => {
+    const existingFixes = document.getElementById('bp-fixes');
+    if(existingFixes) existingFixes.remove();
+    const fixWrap = document.createElement('div');
+    fixWrap.id = 'bp-fixes';
+    fixWrap.style.cssText = 'margin-top:28px;display:flex;flex-direction:column;gap:10px';
+    const heading = document.createElement('div');
+    heading.style.cssText = 'font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px;display:flex;align-items:center;gap:12px';
+    heading.innerHTML = '<span style="width:16px;height:1px;background:rgba(255,255,255,.3);display:inline-block"></span>5-Step Expert Fix Roadmap';
+    fixWrap.appendChild(heading);
+    d.fixes.forEach((fix, i) => {
+      const el = document.createElement('div');
+      el.style.cssText = 'background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:18px 22px;opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s';
+      el.innerHTML =
+        `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px">` +
+        `<div style="font-family:var(--ff-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#60a5fa">${fix.priority}</div>` +
+        `<div style="font-family:var(--ff-mono);font-size:9px;color:rgba(255,255,255,.3)">${fix.effort}</div></div>` +
+        `<div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:6px;line-height:1.5">${fix.action}</div>` +
+        `<div style="font-size:12px;color:rgba(255,255,255,.45);font-weight:300;line-height:1.6">${fix.impact}</div>`;
+      fixWrap.appendChild(el);
+      setTimeout(() => { el.style.opacity='1'; el.style.transform='none'; }, i * 180 + 200);
+    });
+    document.querySelector('.bp-score').after(fixWrap);
+  }, 1400);
+}
+
+
+/* ══════════════════════════════════════════
+   GSAP — NAV + HERO ENTRANCE
+══════════════════════════════════════════ */
+ScrollTrigger.create({
+  start:'top -70',
+  onEnter:()=>document.getElementById('nav').classList.add('blur'),
+  onLeaveBack:()=>document.getElementById('nav').classList.remove('blur'),
+});
+
+const heroRvs=document.querySelectorAll('#hero .rv');
+gsap.set(heroRvs,{opacity:0,y:24});
+gsap.to(heroRvs,{opacity:1,y:0,duration:.9,ease:'power3.out',stagger:.14,delay:.2});
+
+/* ══════════════════════════════════════════
+   GSAP SCROLL REVEALS
+══════════════════════════════════════════ */
+document.querySelectorAll('.rv').forEach(el=>{
+  if(el.closest('#hero'))return;
+  gsap.fromTo(el,{opacity:0,y:28},{
+    opacity:1,y:0,duration:.85,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 90%',toggleActions:'play none none none'},
+  });
+  el.classList.add('in');
+});
+
+/* ══════════════════════════════════════════
+   CRM BARS ANIMATE ON SCROLL
+══════════════════════════════════════════ */
+ScrollTrigger.create({
+  trigger:'#crm-grid',start:'top 80%',once:true,
+  onEnter:()=>{
+    document.querySelectorAll('.crm-bar-fill').forEach((b,i)=>{
+      setTimeout(()=>{b.style.width=(parseFloat(b.dataset.w)*100)+'%';b.classList.add('go')},i*60);
+    });
+  }
+});
+
+/* ══════════════════════════════════════════
+   GSAP COUNTERS
+══════════════════════════════════════════ */
+[{id:'r1',v:8,s:'<sub>min</sub>'},{id:'r2',v:50,s:'<sub>%</sub>'},{id:'r3',v:14,s:'<sub>d</sub>'},{id:'r4',v:100,s:'<sub>+</sub>'}].forEach(m=>{
+  const el=document.getElementById(m.id);if(!el)return;
+  ScrollTrigger.create({trigger:el,start:'top 80%',once:true,onEnter:()=>{
+    gsap.to({n:0},{n:m.v,duration:2,ease:'power2.out',onUpdate:function(){
+      el.innerHTML=Math.floor(this.targets()[0].n)+m.s;
+    }});
+  }});
+});
+
+/* ══════════════════════════════════════════
+   THREE.JS RESULTS BG — flowing particles
+══════════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('results-canvas');
+  if(!c)return;
+  const r=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:true});
+  r.setClearColor(0,0);
+  const sc=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(60,c.clientWidth/c.clientHeight,.1,1000);
+  cam.position.z=50;
+  const pts2=[];
+  const g2=new THREE.SphereGeometry(.08,4,4);
+  for(let i=0;i<120;i++){
+    const m=new THREE.Mesh(g2,new THREE.MeshBasicMaterial({color:i<10?0x1A56DB:0x333333,transparent:true,opacity:i<10?.6:.15}));
+    m.position.set((Math.random()-.5)*120,(Math.random()-.5)*60,(Math.random()-.5)*30);
+    m.userData={vy:-.05-.03*Math.random(),phase:Math.random()*Math.PI*2};
+    sc.add(m);pts2.push(m);
+  }
+  function rsz(){r.setSize(c.clientWidth,c.clientHeight);cam.aspect=c.clientWidth/c.clientHeight;cam.updateProjectionMatrix()}
+  rsz();
+  let t2=0;
+  (function loop(){requestAnimationFrame(loop);t2+=.008;
+    pts2.forEach(p=>{
+      p.position.y+=p.userData.vy+Math.sin(t2+p.userData.phase)*.02;
+      if(p.position.y<-32)p.position.y=32;
+    });
+    r.render(sc,cam);
+  })();
+})();
+
+/* ══════════════════════════════════════════
+   FORM
+══════════════════════════════════════════ */
+async function doForm(e){
+  e.preventDefault();
+  const form=e.target,btn=document.getElementById('fsub');
+  btn.textContent='Sending…';btn.disabled=true;
+  try{
+    const r=await fetch('https://formspree.io/f/mvzypzak',{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+    if(r.ok){form.reset();document.getElementById('succ').classList.add('on');btn.textContent='Send Message';btn.disabled=false;}
+    else{btn.textContent='Error — try WhatsApp';setTimeout(()=>{btn.textContent='Send Message';btn.disabled=false},3000);}
+  }catch{btn.textContent='Error — try WhatsApp';setTimeout(()=>{btn.textContent='Send Message';btn.disabled=false},3000);}
+}
+
+/* ══════════════════════════════════════════
+   SCANLINE FOOTER — cursor proximity glow
+══════════════════════════════════════════ */
+(function(){
+  const sf   = document.getElementById('scanline-footer');
+  const glow = document.getElementById('sl-glow');
+  if (!sf || !glow) return;
+
+  document.addEventListener('mousemove', e => {
+    const rect = sf.getBoundingClientRect();
+    const inside = e.clientY >= rect.top && e.clientY <= rect.bottom;
+    if (inside) {
+      glow.style.left    = (e.clientX - rect.left) + 'px';
+      glow.style.top     = (e.clientY - rect.top)  + 'px';
+      glow.style.opacity = '1';
+    } else {
+      glow.style.opacity = '0';
+    }
+  });
+
+  // Animate scanline lines in on scroll
+  const lines = document.querySelectorAll('.sl-line');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        gsap.from(entry.target.querySelector('.sl-text'), {
+          x: -60, opacity: 0, duration: 1.2, ease: 'power3.out'
+        });
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  lines.forEach(l => obs.observe(l));
+})();
+
+
+
 </script>
 </body>
 </html>
